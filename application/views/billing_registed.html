@@ -1,0 +1,67 @@
+{extends file='core/member.html'}
+{block name='title'}登録完了 &laquo; 追加請求先 &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>追加請求先登録完了</h2>
+
+<div id="tabbill">
+<table class="uniform" summary="請求先">
+<thead>
+<tr><th colspan="2" class="sub">請求先</th></tr>
+</thead>
+
+<tbody>
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.corpkana nocache}</div>{$foreign.corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>
+〒{$foreign.zip nocache}<br/>
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">担当者名</th>
+<td>
+{$foreign.division nocache} {$foreign.position nocache}<br/>
+<div class="ruby">{$foreign.fullkana nocache}</div>{$foreign.fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.fax nocache}</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="btn-detail" style="margin:20px 0 0;">
+<a href="{uri_folder_string()}/billing/"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+</div>
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<style>#contents th.sub { background:#4D80C1; color:#fff; }</style>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/billing_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;追加請求先登録&nbsp;&gt;&nbsp;登録完了
+{/block}

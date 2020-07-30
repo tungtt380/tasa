@@ -1,0 +1,82 @@
+{extends file='core/member.html'}
+{block name='title'}出展申込者 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>出展申込者</h2>
+<div id="cnav" class="clearfix">
+<a href="regist"><img src="/images/common/btn_regist.gif" width="100" height="25" alt="新規作成" /></a>
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="hidden" id="limit" name="limit" value="{$limit}" />
+<input type="text" id="q" name="q" value="{$q}" />
+スペースで絞込：<select id="sp" name="sp">
+<option value="">全てのスペース</option>
+<option value="A"{if $sp == 'A'} selected="selected"{/if}>A</option>
+<option value="B"{if $sp == 'B'} selected="selected"{/if}>B</option>
+<option value="C"{if $sp == 'C'} selected="selected"{/if}>C</option>
+<option value="D"{if $sp == 'D'} selected="selected"{/if}>D</option>
+<option value="E"{if $sp == 'E'} selected="selected"{/if}>E</option>
+<option value="F"{if $sp == 'F'} selected="selected"{/if}>F</option>
+<option value="S"{if $sp == 'S'} selected="selected"{/if}>S</option>
+</select>
+</form>
+</div>
+</div>
+<br/>
+<p>{if ($count > 0)}{$count}件を表示{/if}</p>
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th>出展者コード</th>
+<th>申込</th>
+<th>状態</th>
+<th>出展会社名</th>
+<!--<th>代表者名</th>-->
+<th>表示名</th>
+<th>出展エリア</th>
+<th>小間番号</th>
+<th>申込日時/更新日時</th>
+<th>申込備考/事務局メモ</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td><a href="detail/{$i.exhid}">{$i.exhid}</a></td>
+<td>{if $i.route == 'W'}Web{else}郵送{/if}</td>
+<td><span class="nowrap">{$status[$i.statusno] nocache}</span></td>
+<td><div class="ruby"><span title="{$i.corpkana}">{$i.corpkana|truncate:20 nocache}</span></div>
+    <span title="{$i.corpname nocache}">{$i.corpname|truncate:20 nocache}</span></td>
+<!--<td><div class="ruby">{$i.fullkana nocache}</div>{$i.fullname nocache}</td>-->
+<td><div class="ruby"><span title="{$i.brandkana nocache}">{$i.brandkana|truncate:20 nocache}</span></div>
+    <span title="{$i.brandname nocache}">{$i.brandname|truncate:20 nocache}</span></td>
+<td>{$booth[$i.q_booth1]}{if isset($i.q_booth2)}<br />{$booth[$i.q_booth2]}{/if}{if isset($i.q_booth3)}<br />{$booth[$i.q_booth3]}{/if}{if isset($i.q_booth4)}<br />{$booth[$i.q_booth4]}{/if}</td>
+<td>{if isset($i.q_boothno1)}{$i.q_boothno1}{/if}{if isset($i.q_boothno2)}<br />{$i.q_boothno2}{/if}{if isset($i.q_boothno3)}<br />{$i.q_boothno3}{/if}{if isset($i.q_boothno4)}<br />{$i.q_boothno4}{/if}</td>
+<td><div class="ruby nowrap">{$i.accepted|truncate:16:"":true nocache}</div><span class="nowrap">{$i.updated|truncate:16:"":true nocache}</span></td>
+<td>{if $i.promotion != ''}<span class="red">{$i.promotion}</span><br/>{/if}{if $i.remark != ''}申込備考：{$i.remark|nl2br nocache}<br/>{/if}{if $i.comment != ''}事務局メモ：{$i.comment|nl2br nocache}{/if}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/exhibitor_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;出展申込者
+{/block}

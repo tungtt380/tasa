@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+#contents td {
+	height:59px;
+	border-bottom:1px solid #d6d6d6;
+	padding:0 10px;
+	text-align:center;
+	vertical-align:middle;
+}
+
+#contents td span.piefloat {
+	display:block;
+	width:36px;
+	height:36px;
+	float:left;
+	margin:0 10px 0;
+}
+
+.reportform th {
+    cursor:pointer;
+}

@@ -1,0 +1,116 @@
+{extends file='core/member.html'}
+{block name='title'}リース備品請求一覧 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>リース備品請求一覧</h2> 
+<div style="background-color:#FFFFCC;font-size:10.5pt;margin:8px 0px;padding:2px;border:1px solid #FFFF99;">この申込は A、C、D、S スペース専用になります。</div>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div>
+<p><a href="#download">[ダウンロード]</a></p>
+</div>
+
+<table class="listform tablesorter"> 
+<colgroup class="nowrap">
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup class="nowrap">
+<colgroup class="nowrap">
+<thead>
+<tr> 
+<th>小間番号</th>
+<th>出展者名/表示名</th>
+<th colspan="3">応接セット</th>
+<th colspan="3">ティーレストセット</th>
+<th colspan="3">ハイカウンターセット</th>
+<th colspan="8">スタンド椅子</th>
+<th class="nowrap">更新日</th>
+<th>操作</th>
+</tr>
+</thead>
+{/if}
+ <tr>
+ <td class="right">{$i.exhboothno}</td>
+ <td><div>{$i.corpname}</div>{$i.brandname}</td>
+ <td>{$i.AS_5}</td>
+ <td>{$i.AS_29W}</td>
+ <td>{$i.AS_29BK}</td>
+ <td>{$i.AS_38}</td>
+ <td>{$i.AS_111W}</td>
+ <td>{$i.AS_111BK}</td>
+ <td>{$i.AS_963}</td>
+ <td>{$i.AS_973Y}</td>
+ <td>{$i.AS_973GN}</td>
+ <td>{$i.BC_38_AW}</td>
+ <td>{$i.BC_38_ABK}</td>
+ <td>{$i.BC_38_BW}</td>
+ <td>{$i.BC_38_BBK}</td>
+ <td>{$i.BC_38_CW}</td>
+ <td>{$i.BC_38_CBK}</td>
+ <td>{$i.BC_38_DW}</td>
+ <td>{$i.BC_38_DBK}</td>
+ <td>{$i.updated}</td>
+<td class="nowrap">
+{if $i.appid != ''}
+{if uri_folder_string() == '/op'}
+<a href="change/{$i.appid}">[変更]</a><a href="delete/{$i.appid}">[削除]</a>
+{else}
+<a href="detail/{$i.appid}">[詳細]</a>
+{/if}
+{else}
+{if uri_folder_string() == '/op'}
+<a href="create/{$i.exhid}/{$i.exhboothid}">[登録]</a>
+{/if}
+{/if}
+</td>
+ </tr>
+{if $smarty.foreach.rec.last}
+</table>
+
+<div>
+<h3>ダウンロード</h3>
+<p>
+<a href="download/csv"><img src="/images/common/ico_csv.png" style="vertical-align:text-bottom" width="48" height="48" alt="CSV" title="CSV" />(CSVファイル)</a>
+<a href="download/xlsx"><img src="/images/common/ico_xlsx.png" style="vertical-align:text-bottom" width="48" height="48" alt="Excel2007" title="Excel2007" />(Excelファイル)</a>
+</p>
+</div>
+
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/exx_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;リース備品請求一覧
+{/block}
+

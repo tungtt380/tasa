@@ -1,0 +1,66 @@
+{extends file='core/member.html'}
+{block name='title'}操作履歴 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>操作履歴</h2>
+<p>
+{if ($count > 0)}{$count}件中、{($page-1)*$pp+1}〜{if $page*$pp > $count}{$count}{else}{$page*$pp}{/if}件を表示&nbsp;&nbsp;&nbsp;
+<span class="pagenation">{$pagenation}</span>{/if}
+</p>
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div id="history">
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th>日時</th>
+<th>接続元</th>
+<th>操作</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td>{$i.created nocache}</td>
+<td>{$i.ipaddress nocache}</td>
+<td>{$i.operation nocache}</td>
+<td>{$i.opcomment nocache}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<ul>
+<li>操作履歴が見つかりません。</li>
+</ul>
+</div>
+{/foreach}
+<div class="info" style="margin:20px 0 0;">
+<h4>注意事項</h4>
+<p>操作履歴は過去1年分の記録が表示されます。
+<br />以下の操作（コントロールパネルからの操作）が記録されます。</p>
+<ul>
+<li>・ログイン・ログアウト</li>
+<li>・各申請および状態の追加・更新・削除時の操作</li>
+<li>・コントロールパネルのパスワード変更</li>
+</ul>
+</div>
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;操作履歴
+{/block}
+

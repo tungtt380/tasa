@@ -1,0 +1,65 @@
+{extends file='core/member.html'}
+{block name='title'}members &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>アカウント</h2>
+<p>このシステムを使用するためのアカウント情報一覧になります。<br />どの出展者がどのアカウントと結びついているかはこの時点では不明です。</p>
+<div id="cnav" class="clearfix">
+<a href="regist"><img src="/images/common/btn_regist.gif" width="100" height="25" alt="新規作成" /></a>
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead>
+ <tr>
+<th>コード</th>
+<th>役割</th>
+<th>ユーザー名</th>
+<th>パスワード</th>
+<th>メールアドレス</th>
+<th>出展者コード</th>
+<th>稼働</th>
+<th>拒否(理由)</th>
+ </tr>
+</thead>
+<tbody>
+{/if}
+ <tr>
+<td><a href="change/{$i.memberid}">{$i.memberid}</a></td>
+<td>{$i.rolename nocache}</td>
+<td>{$i.username nocache}</td>
+<td>********</td>
+<td>{$i.email nocache}</td>
+<td>{if isset($i.pcode1)}<a href="/op/exhibitor/detail/{$i.pcode1}">{$i.pcode1}</a>{/if}</td>
+<td>{$i.activate nocache}</td>
+<td>{if $i.reject != 0}{$i.reason nocache}{/if}</td>
+ </tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<ul>
+<li>データが見つかりません。</li>
+</ul>
+</div>
+{/foreach}
+{/block}
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;アカウント
+{/block}

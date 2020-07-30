@@ -1,0 +1,88 @@
+{extends file='core/member.html'}
+{block name='title'}小間清掃登録 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>小間清掃登録</h2> 
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div>
+<p><a href="#download">[ダウンロード]</a></p>
+</div>
+
+<table class="listform tablesorter"> 
+<colgroup class="nowrap">
+<colgroup>
+<colgroup class="nowrap">
+<colgroup class="nowrap">
+<colgroup class="nowrap">
+<colgroup class="nowrap">
+<thead>
+<tr> 
+<th>小間番号</th> 
+<th>出展者名/表示名</th> 
+<th>小間数</th>
+<th class="nowrap">支払方法</th>
+<th class="nowrap">更新日</th>
+<th class="nowrap">操作</th> 
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td class="right">{$i.exhboothno}</td>
+<td>{$i.corpname}<br/>{$i.brandname}</td>
+{if $i.appid != ''}
+<td>{$i.cleanbooth}</td>
+<td>{if $i.paymethod==1}集金{else}銀行振込{/if}</td>
+<td>{$i.updated}</td>
+{else}
+<td colspan="3">(未登録)</td>
+{/if}
+<td class="nowrap">
+{if $i.appid != ''}
+{if uri_folder_string() == '/op'}
+<a href="change/{$i.appid}">[変更]</a><a href="delete/{$i.appid}">[削除]</a>
+{else}
+<a href="detail/{$i.appid}">[詳細]</a>
+{/if}
+{else}
+{if uri_folder_string() == '/op'}
+<a href="create/{$i.exhid}/{$i.exhboothid}">[登録]</a>
+{/if}
+{/if}
+</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+
+<div id="download">
+<h3>ダウンロード</h3>
+<p>
+<a href="download/csv"><img src="/images/common/ico_csv.png" style="vertical-align:text-bottom" width="48" height="48" alt="CSV" title="CSV" />(CSVファイル)</a>
+<a href="download/xlsx"><img src="/images/common/ico_xlsx.png" style="vertical-align:text-bottom" width="48" height="48" alt="Excel2007" title="Excel2007" />(Excelファイル)</a>
+</p>
+</div>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/e14cleaning_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;(14)小間清掃登録
+{/block}
+

@@ -1,0 +1,76 @@
+{extends file='core/member.html'}
+{block name='title'}小間割一覧 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>小間割一覧</h2> 
+{if isset($message.__all) && $message.__all != ''}
+<div class="blockwarn"><span class="linewarn">入力項目に不備があります。以下の入力項目を確認してください。</span>
+{$message.__all nocache}
+</div>
+{else}
+<div class="article"></div>
+{/if}
+
+<div id="cnav" class="clearfix">
+<div class="search">
+<form id="search" method="post" action="{uri_folder_string()}/boothnumber/search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+
+<br />
+
+<div id="tabbooth"> 
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="tablesorter">
+<thead> 
+<tr>
+<th>小間番号</th> 
+<th>スペース</th> 
+<th>小間形状</th> 
+<th>小間数</th> 
+<th>出展者名/表示名</th>
+<th>受付ID</th>
+<th>通番</th>
+<!--<th>合同出展</th>-->
+<th>ステータス</th>
+</tr>
+</thead> 
+<tbody> 
+{/if}
+<tr>
+ <td class="nowrap"><div style="font-size:8pt;">{$i.exhboothno}</div></td>
+ <td>{$i.spaceabbr}</td>
+ <td>{$i.boothabbr}</td>
+ <td>{$i.boothcount}</td>
+ <td>{$i.corpname}<br/>{$i.brandname}</td>
+ <td>{$i.exhid}<!--<input type="hidden" name="exhid[]" value="{$i.exhid}">--></td>
+ <td>{$i.seqno}</td>
+<!--<td></td>-->
+ <td>{$status[$i.statusno]}<input type="hidden" name="exhboothid[]" value="{$i.exhboothid}"></td>
+ </tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/boothnumber_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;小間割登録
+{/block}

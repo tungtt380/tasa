@@ -1,0 +1,226 @@
+{extends file='core/member.html'}
+{block name='title'}(04)施工業者登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>施工業者登録</h2>
+{if isset($message.__all)}
+<div class="blockwarn"><p>{$message.__all nocache}</p></div>
+{else}
+<div id="article"><p>施工業者の登録を行います。</p></div>
+{/if}
+
+<!-- 2016-11-28 23:59:59 クローズのコメント -->
+{if $smarty.now > "2019-11-30 00:00:00"|strtotime}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+web登録は締め切らせていただきました。<!--<br>
+今後のご登録は、出展要項の申請用紙にご記入の上、FAXにてお送りください。-->
+</p>
+{/if}
+<!-- // 2016-11-28 23:59:59 クローズのコメント -->
+
+{include file='core/ex_murayama.html'}
+{include file='core/exhform.html'}
+
+<form method="post" action="regist_in"> 
+<input type="hidden" name="exhid" value="{$foreign.exhid}"/>
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid}"/>
+
+<div class="section">
+<p>申請入力頂く際のご注意</p>
+<ul>
+<li><span class="red">*</span>マークは入力必須項目ですので必ずご記入ください。</li>
+<li>半角カタカナはご利用頂けません。</li>
+<li>英数字は半角でご入力ください。</li>
+</ul>
+</div>
+
+<div id="tabcorp"> 
+<table class="uniform"> 
+<tr><th colspan="2" class="main">施工に関する連絡先</th></tr> 
+<tr>
+<td colspan="2">■ブース装飾(施工)に関しての連絡窓口を選択して下さい。<span class="red">*</span>
+{if $message.outsourcing != '' nocache}<span class="linewarn">{$message.outsourcing nocache}</span>{/if}
+<br/>
+<input type="radio" id="outsourcing0" name="outsourcing" value="0" {if $foreign.outsourcing==0}checked="checked"{/if}>出展者(自社)にご連絡<br/>
+<input type="radio" id="outsourcing1" name="outsourcing" value="1" {if $foreign.outsourcing==1}checked="checked"{/if}>出展者以外(施工業者)に連絡
+</td>
+</tr>
+</table>
+</div>
+
+<div id="tabcontact">
+<table class="uniform"> 
+<tr><th colspan="2" class="main">施工に関する連絡先(出展者以外の場合)</th></tr> 
+
+<th class="w200">施工業者名 <span class="red">*</span></th> 
+<td> 
+<input type="text" id="corpname" name="corpname" size="48" maxlength="60" value="{$foreign.corpname nocache}" placeholder="名称"> 
+<span class="example">例)○○株式会社</span>
+{if $message.corpname != '' nocache}<span class="linewarn">{$message.corpname nocache}</span>{/if}
+</td>
+</tr> 
+ 
+<tr> 
+<th>所在地 <span class="red">*</span></th> 
+<td> 
+<span class="example"><label for="sekou_zip">郵便番号</label> 例)1234567</span><br /> 
+<input type="text" id="zip" name="zip" size="8" maxlength="8" value="{$foreign.zip nocache}" placeholder="郵便番号"> 
+<div id="zip" class="clearfix"><span id="zipdir" class="zipsearch">郵便番号から住所を検索</span><span id="ziprev" class="revsearch">住所から郵便番号を検索</span></div>
+{if $message.zip != '' nocache}<span class="linewarn">{$message.zip nocache}</span>{/if}
+<span class="example"><label for="sekou_address_one">町名番地</label> 例)東京都新宿区新宿6-27-30</span><br /> 
+{form_dropdown_ex('prefecture',$prefecture,$foreign.prefecture,'東京都','id="prefecture"')}
+{if $message.prefecture != '' nocache}<span class="linewarn">{$message.prefecture nocache}</span>{/if}
+
+<input type="text" id="address1" name="address1" size="31" maxlength="60" value="{$foreign.address1 nocache}" placeholder="町名番地"> 
+{if $message.address1 != '' nocache}<span class="linewarn">{$message.address1 nocache}</span>{/if}
+<br/> 
+<span class="example"><label for="address2">ビルマンション名</label> 例)○○ビル3F</span><br /> 
+<input type="text" id="address2" name="address2" size="48" maxlength="60" value="{$foreign.address2 nocache}" placeholder="ビル・マンション名"> 
+{if $message.address2 != '' nocache}<span class="linewarn">{$message.address2 nocache}</span>{/if}
+<br/> 
+</td> 
+</tr> 
+
+<tr> 
+<th class="w200">担当部署 <span class="red">*</span></th> 
+<td> 
+<input type="text" id="division" name="division" size="48" maxlength="60" value="{$foreign.division nocache}" placeholder="担当部署名"> 
+{if $message.division != '' nocache}<span class="linewarn">{$message.division nocache}</span>{/if}
+<br/></td></tr> 
+<tr>
+<th class="w200">担当者 <span class="red">*</span></th> 
+<td> 
+<input type="text" id="fullname" name="fullname" size="48" maxlength="60" value="{$foreign.fullname nocache}" placeholder="担当者名"> 
+{if $message.fullname != '' nocache}<span class="linewarn">{$message.fullname nocache}</span>{/if}
+<br/></td></tr> 
+<tr>
+<th class="w200">メールアドレス <span class="red">*</span></th> 
+<td> 
+<input type="text" id="email" name="email" size="48" maxlength="60" value="{$foreign.email nocache}" placeholder="メールアドレス"> 
+{if $message.email != '' nocache}<span class="linewarn">{$message.email nocache}</span>{/if}
+<br/></td></tr> 
+<tr> 
+<th>携帯番号 <span class="red">*</span></th> 
+<td> 
+<span class="example"><label for="sekou_mobile">携帯番号</label>(数字) 例)0312345678</span><br /> 
+<input type="text" id="mobile" name="mobile" size="15" maxlength="15" value="{$foreign.mobile nocache}" placeholder="TEL"> 
+{if $message.mobile != '' nocache}<span class="linewarn">{$message.mobile nocache}</span>{/if}
+</td> 
+</tr>
+<tr> 
+<th>TEL <span class="red">*</span></th> 
+<td> 
+<span class="example"><label for="sekou_phone">TEL</label>(数字) 例)0312345678</span><br /> 
+<input type="text" id="phone" name="phone" size="15" maxlength="15" value="{$foreign.phone nocache}" placeholder="TEL"> 
+{if $message.phone != '' nocache}<span class="linewarn">{$message.phone nocache}</span>{/if}
+</td> 
+</tr> 
+ 
+<tr> 
+<th>FAX <span class="red">*</span></th> 
+<td> 
+<span class="example"><label for="sekou_fax">FAX</label>(数字) 例)0312345678</span><br /> 
+<input type="text" id="fax" name="fax" size="15" maxlength="15" value="{$foreign.fax nocache}" placeholder="FAX"> 
+{if $message.fax != '' nocache}<span class="linewarn">{$message.fax nocache}</span>{/if}
+</td> 
+</tr> 
+</tbody> 
+</table> 
+</div> 
+
+<div id="tabetc">
+<table class="uniform" summary="基本設備オプションについて">
+<tr>
+<th colspan="2" class="main">基本設備オプションについて</th> 
+</tr>
+
+<tr>
+<th class="w200">パラペット <span class="red">*</span></th>
+<td>
+<input type="radio" id="parapet1" name="parapet" value="1"{if $foreign.parapet==1} checked="checked"{/if} />要
+<input type="radio" id="parapet0" name="parapet" value="0"{if $foreign.parapet==0} checked="checked"{/if} />不要
+<br />※パラペットを取り外す場合は、統一社名板・蛍光灯も同時に取り外しとなります。
+</td>
+</tr>
+
+<tr>
+<th class="w200">社名ロゴ使用 <span class="red">*</span>
+<br />@&yen;5,500(税込)</th>
+<td>
+<input type="radio" id="corplogo1" name="corplogo" value="1"{if $foreign.corplogo==1} checked="checked"{/if} />希望する
+<input type="radio" id="corplogo0" name="corplogo" value="0"{if $foreign.corplogo==0} checked="checked"{/if} />希望しない
+<br />※社名板表記は申し込み時にご指定いただいた「表示名」となります。
+<br />※ロゴデータはイラストレーター（AIデータ）のアウトライン処理されたデータをご用意ください。（送付先メールアドレスは後日ご連絡します。）
+</td>
+</tr>
+
+<tr>
+<th class="w200">壁面カラーの変更 <span class="red">*</span>
+<br />@&yen;330(税込)/㎡</th>
+<td>
+<input type="radio" id="wallpaper1" name="wallpaper" value="1"{if $foreign.wallpaper==1} checked="checked"{/if} />希望する
+(色：<input type="text" id="wallcolor" name="wallcolor" value="{$foreign.wallcolor|default:'白'}"/>)
+<input type="radio" id="wallpaper0" name="wallpaper" value="0"{if $foreign.wallpaper==0} checked="checked"{/if} />希望しない
+<br />※基本色は白になります。他の色を希望する場合は、色を入力してください。
+<br />※一部の貼り分けについては別途料金となります。
+</td>
+</tr>
+
+<tr>
+<th class="w200">パンチカーペット <span class="red">*</span>
+<br />@&yen;17,600(税込)/1小間</th>
+<td>
+<input type="radio" id="punchcarpet1" name="punchcarpet" value="1"{if $foreign.punchcarpet==1} checked="checked"{/if} />希望する
+(色：<input type="text" id="punchcolor" name="punchcolor" value="{$foreign.punchcolor}"/>)
+<input type="radio" id="punchcarpet0" name="punchcarpet" value="0"{if $foreign.punchcarpet==0} checked="checked"{/if} />希望しない
+<br />※一部の貼り分けについては別途料金となります。
+</td>
+</tr>
+
+</table>
+</div>
+
+<div id="tabbilling">
+<table class="uniform">
+<colgroup class="w200">
+<colgroup>
+<tbody>
+<tr><th colspan="2" class="sub">請求先</th></tr>
+<tr><th>請求先</th>
+<td>
+<select name="billid">
+{foreach from=$lists name=rec item=i}
+<option value="{$i.billid}" {if $foreign.billid==$i.billid}selected{/if}>
+{if $i.seqno == 0}(デフォルト){else}(追加請求先){/if}:
+{$i.corpname} {$i.position} {$i.fullname}
+</option>
+{/foreach}
+</select>
+</td>
+</tbody>
+</table>
+</div>
+<!-- 2016-11-28 23:59:59 クローズの処理 -->
+{if $smarty.now < "2019-11-30 00:00:00"|strtotime}
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="確認画面へ" />
+{else}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em;">
+お申し込みを締め切らせていただきました。
+</p>
+{/if}
+<!-- 2016-11-28 23:59:59 クローズの処理 -->
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e04construction_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e04construction/">施工業者登録</a>&nbsp;&gt;&nbsp;登録
+{/block}

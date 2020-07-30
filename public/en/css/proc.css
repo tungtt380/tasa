@@ -1,0 +1,43 @@
+@charset "utf-8";
+#wrapper {
+	width:100%;
+	background:url(/images/common/main_bg_01.gif) repeat-x #edf0f5;
+	min-width:0px;
+	text-align:center;
+}
+#rapper {
+	width:800px;
+	margin:0 auto;
+	text-align:left;
+}
+
+#contents p {
+	font-size:13px;
+}
+
+#text {
+	margin:0 20px 20px;
+}
+h3 {
+	height:30px;
+	line-height:33px;
+	font-size:14px;
+	margin:0 0 10px;
+	padding:0 10px;
+	background:#014BA8;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	color:#fff;
+}
+#flow {
+	width:688px;
+	height:888px;
+	background:url(/images/howto/bg_flow.jpg) no-repeat top left;
+	text-indent:-9999px;
+	margin:0 0 20px;
+}
+
+.red {
+	color:#c00;
+}

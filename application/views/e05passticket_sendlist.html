@@ -1,0 +1,122 @@
+{extends file='core/member.html'}
+{block name='title'}パス類追加請求集計 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>パス類追加請求集計</h2> 
+
+<p>集計日時：{$smarty.now|date_format:'%Y-%m-%d %H:%M:%S'}</p>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div id="tabcorp"> 
+<table class="listform tablesorter"> 
+<thead>
+<tr>
+	<th rowspan="2" class="nowrap">手続<br/>番号</th>
+	<th rowspan="2" class="nowrap">小間<br/>番号</th>
+	<th rowspan="2" class="nowrap">出展者名</th>
+	<th rowspan="2" class="nowrap">表示名</th>
+	<th rowspan="2" class="nowrap">小間<br/>種別</th>
+	<th colspan="3" class="nowrap">出展者パス</th>
+	<th colspan="3" class="nowrap">搬入出リボン</th>
+	<th colspan="3" class="nowrap">搬入車輌証</th>
+	<th colspan="3" class="nowrap">特別招待券</th>
+	<th colspan="3" class="nowrap">一般招待券</th>
+	<th rowspan="2" class="nowrap">ポスター</th>
+	<th rowspan="2" class="nowrap">告知<br/>チラシ</th>
+	<th rowspan="2" class="nowrap">駐車券</th>
+	<th colspan="8" class="nowrap">送付先</th>
+	<th rowspan="2" class="nowrap">更新日時</th>
+</tr>
+<tr>
+	<th class="nowrap">既定</th>
+	<th class="nowrap">追加</th>
+	<th class="nowrap bgred">合計</th>
+	<th class="nowrap">既定</th>
+	<th class="nowrap">追加</th>
+	<th class="nowrap bgred">合計</th>
+	<th class="nowrap">既定</th>
+	<th class="nowrap">追加</th>
+	<th class="nowrap bgred">合計</th>
+	<th class="nowrap">既定</th>
+	<th class="nowrap">追加</th>
+	<th class="nowrap bgred">合計</th>
+	<th class="nowrap">既定</th>
+	<th class="nowrap">追加</th>
+	<th class="nowrap bgred">合計</th>
+	<th class="nowrap">会社名</th>
+	<th class="nowrap">所属</th>
+	<th class="nowrap">役職</th>
+	<th class="nowrap">担当者</th>
+	<th class="nowrap">〒</th>
+	<th class="nowrap">住所</th>
+	<th class="nowrap">TEL</th>
+	<th class="nowrap">FAX</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td class="nowrap right">{$i.appid}</td>
+<td class="nowrap right">{if $i.exhboothno}{$i.exhboothno|string_format:"%04d"}{/if}</td>
+<td class="nowrap"><div class="ruby">{$i.corpkana}</div>{$i.corpname}</td>
+<td class="nowrap">{$i.brandname}</td>
+<td class="nowrap">{$i.boothname}</td>
+<td class="nowrap right bgrey">{$i.default3}</td>
+<td class="nowrap right">{if isset($i.quantity3)}{$i.quantity3}{/if}</td>
+<td class="nowrap right bgred">{$i.default3+$i.quantity3}</td>
+<td class="nowrap right bgrey">{$i.default1}</td>
+<td class="nowrap right">{if isset($i.quantity1)}{$i.quantity1}{/if}</td>
+<td class="nowrap right bgred">{$i.default1+$i.quantity1}</td>
+<td class="nowrap right bgrey">{$i.default2}</td>
+<td class="nowrap right">{if isset($i.quantity2)}{$i.quantity2}{/if}</td>
+<td class="nowrap right bgred">{$i.default2+$i.quantity2}</td>
+<td class="nowrap right bgrey">{$i.default4}</td>
+<td class="nowrap right">{if isset($i.quantity4)}{$i.quantity4}{/if}</td>
+<td class="nowrap right bgred">{$i.default4+$i.quantity4}</td>
+<td class="nowrap right bgrey">{$i.default5}</td>
+<td class="nowrap right">{if isset($i.quantity5)}{$i.quantity5}{/if}</td>
+<td class="nowrap right bgred">{$i.default5+$i.quantity5}</td>
+<td class="nowrap right bgred">{$i.boothcount*5}</td>
+<td class="nowrap right bgred">{$i.boothcount*20}</td>
+<td class="nowrap right bgred">1</td>
+<td class="nowrap">{$i.d_corpname}</td>
+<td class="nowrap">{$i.d_division}</td>
+<td class="nowrap">{$i.d_position}</td>
+<td class="nowrap">{$i.d_fullname}</td>
+<td class="nowrap">{deco_zip($i.d_countrycode,$i.d_zip)}</td>
+<td class="nowrap">{$i.d_prefecture}{$i.d_address1} {$i.d_address2}</td>
+<td class="nowrap">{deco_phone($i.d_countrycode,$i.d_phone)}</td>
+<td class="nowrap">{deco_phone($i.d_countrycode,$i.d_fax)}</td>
+<td class="nowrap">{$i.updated}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+</div>
+{/if}
+{/foreach}
+
+<div>
+<h3>ダウンロード</h3>
+<p>
+<a href="../sendlist_download/csv"><img src="/images/common/ico_csv.png" style="vertical-align:text-bottom" width="48" height="48" alt="CSV" title="CSV" />(CSVファイル)</a>
+</p>
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<style>.nowrap.right.bgred{ color:#c00; font-weight:bold; }</style>
+<style>.nowrap.right.bgrey{ color:#bbb; }</style>
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/e05passticket_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;パス類追加請求集計
+{/block}

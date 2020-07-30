@@ -1,0 +1,90 @@
+{extends file='core/member.html'}
+{block name='title'}入金 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>入金一覧</h2> 
+<div class="article">
+<p>以下は、入金として発生しているものを表示しています。</p>
+</div>
+
+<div id="snav">
+<form id="search" method="post" action="search">
+<div class="search">
+入力日:
+<input type="text" id="isdate" name="isdate" class="datepicker" value="{$isdate nocache}" placeholder="YYYY-MM-DD" />〜
+<input type="text" id="iedate" name="iedate" class="datepicker" value="{$iedate nocache}" placeholder="YYYY-MM-DD" /><br/>
+入金日:
+<input type="text" id="dsdate" name="dsdate" class="datepicker" value="{$dsdate nocache}" placeholder="YYYY-MM-DD" />〜
+<input type="text" id="dedate" name="dedate" class="datepicker" value="{$dedate nocache}" placeholder="YYYY-MM-DD" /><br/>
+検索キー:<input type="text" id="q" name="q" value="{$q}" />
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+</div>
+</form>
+</div>
+
+<a href="create"><img src="/images/common/btn_regist.gif" width="100" height="25" alt="新規作成" /></a>
+
+<div id="tabpayment"> 
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead> 
+<tr>
+<th class="nowrap">入金番号</th>
+<th class="nowrap">入力日</th>
+<th class="nowrap">入金日</th>
+<th>入金先</th>
+<th>入金元(請求先)</th>
+<th>出展者名</th>
+<th class="nowrap">入金金額</th> 
+<th class="nowrap">手数料</th> 
+<th class="nowrap">消込金額</th>
+</tr>
+</thead> 
+<tbody> 
+{/if}
+<tr>
+ <td><a href="detail/{$i.paymentno}">{$i.paymentno}</a></td>
+ <td class="nowrap">{$i.created|truncate:10:""}</td>
+ <td class="nowrap">{$i.paymentdate}</td>
+ <td>{$paymenttype[$i.paymentcode]}{if $i.payeeid != 0}{$payee[$i.payeeid]}{/if}</td>
+ <td>{if $i.b_corpname}{$i.b_corpname}{else}<span class="red">{$i.corpname}{/if}</span></td>
+ <td>{$i.brandname}</td>
+ <td class="right">&yen;{$i.deposit|number_format}</td>
+ <td class="right">&yen;{$i.charge|number_format}</td>
+ <td class="right">&yen;{$i.amount|number_format}</td>
+ </tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+
+<div>
+<h3>ダウンロード</h3>
+<p>
+<a href="download/csv"><img src="/images/common/ico_csv.png" style="vertical-align:text-bottom" width="48" height="48" alt="CSV" title="CSV" />(CSVファイル)</a>
+<a href="download/xlsx"><img src="/images/common/ico_xlsx.png" style="vertical-align:text-bottom" width="48" height="48" alt="Excel2007" title="Excel2007" />(Excelファイル)</a>
+</p>
+</div>
+
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.14.custom.min.js"></script>
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/jquery/ui/i18n/jquery.ui.datepicker-ja.js"></script>
+<script type="text/javascript" src="/js/payment_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent} &gt; 請求
+{/block}

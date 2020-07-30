@@ -1,0 +1,57 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &raquo; 認証 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>登録 &raquo; 認証</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="regist-nav">
+<form method="post" action="regist_in">
+<table class="uniform">
+
+<tr>
+ <th>役割</th>
+ <td>
+{form_dropdown('rolename',$role,$foreign.rolename,'id="rolename"')}
+ </td>
+</tr>
+<tr>
+ <th>ユーザー名</th>
+ <td>
+ <input type="text" name="username" maxlength="60" value="{$foreign.username nocache}" />
+{if $message.username != "" nocache}<span class="linewarn">{$message.username nocache}</span>{/if}
+ <span class="example">例)username</span>
+ </td>
+</tr>
+<tr>
+ <th>パスワード</th>
+ <td>
+ <input type="text" name="password" maxlength="60" value="{$foreign.password nocache}" />
+{if $message.password != "" nocache}<span class="linewarn">{$message.password nocache}</span>{/if}
+ <span class="example">例)pas$w0rd</span>
+ </td>
+</tr>
+<tr>
+ <th>メールアドレス</th>
+ <td>
+ <input type="text" name="email" maxlength="120" value="{$foreign.email nocache}" />
+{if $message.email != "" nocache}<span class="linewarn">{$message.email nocache}</span>{/if}
+ <span class="example">例)example@tokyoautosalon.jp</span>
+ </td>
+</tr>
+
+</table>
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+</form>
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/members_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/account/">アカウント</a>&nbsp;&gt;&nbsp;登録
+{/block}

@@ -1,0 +1,53 @@
+{extends file='core/member.html'}
+{block name='title'}集計 &raquo; 売上 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>売上集計</h2>
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th>項目</th>
+<th>請求総額(値引前)</th>
+<th>値引額</th>
+<th>請求総額(値引後)</th>
+<th>入金済金額</th>
+<th>未入金金額</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+ <td><!--{$i.invoicedid} {$i.itemtype}--> {$i.itemdetail}</td>
+ <td class="right">&yen;{$i.price|number_format}</td>
+ <td class="right">&yen;{($i.discount)|number_format}</td>
+ <td class="right">&yen;{$i.suminvoiceamount|number_format}</td>
+ <td class="right">&yen;{$i.sumpaymentamount|number_format}</td>
+ <td class="right">&yen;{$i.sumprice|number_format}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<ul>
+<li>データが見つかりません。</li>
+</ul>
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/exhibitor.css" rel="stylesheet" />
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}{$smarty.block.parent}
+{/block}

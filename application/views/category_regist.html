@@ -1,0 +1,55 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &raquo; カテゴリ &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>登録 &raquo; カテゴリ</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="regist-nav">
+<form method="post" action="regist_in">
+<table class="uniform">
+
+<tr>
+ <th>カテゴリコード</th>
+ <td>
+ <input type="text" name="categorycode" value="{$foreign.categorycode nocache}" placeholder="数字で入力" />
+{if $message.categorycode != "" nocache}<span class="linewarn">{$message.categorycode nocache}</span>{/if}
+ <span class="example">例)10</span>
+ </td>
+</tr>
+<tr>
+ <th>並び順</th>
+ <td>
+ <input type="text" name="seqno" value="{$foreign.seqno nocache}" placeholder="数値を入力" />
+{if $message.seqno != "" nocache}<span class="linewarn">{$message.seqno nocache}</span>{/if}
+ <span class="example">例)10</span>
+ </td>
+</tr>
+<tr>
+ <th>カテゴリ名</th>
+ <td>
+ <input type="text" name="categoryname" value="{$foreign.categoryname nocache}" placeholder="カテゴリ名を入力" />
+{if $message.categoryname != "" nocache}<span class="linewarn">{$message.categoryname nocache}</span>{/if}
+ <span class="example">例)チューニング</span>
+ </td>
+</tr>
+<tr>
+ <th>カテゴリ略記</th>
+ <td>
+ <input type="text" name="categoryabbr" value="{$foreign.categoryabbr nocache}" placeholder="カテゴリ略記を入力" />
+{if $message.categoryabbr != "" nocache}<span class="linewarn">{$message.categoryabbr nocache}</span>{/if}
+ <span class="example">例)TUNE</span>
+ </td>
+</tr>
+</table>
+<input type="hidden" name="allow" value="1" />
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録" />
+</form>
+</div>
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/category_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/category/">カテゴリ</a>&nbsp;&gt;&nbsp;登録
+{/block}

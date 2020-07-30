@@ -1,0 +1,148 @@
+{extends file='core/member.html'}
+{block name='title'}詳細 &raquo; 顧客 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>詳細 &raquo; 顧客</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="detail-nav">
+
+<table class="uniform">
+<tr>
+<th class="w200">顧客コード</th>
+<td>{$foreign.customerid nocache}</td>
+</tr>
+<tr>
+ <th>企業名</th>
+<td><div class="ruby">{$foreign.corpkana nocache}</div>{$foreign.corpname nocache}</td>
+</tr>
+<tr>
+ <th>所在地</th>
+<td>
+{if $foreign.countrycode == 'JP'}〒{$foreign.zip nocache}<br/>{else}({$foreign.countrycode nocache}){$foreign.zip nocache}{/if}
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+</td>
+</tr>
+<tr>
+ <th>TEL</th>
+<td>{$foreign.phone nocache}</td>
+</tr>
+<tr>
+ <th>FAX</th>
+<td>{$foreign.fax nocache}</td>
+</tr>
+<tr>
+<th>代表者名</th>
+<td>
+{$foreign.position nocache}
+<div class="ruby">{$foreign.fullkana nocache}</div>{$foreign.fullname nocache}
+</td>
+</tr>
+<tr>
+ <th>ホームページ</th>
+<td>{if isset($foreign.url)}http://{$foreign.url nocache}{/if}</td>
+</tr>
+<tr>
+<th>事務局メモ</th>
+<td>{$foreign.comment nocache}</td>
+</tr>
+<tr>
+<th class="w200">会員ステータス</th>
+<td>{if isset($history.TAS) && $history.TAS >= 3}TAS正会員{/if}{if isset($foreign.napac) && $foreign.napac > 0}NAPAC会員{/if}</td>
+</tr>
+</table>
+<div class="del-btn"><a href="../delete/{$foreign.customerid nocache}"><img src="/images/common/btn_delete.gif" width="150" height="25" alt="削除" /></a></div>
+<div class="chg-btn"><a href="../change/{$foreign.customerid nocache}"><img src="/images/common/btn_change.gif" width="150" height="25" alt="変更" /></a></div>
+</div>
+
+<table class="listform tablesorter" style="margin:15px 0 0;">
+<thead>
+ <tr>
+ <th>年度</th>
+ <th>TAS</th>
+ <th>媒体ブース</th>
+ <th>SAS</th>
+ <th>FAS</th>
+ <th>IAS</th>
+ </tr>
+</thead>
+<tbody>
+{foreach from=$years name=rec item=year}
+{if $smarty.foreach.rec.first}
+<tr>
+<td><b>{$year}</b></td>
+<td>{if isset($history[$year].TAS)}<b>TAS</b>{/if}</td>
+<td>{if isset($history[$year].TASP)}<b>{$history[$year].TASP}</b>{/if}</td>
+<td>{if isset($history[$year].SAS)}<b>SAS</b>{/if}</td>
+<td>{if isset($history[$year].FAS)}<b>FAS</b>{/if}</td>
+<td>{if isset($history[$year].IAS)}<b>IAS</b>{/if}</td>
+</tr>
+{else}
+<tr>
+<td>{$year}</td>
+<td>{if isset($history[$year].TAS)}TAS{/if}</td>
+<td>{if isset($history[$year].TASP)}<b>{$history[$year].TASP}</b>{/if}</td>
+<td>{if isset($history[$year].SAS)}SAS{/if}</td>
+<td>{if isset($history[$year].FAS)}FAS{/if}</td>
+<td>{if isset($history[$year].IAS)}IAS{/if}</td>
+</tr>
+{/if}
+{/foreach}
+</tbody>
+</table>
+<div id="more">全ての年度を見る</div>
+<div id="close">折りたたむ</div>
+<style>
+#more,#close {
+	display:block;
+	padding:10px 0;
+	width:100%;
+	height:20px;
+	line-height:20px;
+	background:#EAEAEA;
+	cursor:pointer;
+	text-align:center;
+	color:#000;
+	font-weight:bold;
+}
+
+.nodisp,#close {
+	display:none;
+}
+</style>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/customers_change.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+<script type="text/javascript">
+$(".tablesorter tr:gt(10)").addClass("nodisp");
+$(".tablesorter tr:odd").addClass("odd");
+$(".tablesorter tr:even").addClass("even");
+$("#more").click(
+	function() {
+		$("#more").toggle();
+		$("#close").toggle();
+		$("tr.nodisp").toggle();
+	}
+);
+$("#close").click(
+	function() {
+		$("#close").toggle();
+		$("#more").toggle();
+		$("tr.nodisp").toggle();
+	}
+);
+</script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/customer/">顧客</a>&nbsp;&gt;&nbsp;詳細({$foreign.corpname nocache})
+{/block}

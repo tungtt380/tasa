@@ -1,0 +1,24 @@
+{extends file='core/member.html'}
+{block name='title'}リース備品申込 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>リース備品申込</h2> 
+<div style="background-color:#FFFFCC;font-size:10.5pt;margin:8px 0px;padding:2px;border:1px solid #FFFF99;">この申込は 車両専用スペースではお申込みできません。</div>
+
+<div>
+	<p>B、E、Fスペースの出展者さまはお申込み頂けません。</p>
+</div>
+{/block}
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/e13equipment_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;(11)リース備品申込
+{/block}

@@ -1,0 +1,41 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &raquo; 都道府県 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>登録</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="regist-nav">
+<form method="post" action="regist_in">
+<table class="uniform">
+
+<tr>
+<th>コード</th>
+<td>
+<input type="text" name="prefcode" value="{$foreign.prefcode nocache}" placeholder="数値２桁で入力" />
+{if $message.prefcode != '' nocache}<span class="linewarn">{$message.prefcode nocache}</span>{/if}
+<span class="example">例) 13</span>
+</td>
+</tr>
+
+<tr>
+<th>都道府県名</th>
+<td>
+<input type="text" name="prefname" value="{$foreign.prefname nocache}" placeholder="都道府県名を入力" />
+{if $message.prefname != '' nocache}<span class="linewarn">{$message.prefname nocache}</span>{/if}
+<span class="example">例) 東京都</span>
+</td>
+</tr>
+
+</table>
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+</form>
+</div>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/prefecture_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/prefecture/">都道府県</a>&nbsp;&gt;&nbsp;登録
+{/block}

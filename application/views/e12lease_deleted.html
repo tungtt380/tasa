@@ -1,0 +1,27 @@
+{extends file='core/member.html'}
+{block name='title'}(11)リース備品申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>リース備品削除</h2>
+<p>削除が完了いたしました。</p>
+<form method="get" action="deleted_in" >
+
+
+ </form>
+ </tbody> 
+</table>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/sponsor_change.js"></script>
+<script type="text/javascript" src="/js/e04construction_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e12lease/">リース備品申込</a>&nbsp;&gt;&nbsp;編集
+{/block}

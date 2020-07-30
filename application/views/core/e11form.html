@@ -1,0 +1,201 @@
+<table class="uniform">
+<tbody>
+<tr><th colspan="2">ご請求先</th></tr>
+<td colspan="2"><p>■請求先を選択して下さい。<span class="red">*</span>（下記にない場合は左メニュー出展者情報内「請求先追加登録」で請求先を追加してください。）<br/>
+<select name="billid">
+{foreach from=$lists name=rec item=i}
+<option value="{$i.billid}" {if $foreign.billid==$i.billid}selected{/if}>〒{$i.zip} {$i.prefecture} {$i.address1} {$i.address2} {$i.corpname} {$i.position} {$i.fullname}</option>
+{/foreach}
+</select>
+</tr>
+</tbody>
+</table>
+
+<table class="uniform">
+<thead>
+<tr><th colspan="2">ご連絡先<br/><strong>(ご登録と異なる場合はご連絡先を入力下さい)</strong></th></tr>
+</thead>
+<tbody>
+<td colspan="2"><p>■連絡先を選択して下さい。<span style="color:#ff0000">*</span>{if $message.outsourcing != '' nocache}<span class="linewarn">{$message.outsourcing nocache}</span>{/if}</p>
+<input type="radio" id="outsourcing0" name="contact" value="0" {if $foreign.contact==0}checked="checked"{/if}>
+上記連絡先と同じ(ご記入の必要はございません)<br/>
+<input type="radio" id="outsourcing1" name="contact" value="1" {if $foreign.contact==1}checked="checked"{/if}>
+別の連絡先 (連絡先を以下にご記入ください)
+{if isset($message.outsourcing)}  <span class="linewarn">{$message.outsourcing nocache}</span>{/if} <br/>
+</table>
+<div id="tabcontact">
+<table class="uniform">
+<tr><th colspan="2" class="main">連絡先</th></tr>
+
+<th class="w200">会社名<span class="red">*</span></th>
+<td>
+<input type="text" id="corpname" name="corpname" size="48" maxlength="60" value="{$foreign.corpname nocache}" placeholder="名称">
+<span class="example">例)○○株式会社</span>
+{if $message.corpname != '' nocache}<span class="linewarn">{$message.corpname nocache}</span>{/if}
+</td>
+</tr>
+
+<tr>
+<th>所在地 <span class="red">*</span></th>
+<td>
+<span class="example"><label for="sekou_zip">郵便番号</label> 例)1234567</span><br />
+<input type="text" id="zip" name="zip" size="8" maxlength="8" value="{$foreign.zip nocache}" placeholder="郵便番号">
+<div id="zip" class="clearfix"><span id="zipdir" class="zipsearch">郵便番号から住所を検索</span><span id="ziprev" class="revsearch">住所から郵便番号>を検索</span></div>
+{if $message.zip != '' nocache}<span class="linewarn">{$message.zip nocache}</span>{/if}
+<span class="example"><label for="sekou_address_one">町名番地</label> 例)東京都新宿区新宿6-27-30</span><br />
+{form_dropdown_ex('prefecture',$prefecture,$foreign.prefecture,'東京都','id="prefecture"')}
+{if $message.prefecture != '' nocache}<span class="linewarn">{$message.prefecture nocache}</span>{/if}
+
+<input type="text" id="address1" name="address1" size="31" maxlength="60" value="{$foreign.address1 nocache}" placeholder="町名番地">
+{if $message.address1 != '' nocache}<span class="linewarn">{$message.address1 nocache}</span>{/if}
+<br/>
+<span class="example"><label for="address2">ビルマンション名</label> 例)○○ビル3F</span><br />
+<input type="text" id="address2" name="address2" size="48" maxlength="60" value="{$foreign.address2 nocache}" placeholder="ビル・マンション名">
+{if $message.address2 != '' nocache}<span class="linewarn">{$message.address2 nocache}</span>{/if}
+<br/>
+</td>
+</tr>
+<tr>
+<th class="w200">担当部署 <span class="red">*</span></th>
+<td>
+<input type="text" id="division" name="division" size="48" maxlength="60" value="{$foreign.division nocache}" placeholder="担当部署名">
+{if $message.division != '' nocache}<span class="linewarn">{$message.division nocache}</span>{/if}
+<br/></td></tr>
+<tr>
+<th class="w200">担当者 <span class="red">*</span></th>
+<td>
+<input type="text" id="fullname" name="fullname" size="48" maxlength="60" value="{$foreign.fullname nocache}" placeholder="担当者名">
+{if $message.fullname != '' nocache}<span class="linewarn">{$message.fullname nocache}</span>{/if}
+<br/></td></tr>
+<tr>
+<th class="w200">メールアドレス <span class="red">*</span></th>
+<td>
+<input type="text" id="email" name="email" size="48" maxlength="60" value="{$foreign.email nocache}" placeholder="メールアドレス">
+{if $message.email != '' nocache}<span class="linewarn">{$message.email nocache}</span>{/if}
+<br/></td></tr>
+<tr>
+<th>携帯番号 <span class="red">*</span></th>
+<td>
+<span class="example"><label for="sekou_mobile">携帯番号</label>(数字) 例)0312345678</span><br />
+<input type="text" id="mobile" name="mobile" size="15" maxlength="15" value="{$foreign.mobile nocache}" placeholder="TEL">
+{if $message.mobile != '' nocache}<span class="linewarn">{$message.mobile nocache}</span>{/if}
+</td>
+</tr>
+<tr>
+<th>TEL <span class="red">*</span></th>
+<td>
+<span class="example"><label for="sekou_phone">TEL</label>(数字) 例)0312345678</span><br />
+<input type="text" id="phone" name="phone" size="15" maxlength="15" value="{$foreign.phone nocache}" placeholder="TEL">
+{if $message.phone != '' nocache}<span class="linewarn">{$message.phone nocache}</span>{/if}
+</td>
+</tr>
+
+<tr>
+<th>FAX <span class="red">*</span></th>
+<td>
+<span class="example"><label for="sekou_fax">FAX</label>(数字) 例)0312345678</span><br />
+<input type="text" id="fax" name="fax" size="15" maxlength="15" value="{$foreign.fax nocache}" placeholder="FAX">
+{if $message.fax != '' nocache}<span class="linewarn">{$message.fax nocache}</span>{/if}
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div>
+■レンタル内容価格(税別)<br>
+
+<table class="uniform">
+<thead>
+	<tr>
+		<th><strong>セット名</strong></th>
+		<th><strong>セット内容</strong></th>
+		<th><strong>価格(税別)</strong></th>
+		<th><strong>数量</strong></th>
+	</tr>
+</thead>
+<tbody>
+<tr>
+	<th class="w100">Aプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>42インチ液晶モニター</li>
+			<li>BDプレイヤーorデジタルメディアプレイヤー<br>動画は(.mov .wmv .mp4 .aviのみ可能)</li>
+			<li>自立スタンドor壁掛け金具</li>
+			<li>スピーカー(45ｗ×2)アンプ(×1)</li>
+		</ul>
+	</th>
+	<th>&yen;130,000</th>
+	<td><div align="center">
+	<input type="text" id="quantity_1" name="quantity_1" size="8" maxlength="8" value="{$foreign.quantity_1 nocache}">
+	{if isset($message.quantity_1)}<span class="linewarn">{$message.quantity_1 nocache}</span>{/if}</div></td> 
+</tr>
+<tr>
+	<th class="w100">Bプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>32インチ液晶モニター</li>
+			<li>BDプレイヤーorデジタルメディアプレイヤー<br>動画は(.mov .wmv .mp4 .aviのみ可能)</li>
+			<li>自立スタンドor壁掛け金具</li>
+			<li>スピーカー(45ｗ×2)アンプ(×1)</li>
+		</ul>
+	</th>
+	<th>&yen;115,000</th>
+	<td><div align="center">
+	<input type="text" id="quantity_2" name="quantity_2" size="8" maxlength="8" value="{$foreign.quantity_2 nocache}">
+	{if isset($message.quantity_2)}<span class="linewarn">{$message.quantity_2 nocache}</span>{/if}</div></td> 
+</tr>
+<tr>
+	<th class="w100">Cプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>24インチ液晶モニター</li>
+			<li>BDプレイヤーorデジタルメディアプレイヤー<br>動画は(.mov .wmv .mp4 .aviのみ可能)</li>
+			<li>自立スタンドor壁掛け金具</li>
+			<li>スピーカー(45ｗ×2)アンプ(×1)</li>
+		</ul>
+	</th>
+	<th>&yen;65,000</th> 
+	<td><div align="center">
+	<input type="text" id="quantity_3" name="quantity_3" size="8" maxlength="8" value="{$foreign.quantity_3 nocache}">
+	{if isset($message.quantity_3)}<span class="linewarn">{$message.quantity_3 nocache}</span>{/if}</div></td> 
+</tr>
+<tr>
+	<th class="w100">Dプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>有線ハンドマイク×1</li>
+			<li>CDプレイヤー×1</li>
+			<li>スピーカー(45w×2)</li>
+			<li>アンプ</li>
+			<li>イコライザー</li>
+		</ul>
+	</th>
+	<th>&yen;60,000</th>
+	<td><div align="center">
+	<input type="text" id="quantity_4" name="quantity_4" size="8" maxlength="8" value="{$foreign.quantity_4 nocache}">
+	{if isset($message.quantity_4)}<span class="linewarn">{$message.quantity_4 nocache}</span>{/if}</div></td> 
+</tr>
+<tr>
+	<th class="w100">Eプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>有線ハンドマイク×1</li>
+			<li>CDプレイヤー×1</li>
+			<li>スピーカー(200w×2)</li>
+			<li>アンプ</li>
+			<li>イコライザー</li>
+		</ul>
+	</th>
+	<th>&yen;100,000</th>
+	<td><div align="center">
+	<input type="text" id="quantity_5" name="quantity_5" size="8" maxlength="8" value="{$foreign.quantity_5 nocache}">
+	{if isset($message.quantity_5)}<span class="linewarn">{$message.quantity_5 nocache}</span>{/if}</div></td> 
+</tr>
+</table>
+
+※40インチ以上のモニターを希望する際は、弊社にてご相談ください。<br>
+※上記以外にもさまざまな機材をご用意できますので、お気軽にご相談ください。<br>
+※商品の破損等が発生した場合、実費にてご請求させていただきます。あらかじめご了承ください。<br>
+
+</div>

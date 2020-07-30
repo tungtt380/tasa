@@ -1,0 +1,17 @@
+{extends file='core/member.html'}
+{block name='title'}バルーンレンタル申込 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>バルーンレンタル申込</h2>
+<div class="article">
+<p>出展要項No.10の申込用紙にご記入の上、下記まで<b>FAX</b>でご提出ください。</p>
+</div>
+
+{include file='core/ex_hikousen.html' nocache}
+
+<!--
+<h2>申込書類のダウンロード</h2>
+<p><a href="{uri_folder_string()}/e10baloonrental/download"><img style="vertical-align:text-bottom" src="/images/common/ico_pdf.png" alt="[PDF]" />バルーンレンタル申込書(PDFファイル:xxKB)</a></p>
+-->
+
+{/block}

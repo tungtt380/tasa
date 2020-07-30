@@ -1,0 +1,66 @@
+{extends file='core/member.html'}
+{block name='title'}変更完了 &raquo; 幕張新都心食事券 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>幕張新都心食事券登録</h2> 
+<p style="margin:0 0 20px;">編集が完了いたしました。</p>
+<!--
+<form method="post" action="history" target="_blank"> 
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input name="addpass_submit_a" type="submit" class="bt1" value="今までのお申込み履歴" />
+</form>
+-->
+{if isset($message.__all)}
+<div class="blockwarn"><p>{$message.__all nocache}</p></div>
+{/if}
+<div id="tabcorp">
+<table class="uniform">
+<tr> 
+<th colspan="2" class="main">幕張新都心飲食共通利用券</th>
+</tr>
+<tr>
+<th class="w200">利用券の追加枚数</th>
+<td>これまでの申込枚数：{$foreign.nowquantity|default:0 nocache}枚に、以下の枚数を追加申込みします。<br />
+@1,000円券×{$foreign.addquantity nocache}枚<br/>
+(250円券×3枚＋100円券×2枚＋50円券×１枚)
+{if $message.addquantity != '' nocache}<span class="linewarn">{$message.addquantity nocache}</span>{/if}
+</td>
+</tr>
+</table>
+
+<table class="uniform">
+<tr> 
+<th colspan="2" class="sub">ご請求先</th>
+</tr>
+<tr>
+<th class="w200">ご請求先</th>
+<td>〒{$lists[$foreign.billid].zip}<br>
+{$lists[$foreign.billid].prefecture} {$lists[$foreign.billid].address1} {$lists[$foreign.billid].address2}<br>
+{$lists[$foreign.billid].corpname}<br>
+{$lists[$foreign.billid].position} {$lists[$foreign.billid].fullname}
+<br />
+{if $message.billid != '' nocache}<span class="linewarn">{$message.billid nocache}</span>{/if}</td>
+</tr>
+</table>
+</div>
+
+{if uri_folder_string() != '/ex'}
+<div class="btn-detail" style="margin:20px 0 0;">
+<a href="{uri_folder_string()}/e07voucherticket/"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+</div>
+{/if}
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e04construction_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e07voucherticket/">幕張新都心食事券</a>&nbsp;&gt;&nbsp;変更完了
+{/block}

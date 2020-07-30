@@ -1,0 +1,81 @@
+{extends file='core/member.html'}
+{block name='title'}(05)パス類追加請求 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>パス類追加請求</h2> 
+
+<div> 
+<table class="uniform">
+<colgroup>
+<colgroup>
+<colgroup>
+<thead>
+<tr>
+<th>種類</th>
+<th>これまでの追加枚数</th>
+<th>今回追加枚数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="w200">搬入出リボン（有料：@&yen;100-税込）<br>※現地発行も可：（有料：@&yen;100-税込）<br/>☆搬入出日のみ有効</th>
+<td class="center">{$foreign.quantity_1|default:0 nocache}枚</td>
+<td class="center">{$foreign.addquantity_1|default:0 nocache}枚</td>
+</tr>
+<tr>
+<th class="w200">搬入出車両証(無料)<br/>☆搬入出日のみ有効</th>
+<td class="center">{$foreign.quantity_2|default:0 nocache}枚</td>
+<td class="center">{$foreign.addquantity_2|default:0 nocache}枚</td>
+</tr>
+<tr>
+<th class="w200">出展者パス(有料＠￥8,000(税込)<br/>☆搬入出日/会期中とも有効</th>
+<td class="center">{$foreign.quantity_3|default:0 nocache}枚</td>
+<td class="center">{$foreign.addquantity_3|default:0 nocache}枚</td>
+</tr>
+<tr>
+<th class="w200">特別招待券(有料＠￥3,000(税込)<br/>☆01/10(金)のみ有効</th>
+<td class="center">{$foreign.quantity_4|default:0 nocache}枚</td>
+<td class="center">{$foreign.addquantity_4|default:0 nocache}枚</td>
+</tr>
+<tr>
+<th class="w200">一般招待券(有料＠￥2,000(税込)<br/>☆01/11(土)、01/12(日)のみ有効</th>
+<td class="center">{$foreign.quantity_5|default:0 nocache}枚</td>
+<td class="center">{$foreign.addquantity_5|default:0 nocache}枚</td>
+</tr>
+</tbody>
+</table>
+
+<table class="uniform">
+<tr>
+<th>ご請求先<br /></th>
+<td>
+〒{$lists[$foreign.billid].zip}<br/>
+{$lists[$foreign.billid].prefecture} {$lists[$foreign.billid].address1} {$lists[$foreign.billid].address2}<br/>
+{$lists[$foreign.billid].corpname}<br/>
+{$lists[$foreign.billid].position} {$lists[$foreign.billid].fullname}
+</td>
+<tr>
+</table>
+
+{if TRUE}
+<a href="./change/{$foreign.appid}"><img src="/images/common/btn_change.gif" id="action" name="action" value="変更" /></a>
+{/if}
+
+<p>※ご請求は、開催後となります。また、ご請求先につきましては、お申込みの際”ご請求先”でご指定いただいたところになります。</p>
+<p>※一度追加でお申込み頂いたものを、キャンセルまたは枚数を減らしたいなどのご変更をご希望の場合には直接東京オートサロン事務局まで、お問い合わせください。</p>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/e.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e05passticket_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e05passticket/">パス類追加請求</a>&nbsp;&gt;&nbsp;編集
+{/block}

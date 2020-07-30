@@ -1,0 +1,254 @@
+{extends file='core/member.html'}
+{block name='title'}出展申込者 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>(01)展示車両登録（車両諸元表入力）</h2>
+
+{if (($rolename == 'exhibitor' || $rolename == 'exhibitor2') && $e01webonly)}
+<div class="blockwarn article" style="font-size:14px; font-weight:bold; margin:1em .5em; padding:.5em; border:2px solid #fcc; background-color:#fee;">
+<p>この登録は公式ホームページでご紹介用およびカスタムカーコンテストへのエントリー用の登録となります。</p>
+<!--<p>スペックボード作成の申込みは締切らせていただいておりますのでご了承ください。</p>
+<p>また修正いただいた内容はスペックボードには反映されませんのでご了承ください。</p>-->
+</div>
+{/if}
+<!-- 2016-12-7 再開用コメント -->
+{if (($rolename == 'exhibitor') && ($smarty.now > "2019-12-09 10:00:00"|strtotime && $smarty.now < "2020-01-10 00:00:00"|strtotime)) || ($rolename == 'promotion' && ($smarty.now > "2019-12-09 10:00:00"|strtotime && $smarty.now < "2020-01-10 10:00:00"|strtotime))}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+スペックボード作成の受付けは締め切らせていただきました。<br>
+今後のご修正、ご登録は事務局作成のスペックボードには反映されませんのでご了承ください。<br>
+ホームページ上では随時修正情報を反映させていただきます。<br>
+また修正した内容でスペックボードデータをダウンロードも可能です。
+</p>
+<!-- //2016-12-7 再開用コメント -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2020-01-10 00:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">展示車両の登録・編集は締め切らせて頂きました。
+</p>
+<!-- 2016-11-30 一時クローズのコメント 2016-12-7 再開時表示消し -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2019-12-05 09:00:00"|strtotime && $smarty.now < "2019-12-09 10:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">スペックボード作成作業の為、登録を一旦締め切らせていただいております。<br>
+12/9 9:00より再開予定です。今しばらくお待ちください。<br>
+※12/9以降に新規ご登録いただいた車両のスペックボードは作成されません。
+</p>
+{/if}
+<!-- // 2016-11-30 一時クローズのコメント 2016-12-7 再開時表示消し -->
+
+{foreach from=$lists2 name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div id="tabcorp">
+{if uri_match('/ex/e01car/create', $rolepermission)}
+<div>
+<p>車両諸元表の登録は3種類に分かれて登録して頂くことになりました。<br />
+それぞれのコンセプトにあった系統を選択して頂きご記入ください。</p>
+<br />
+{if $i.expired}
+<h3>登録車両はありません。</h3>
+{else}
+{if !($i.carname)}
+展示車両が無い場合は<a href="create/{$i.exhid}/{$i.exhboothid}/9"><b>9.展示車両無し</b></a>を選択してください。
+{/if}
+<br />
+{if ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2020-01-01 10:00:00"|strtotime && "2020-01-01 10:00:00"|strtotime > $smarty.now)}
+<table class="uniform">
+<tr>
+<th>1.チューニング系で新規登録</th>
+<th>2.ドレスアップ系で新規登録</th>
+<th>3.その他で新規登録</th>
+{if !($i.carname)}
+<th>9.展示車両無し</th>
+{/if}
+</tr>
+</table>
+{else}
+<table class="uniform">
+<tr>
+<th><a href="create/{$i.exhid}/{$i.exhboothid}/0">1.チューニング系で新規登録</a></th>
+<th><a href="create/{$i.exhid}/{$i.exhboothid}/1">2.ドレスアップ系で新規登録</a></th>
+<th><a href="create/{$i.exhid}/{$i.exhboothid}/2">3.その他で新規登録</a></th>
+{if !($i.carname)}
+<th><a href="create/{$i.exhid}/{$i.exhboothid}/9">9.展示車両無し</a></th>
+{/if}
+</tr>
+</table>
+{/if}
+</div>
+<div class="blockinfo">
+    <!--<p style="color:#F00; font-weight: bold;">スペックボードのプレビューは現在準備中です。準備ができ次第観閲可能となりますので、もうしばらくお待ちください。</p>-->
+    
+    <!-- スペックボードができたら戻す。-->
+<p>スペックボードの作成を希望された方は、プレビューを観閲することができます。
+スペックボードのプレビューを表示するにはスペックボード欄に表示されるアイコンをクリックしてください。</p>
+
+</div>
+<h3>現在登録されている車両は下記の通りです。</h3>
+{/if}
+{/if}
+<table class="listform tablesorter"> 
+<thead>
+<th>出展者名</th>
+<th>表示名</th>
+{if ($rolename != 'exhibitor' AND $rolename != 'exhibitor2' AND $rolename != 'promotion')}
+<th>小間形状</th>{/if}
+<th>小間番号</th>
+<th>出展車両名</th>
+<th>スペックボード</th>
+<!--{if ($rolename != 'exhibitor' AND $rolename != 'promotion')}<th>写真</th>{/if}-->
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td><div class="ruby">{$i.corpkana}</div>{$i.corpname}</td>
+<td><div class="ruby">{$i.brandkana}</div>{$i.brandname}</td>
+{if ($rolename != 'exhibitor' AND $rolename != 'exhibitor2' AND $rolename != 'promotion')}
+<td class="right">{$i.boothname}</td>{/if}
+<td class="right">{$i.exhboothno}</td>
+{if $i.carname}
+<td class="nowrap">
+{foreach from=$i.carnames name=rec02 item=carname}
+{$carname}<br />
+{/foreach}
+</td>
+<td class="nowrap">
+{if ($rolename != 'exhibitor' && $rolename != 'exhibitor2')}
+{foreach from=$i.specs name=rec02 key=k item=spec}
+{if $i.stands[$k]==1}
+{if $spec==0}[作成]<a href="preview/{$i.appids[$k]}/tuning"><img src="/images/common/ico_tuning.png" width="14" height="14" />TUNING</a> <a href="specboard/{$i.appids[$k]}/tuning">[DL]</a>{/if}
+{if $spec==1}[作成]<a href="preview/{$i.appids[$k]}/dressup"><img src="/images/common/ico_dressup.png" width="14" height="14" />DRESSUP</a> <a href="specboard/{$i.appids[$k]}/dressup">[DL]</a>{/if}
+{if $spec==2}[作成]<a href="preview/{$i.appids[$k]}/concept"><img src="/images/common/ico_concept.png" width="14" height="14" />etc</a> <a href="specboard/{$i.appids[$k]}/concept">[DL]</a>{/if}
+{else}
+{if $spec==0}[なし]<a href="preview/{$i.appids[$k]}/tuning"><img src="/images/common/spacer.gif" width="14" height="14" />TUNING</a>{/if}
+{if $spec==1}[なし]<a href="preview/{$i.appids[$k]}/dressup"><img src="/images/common/spacer.gif" width="14" height="14" />DRESSUP</a>{/if}
+{if $spec==2}[なし]<a href="preview/{$i.appids[$k]}/concept"><img src="/images/common/spacer.gif" width="14" height="14" />etc</a>{/if}
+
+{if $spec==0}TUNING{/if}
+{if $spec==1}DRESSUP{/if}
+{if $spec==2}etc{/if}
+{/if}
+<br />
+{/foreach}
+{elseif (!$e01webonly && uri_match('/ex/e01car/preview', $rolepermission))}
+{foreach from=$i.specs name=rec02 key=k item=spec}
+{if $i.stands[$k]==1}
+{if $spec==0}[作成]<a href="preview/{$i.appids[$k]}/tuning"><img src="/images/common/ico_tuning.png" width="14" height="14" />TUNING</a>{/if}
+{if $spec==1}[作成]<a href="preview/{$i.appids[$k]}/dressup"><img src="/images/common/ico_dressup.png" width="14" height="14" />DRESSUP</a>{/if}
+{if $spec==2}[作成]<a href="preview/{$i.appids[$k]}/concept"><img src="/images/common/ico_concept.png" width="14" height="14" />etc</a>{/if}
+{else}
+{if $spec==0}[なし]<a href="preview/{$i.appids[$k]}/tuning"><img src="/images/common/spacer.gif" width="14" height="14" />TUNING</a>{/if}
+{if $spec==1}[なし]<a href="preview/{$i.appids[$k]}/dressup"><img src="/images/common/spacer.gif" width="14" height="14" />DRESSUP</a>{/if}
+{if $spec==2}[なし]<a href="preview/{$i.appids[$k]}/concept"><img src="/images/common/spacer.gif" width="14" height="14" />etc</a>{/if}
+{if $spec==0}TUNING{/if}
+{if $spec==1}DRESSUP{/if}
+{if $spec==2}etc{/if}
+{/if}
+
+<br />
+{/foreach}
+{else}
+{foreach from=$i.specs name=rec02 key=k item=spec}
+{if $i.stands[$k]==1}
+{if $spec==0}[作成]<a href="preview/{$i.appids[$k]}/tuning"><img src="/images/common/ico_tuning.png" width="14" height="14" />TUNING</a>{/if}
+{if $spec==1}[作成]<a href="preview/{$i.appids[$k]}/dressup"><img src="/images/common/ico_dressup.png" width="14" height="14" />DRESSUP</a>{/if}
+{if $spec==2}[作成]<a href="preview/{$i.appids[$k]}/concept"><img src="/images/common/ico_concept.png" width="14" height="14" />etc</a>{/if}
+{else}
+{if $spec==0}[なし]<a href="preview/{$i.appids[$k]}/tuning"><img src="/images/common/spacer.gif" width="14" height="14" />TUNING</a>{/if}
+{if $spec==1}[なし]<a href="preview/{$i.appids[$k]}/dressup"><img src="/images/common/spacer.gif" width="14" height="14" />DRESSUP</a>{/if}
+{if $spec==2}[なし]<a href="preview/{$i.appids[$k]}/concept"><img src="/images/common/spacer.gif" width="14" height="14" />etc</a>{/if}
+{/if}
+
+{if $spec==0}TUNING{/if}
+{if $spec==1}DRESSUP{/if}
+{if $spec==2}etc{/if}
+<br />
+{/foreach}
+{/if}
+</td>
+{else}
+<td colspan="2">
+{if $i.expired}(展示車両なし){else}[未登録]{/if}
+</td>
+{/if}
+<!--
+{if ($rolename != 'exhibitor' && $rolename != 'promotion')}
+<td>{if $i.appid}<a href="photo/{$i.appids[$k]}">[DL]</a>{/if}</td>
+{/if}
+-->
+<td class="nowrap">
+{if (($rolename != 'exhibitor' && $rolename != 'promotion') || uri_match('/ex/e01car/change', $rolepermission))}
+	{if $i.appid}
+	{foreach from=$i.appids name=rec02 item=appid}
+	<a href="change/{$appid}">[編集]</a>
+	<a href="delete/{$appid}">[削除]</a>
+	<br />
+	{/foreach}
+	{/if}
+{/if}
+</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+
+{if uri_folder_string() == '/op'}
+<div>
+<h3>展示車両登録のダウンロード</h3>
+<p>
+<a href="download/csv"><img src="/images/common/ico_csv.png" style="vertical-align:text-bottom" width="48" height="48" alt="CSV" title="CSV" />(CSVファイル)</a>
+<a href="download/xlsx"><img src="/images/common/ico_xlsx.png" style="vertical-align:text-bottom" width="48" height="48" alt="Excel2007" title="Excel2007" />(Excelファイル)</a>
+<a href="archive"><img src="/images/common/ico_zip.png" style="vertical-align:text-bottom" width="48" height="48" alt="Zip" title="Zip" />(画像ファイル)</a>
+<a href="download_specboard"><img src="/images/common/ico_pdf.png" style="vertical-align:text-bottom" width="48" height="48" alt="Pdf" title="Pdf" />(スペックボードPDFファイル)</a>
+<a href="download_preview"><img src="/images/common/ico_pdf.png" style="vertical-align:text-bottom" width="48" height="48" alt="Pdf" title="Pdf" />(スペックボードPDFファイル(旧形式))</a>
+</p>
+<div class="blockwarn">
+<p>ダウンロードするまでに時間がかかるものもあります。上記アイコンをクリックしたら、最長５分ほど待つ場合がありますので予めご了承ください。</p>
+</div>
+</div>
+{/if}
+{/if}
+{foreachelse}
+<!--
+<div id="tabcorp">
+{if uri_match('/ex/e01car/create', $rolepermission)}
+<div>
+<p>車両諸元表の登録は3種類に分かれて登録して頂くことになりました。<br />
+それぞれのコンセプトにあった系統を選択して頂きご記入ください。</p>
+<br />
+{if $i.expired}
+<h3>登録車両はありません。</h3>
+{else}
+{if !($i.carname)}
+展示車両が無い場合は<a href="create/{$i.exhid}/{$i.exhboothid}/9"><b>9.展示車両無し</b></a>を選択してください。
+{/if}
+<br />
+<table class="uniform">
+<tr>
+<th><a href="create/{$i.exhid}/{$i.exhboothid}/0">1.チューニング系で新規登録</a></th>
+<th><a href="create/{$i.exhid}/{$i.exhboothid}/1">2.ドレスアップ系で新規登録</a></th>
+<th><a href="create/{$i.exhid}/{$i.exhboothid}/2">3.その他で新規登録</a></th>
+{if !($i.carname)}
+<th><a href="create/{$i.exhid}/{$i.exhboothid}/9">9.展示車両無し</a></th>
+{/if}
+</tr>
+</table>
+</div>
+</div>
+{/if}
+{/if}
+</div>
+-->
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;展示車両登録
+{/block}

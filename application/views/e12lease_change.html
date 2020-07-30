@@ -1,0 +1,84 @@
+{extends file='core/member.html'}
+{block name='title'}(12)リース備品申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+
+<h2>リース備品編集</h2> 
+<div style="background-color:#FFFFCC;font-size:10.5pt;margin:8px 0px;padding:2px;border:1px solid #FFFF99;">この申込は A、C、D、S スペース専用になります。<br>
+※ E スペースは小間部分のみ設置可。</div>
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if} 
+{if $smarty.now > "2019-12-10 00:00:00"|strtotime}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+web登録は締め切らせていただきました。<!--<br>
+今後のご登録は、出展要項の申請用紙にご記入の上、FAXにてお送りください。-->
+</p>
+{else}
+{include file='core/ex_asscene.html'}
+{include file='core/exhform.html'}
+
+<form method="post" action="../change_in">
+<input type="hidden" name="appid" value="{$foreign.appid nocache}">
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid nocache}">
+<input type="hidden" name="appno" value="{$foreign.appno nocache}">
+<input type="hidden" name="seqno" value="{$foreign.seqno nocache}">
+<input type="hidden" name="token" value="{$foreign.token nocache}">
+
+{include file="core/e12form.html" nocache}
+    
+<thead> 
+<tr><th colspan="2">ご請求先<br /></th></tr>
+<tr>(ご登録と異なる場合はご請求先をご入力下さい)</tr>
+</thead>
+ 
+
+<tbody>
+<td colspan="2"><p>■請求先を選択して下さい。<span style="color:#ff0000">*</span>{if $message.outsourcing != '' nocache}<span class="linewarn">{$message.outsourcing nocache}</span>{/if}
+  <br/>
+  
+  <label>
+    <input type="radio" id="outsourcing0" name="outsourcing" value="0" {if $foreign.outsourcing==0}checked="checked"{/if}>
+    上記請求先と同じ(ご記入の必要はございません)<br/>
+    <input type="radio" id="outsourcing1" name="outsourcing" value="1" {if $foreign.outsourcing==1 || $foreign.billid}checked="checked"{/if}>
+    別の請求先 (請求先を以下にご記入ください)
+  </label>
+  {if isset($message.outsourcing)}  <span class="linewarn">{$message.outsourcing nocache}</span>{/if} <br/>
+  <select name="billid">
+    
+            
+{foreach from=$lists name=rec item=i}
+      
+    <option value="{$i.billid}" {if $foreign.billid==$i.billid}selected{/if}>〒{$i.zip} {$i.prefecture} {$i.address1} {$i.address2} {$i.corpname} {$i.position} {$i.fullname}</option>
+    
+{/foreach}
+    
+  </select>
+  <br />
+  {if $message.billid != '' nocache}<span class="linewarn">{$message.billid nocache}</span>{/if}</p>
+
+<br/>
+<tr><th>
+    <input name="lease_submit" type="submit" class="bt1" value="確認画面へ">
+    <br/></th></tr>
+</form>
+
+
+</tbody>
+{/if}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/shadowbox.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e12lease_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e12lease/">リース備品申込</a>&nbsp;&gt;&nbsp;編集
+{/block}

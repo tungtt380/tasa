@@ -1,0 +1,60 @@
+{extends file='core/member.html'}
+{block name='title'}みんカラ×オートサロン &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>みんカラ×オートサロン</h2>
+<p>参加希望受け付けました。<br>
+この時点では申し込み完了ではございません。申込書を発送致しますのでご記入頂き、参加法人の印鑑証明書と合わせて12/5必着で申込書記載の返信先までご返信下さい。</p><br />
+
+
+<div id="tabcorp"></div>
+
+<div id="tabbilling">
+	<table class="exhform">
+		<colgroup class="w200">
+		</colgroup>
+		<colgroup>
+		</colgroup>
+		<tbody>
+			<tr>
+				<th>お問い合わせコード</th>
+				<td>{$exhibitor.exhid}</td>
+			</tr>
+			<tr>
+				<th>出展者名</th>
+				<td>{$exhibitor.corpname}</td>
+			</tr>
+			<tr>
+				<th>表示名</th>
+				<td>{$exhibitor.brandname}</td>
+			</tr>
+			<tr>
+				<th><span class="w200">所在地</span></th>
+				<td>{$exhibitor.c_zip nocache}<br />
+					{$exhibitor.c_prefecture nocache}{$exhibitor.c_address1 nocache}{$exhibitor.c_address2 nocache}</td>
+			</tr>
+			<tr>
+				<th>担当者</th>
+				<td>{$exhibitor.c_fullname}</td>
+			</tr>
+			<tr>
+				<th>TEL</th>
+				<td>{deco_phone($exhibitor.c_countrycode,$exhibitor.c_phone)}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e14cleaning_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/minkara/">みんカラ×オートサロン</a>&nbsp;&gt;&nbsp;登録
+{/block}

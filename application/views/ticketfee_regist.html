@@ -1,0 +1,132 @@
+{extends file='core/member.html'}
+{block name='title'}請求額決定 &laquo; 請求登録 &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>請求登録 &raquo; 請求額決定</h2>
+
+{if isset($message.__all) && $message.__all != ''}
+<div class="blockwarn"><span class="linewarn">入力項目に不備があります。以下の入力項目を確認してください。</span>
+{$message.__all nocache}
+</div>
+{else}
+<div class="article">
+<p>請求額を確認して、額面の変更がありましたら、修正をしてください。</p>
+</div>
+{/if}
+
+<form method="post" action="../regist_in">
+<div id="tabbill">
+<table class="uniform" summary="請求先">
+<tr><th colspan="2" class="sub">請求先</th></tr>
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$billing.corpkana nocache}</div>{$billing.corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>
+〒{$billing.zip nocache}<br/>
+{$billing.prefecture nocache}
+{$billing.address1 nocache}
+{$billing.address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">担当者名</th>
+<td>
+{$billing.division nocache} {$billing.position nocache}<br/>
+<div class="ruby">{$billing.fullkana nocache}</div>{$billing.fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$billing.phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$billing.fax nocache}</td>
+</tr>
+</table>
+</div>
+
+<p>請求先が違う場合は、ここで変更してください。</p>
+<div id="tabbilling">
+<table class="uniform">
+<colgroup class="w200">
+<colgroup>
+<tbody>
+<tr><th colspan="2" class="sub">請求先</th></tr>
+<td>
+<select name="billid">
+{foreach from=$bills name=brec item=b}
+<option value="{$b.billid}" {if $billing.billid==$b.billid}selected="selected"{/if}>
+{if $b.seqno == 0}(デフォルト){else}(追加請求先){/if}{if $billing.billid==$b.billid}＊{/if}:
+{$b.corpname} {$b.position} {$b.fullname}
+</option>
+{/foreach}
+</select>
+</td>
+</tbody>
+</table>
+</div>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div>
+<table class="listform tablesorter">
+<colgroup>
+<colgroup class="nowrap">
+<colgroup class="nowrap" style="width:4.5em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup>
+<thead>
+<tr>
+<th>会社名/表示名</th>
+<th>請求項目</th>
+<th>小間数</th>
+<th>単価</th>
+<th>請求金額</th>
+<th>項目割引</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td><div>{$i.corpname}</div>{$i.brandname}<input type="hidden" id="xC{$i.itemcode}{$i.exhboothid}" name="itemname{$i.itemcode}{$i.exhboothid}" value="{$i.corpname}" class="text"></td>
+<td>{$i.itemname}<input type="hidden" id="xI{$i.itemcode}{$i.exhboothid}" name="itemdetail{$i.itemcode}{$i.exhboothid}" value="{$i.itemname}" class="text"></td>
+<td class="right"><div class="grey">{$i.quantity}</div><input type="text" id="xQ{$i.itemcode}{$i.exhboothid}" name="quantity{$i.itemcode}{$i.exhboothid}" value="{$i.quantity}" class="numeric"></td>
+<td class="right"><div class="grey">&yen{$i.unitprice|number_format}</div><input type="text" id="xP{$i.itemcode}{$i.exhboothid}" name="unitprice{$i.itemcode}{$i.exhboothid}" value="{$i.unitprice}" class="numeric"></td>
+<td class="right"><div class="grey">&yen{$i.amount|number_format}</div><div id="xA{$i.itemcode}{$i.exhboothid}" style="margin:5px 0">&yen{$i.amount|number_format}</div></td>
+<td class="right"><div class="grey">&nbsp;</div><input type="text" id="xD{$i.itemcode}{$i.exhboothid}" name="discount{$i.itemcode}{$i.exhboothid}" value="" class="numeric"></td>
+<td>&nbsp;</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+</div>
+{/if}
+{/foreach}
+
+<input type="image" src="/images/common/btn_regist_confirm.gif" id="action" name="action" value="入力内容確認">
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<style>#contents th.sub { background:#4D80C1; color:#fff; }</style>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/exhibitorfee_regist.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent} &gt; 請求登録 &gt; 請求額決定
+{/block}

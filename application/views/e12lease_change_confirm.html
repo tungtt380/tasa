@@ -1,0 +1,51 @@
+{extends file='core/member.html'}
+{block name='title'}(11)リース備品申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+
+<h2>リース備品編集</h2> 
+<p>入力した値はこれでよろしいですか？<br>
+よろしければ「編集」ボタンを押してください。</p> 
+
+{include file='core/ex_asscene.html' nocache}
+{include file='core/exhform.html' nocache}
+
+<form method="post" action="change_confirm_in"> 
+<input type="hidden" name="appid" value="{$foreign.appid nocache}"> 
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid nocache}"> 
+<input type="hidden" name="appno" value="{$foreign.appno nocache}"> 
+<input type="hidden" name="seqno" value="{$foreign.seqno nocache}"> 
+<input type="hidden" name="token" value="{$foreign.token nocache}">
+
+{include file='core/e12view.html' nocache}
+
+<table class="uniform">
+<tr>
+<th>ご請求先<br /></th>
+<td>
+〒{$lists[$foreign.billid].zip}<br/>
+{$lists[$foreign.billid].prefecture} {$lists[$foreign.billid].address1} {$lists[$foreign.billid].address2}<br/>
+{$lists[$foreign.billid].corpname}<br/>
+{$lists[$foreign.billid].position} {$lists[$foreign.billid].fullname}
+</td>
+<tr>
+</table>
+
+<input name="lease_submit" type="submit" class="bt1" value="編集">
+</form>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/sponsor_change.js"></script>
+<script type="text/javascript" src="/js/e04construction_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e12lease/">リース備品申込</a>&nbsp;&gt;&nbsp;編集
+{/block}

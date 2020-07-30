@@ -1,0 +1,61 @@
+{extends file='core/member.html'}
+{block name='title'}公開用出展者データ &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>公開用出展者データ登録</h2> 
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter"> 
+<thead>
+<tr> 
+<th>コード</th>
+<th>出展者名/表示名</th>
+<th>小間番号</th>
+<th class="nowrap">申込状況</th>
+<th class="nowrap">写真</th>
+<th>更新日</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td><div class="ruby">{$i.exhid}</div>{$i.exhboothid}</td>
+<td><div class="ruby">{$i.corpname}</div>{$i.brandname}</td>
+<td>{$i.exhboothno}</td>
+<td class="nowrap">{$i.photo}</td>
+<td class="nowrap">
+{if $i.appid}{if $i.photo}
+<img src="/op/e02publicinfo/images/{$i.photo}" width="50" height="50">
+{else}
+<img src="/images/common/ico_camera.png">
+{/if}{/if}
+</td>
+<td class="nowrap">
+{if $i.appid}{$i.updated}{else}[未登録]{/if}
+</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;展示車両登録
+{/block}

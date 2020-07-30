@@ -1,0 +1,88 @@
+{extends file='core/member.html'}
+{block name='title'}サービス &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>出展申込操作</h2>
+
+{if $service == 1}
+<p>現在は、出展申込登録を<span class="blue">受付中</span>です。</p>
+<div>
+[開始] <a href="./stop">[停止]</a>
+</div>
+{else}
+<p>現在は、出展申込登録を<span class="red"><strong>停止中</strong></span>です。</p>
+<div>
+<a href="./start">[開始]</a> [停止]
+</div>
+{/if}
+
+<div>&nbsp;</div>
+
+<h2>スペース別操作</h2>
+<p>Web申込み受付をスペース別にキャンセル待ちや申込み受付の停止を行います。</p>
+
+{foreach from=$spaces name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="reportform tablesorter">
+<thead>
+<tr>
+<th>スペース</th>
+<th>申込数</th>
+<th class="left">80%ライン</th>
+<th class="left">受付可能数</th>
+<th class="left">申込み率</th>
+<th class="left">状態</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td><a href="../exhibitor/?sp={$i.spaceabbr nocache}">{$i.spacename}</a></td>
+<td class="right">{$i.count nocache}</td>
+<td class="right">{ceil($i.maxspaces*8/10)}</td>
+<td class="right">{$i.maxspaces}</td>
+{if ceil($i.maxspaces*8/10) > $i.count}
+<td><span class="pie1 piefloat">{$i.count},{$i.maxspaces-$i.count}</span>
+{elseif $i.maxspaces > $i.count}
+<td><span class="pie2 piefloat">{$i.count},{$i.maxspaces-$i.count}</span>
+{else}
+<td><span class="pie3 piefloat">0,100</span>
+{/if}{if $i.maxspaces > 0}{round((($i.count)*100/$i.maxspaces),1)}%{/if}
+</td>
+<td>
+<form method="POST" action="./inventory">
+<input type="hidden" id="spaceid" name="spaceid" value="{$i.spaceid}" />
+<select id="inventory" name="inventory">
+<option value="0"{if $i.inventory == 0} selected="selected"{/if}>受付中</option>
+<option value="1"{if $i.inventory == 1} selected="selected"{/if}>キャンセル待ち</option>
+<option value="9"{if $i.inventory == 9} selected="selected"{/if}>受付停止中</option>
+</select>
+<input type="submit" name="submit" value="更新" />
+</form>
+</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<ul>
+<li>データが見つかりません。</li>
+</ul>
+</div>
+{/foreach}
+
+{/block}
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.sparkline.js"></script>
+<script type="text/javascript" src="/js/service.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;サービス
+{/block}

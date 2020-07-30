@@ -1,0 +1,67 @@
+{extends file='core/member.html'}
+{block name='title'}削除確認 &raquo; アンカー工事業者一覧 &raquo; {$smarty.block.parent}{/block}
+
+
+{block name='contents'}
+<h2>アンカー工事業者削除</h2> 
+<p class="lead">削除してよろしいですか？<br>削除すると元に戻せなくなります。</p>
+
+{include file='core/ex_murayama08.html'}
+{include file='core/exhform.html'}
+{include file='core/ex_constructor.html'}
+
+<form method="post" action="../delete_in"> 
+<table width="654" height="230" class="uniform"> 
+
+
+{if $foreign.outsourcing==1}
+<tr> 
+<th width="210" height="51">アンカー工事業名</th> 
+<td width="432">〒{$foreign.zip} <br/>
+{$foreign.prefecture} {$foreign.address1} {$foreign.address2} <br/>
+{$foreign.corpname} <br/>
+{$foreign.position} {$foreign.fullname} <br/>
+{if $message.billid != '' nocache}<span class="linewarn">{$message.billid nocache}</span>{/if} </td> 
+</tr>{/if}
+      <tr>
+        <th height="20" colspan="2" class="sub">作業内容</th>
+      </tr>
+<tr>
+  <th height="33" class="w200"><span class="style5"><span class="style7"><span class="style1"><span style="color:#ff0000">*</span>床面アンカーボルト打設</span></span></th>
+  <td>{$foreign.anchorbolt nocache}本（@1,650円（税込）/本）</td>
+</tr>
+<th height="40" class="sub">&nbsp;</th>
+    <th class="sub"><div align="left"> （直径16mm以下/長さ80mm以下）</div></th>
+ 
+ 
+  <tr><td height="72" colspan="2" bgcolor="#ffdab9"><p>1、当届をご提出頂いても、会場建造物の構造上、作業できない箇所があります。<br />
+  2、提出後に内容の変更があった場合、必ず事前に(株）ムラヤマまでご連絡ください。<br />
+  3、コンクリート針・ドライピット鋲を打つことは禁止されています。<br />
+4、ピット端部から20ｃｍ以上離して打設して下さい。<br />
+5、違反作業を行った場合は、ペナルティーが科せられます。<br />
+6、アンカーボルトの打設位置を示した平面図を提出してください。</p></td></tr>
+  </table> 
+
+{include file="core/ex_repairbill.html"}
+
+<tr><td><input name="anchor_submit" type="submit" class="bt1" value="削除"></td><br />
+</tr>
+</form> 
+</tbody> 
+</table>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e08anchor_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e08anchor/">アンカー工事業者一覧</a>&nbsp;&gt;&nbsp;削除確認
+{/block}
+

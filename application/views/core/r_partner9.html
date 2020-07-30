@@ -1,0 +1,18 @@
+<ul class="mnav">
+
+ <li class="lv1 n5"><h3><img src="/images/common/ico_01.png" width="20" height="20" alt="出展者情報" />出展者情報</h3><ul>
+  <li><a href="{uri_folder_string()}/exhibitorbooth">出展者一覧</a></li>
+ </ul></li>
+
+ <li class="lv1 n5"><h3><img src="/images/common/ico_08.png" width="20" height="20" alt="各種手続" />各種手続</h3><ul>
+  <li class="lv2 fax"><a href="{uri_folder_string()}/e16reservation">16.宿泊予約申込</a><div style="float:right"><span class="labelcount">FAX</span></div></li>
+ </ul></li>
+
+{if uri_folder_string() != '/ex'}
+ <li class="lv1 sub"><ul>
+  <li class="n6"><h3><img src="/images/common/ico_07.png" width="20" height="20" alt="メールアドレス変更" /><a href="{uri_folder_string()}/email">メールアドレス変更</a></h3></li>
+  <li class="n7"><h3><img src="/images/common/ico_08.png" width="20" height="20" alt="ユーザー名変更"  /><a href="{uri_folder_string()}/username">ユーザー名変更</a></h3></li>
+ </ul></li>
+{/if}
+
+</ul>

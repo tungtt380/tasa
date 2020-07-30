@@ -1,0 +1,59 @@
+{extends file='core/member.html'}
+{block name='title'}顧客マッチング &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>顧客マッチング</h2>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th>出展者コード</th>
+<th>出展会社名</th>
+<th>表示名</th>
+<th>事務局メモ</th>
+<th>状態/処理</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td><a href="../exhibitor/detail/{$i.exhid}">{$i.exhid}</a></td>
+<td class="nowrap"><div class="ruby"><span title="{$i.corpkana}">{$i.corpkana|truncate:20 nocache}</span></div>
+{if isset($i.customerid) && $i.customerid != ''}
+    <span title="{$i.corpname nocache}"><a href="../customer/detail/{$i.customerid}">{$i.corpname|truncate:20 nocache}</a></span></td>
+{else}
+    <span title="{$i.corpname nocache}">{$i.corpname|truncate:20 nocache}</span></td>
+{/if}
+<td class="nowrap"><div class="ruby"><span title="{$i.brandkana nocache}">{$i.brandkana|truncate:20 nocache}</span></div>
+    <span title="{$i.brandname nocache}">{$i.brandname|truncate:20 nocache}</span></td>
+<td>{if $i.promotion != ''}<span class="red">{$i.promotion}</span><br/>{/if}{$i.comment|nl2br nocache}</td>
+{if isset($i.customerid) && $i.customerid != ''}
+<td>引継済(<a href="../customer/detail/{$i.customerid}">{$i.customerid}</a>)</td>
+{else}
+<td class="nowrap"><span class="red">未処理</span><br/><a href="detail/{$i.exhid}">[出展処理]</a></td>
+{/if}
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/exhibitor_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;出展申込者
+{/block}

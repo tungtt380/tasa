@@ -1,0 +1,61 @@
+{extends file='core/member.html'}
+{block name='title'}顧客 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>顧客</h2>
+<div id="cnav" class="clearfix">
+<a href="regist"><img src="/images/common/btn_regist.gif" width="100" height="25" alt="新規作成" /></a>
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+<div class="article" style="margin:20px 0;">
+<p>まず、顧客登録をおこなってから出展者登録をおこないます。<br />出展者でない場合も、請求の発生する場合は、必ず顧客登録を行ってください。</p>
+</div>
+<!--
+<p>{if ($count > 0)}{$count}件中、{($page-1)*$ppage+1}〜{if ($count > $page*$ppage)}{$page*$ppage}{else}{$count}{/if}件を表示&nbsp;&nbsp;&nbsp;<span class="pagenation">{$pagenation}</span>{/if}</p>
+-->
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead>
+ <tr>
+ <th>コード</th>
+ <th>顧客名</th>
+ <th>代表者名</th>
+ <th>住所</th>
+ <th>電話番号</th>
+ </tr>
+</thead>
+{/if}
+ <tr>
+ <td><a href="detail/{$i.customerid}">{$i.customerid}</a></td>
+ <td><div class="ruby" title="{$i.corpkana}">{$i.corpkana|truncate:16:"..." nocache}&nbsp;</div><span title="{$i.corpname nocache}">{$i.corpname|truncate:16:"..." nocache}</span></td>
+ <td><div class="ruby" title="{$i.fullkana}">{$i.fullkana|truncate:16:"..." nocache}&nbsp;</div>{$i.fullname|truncate:16:"..." nocache}</td>
+ <td><div class="ruby">〒{$i.zip nocache}&nbsp;</div><span title="{$i.address1|cat:$i.address2|cat:$i.address3 nocache}">{$i.prefecture|cat:$i.address1|cat:$i.address2|truncate:16:"..." nocache}</span></td>
+ <td>{$i.phone nocache}<div class="ruby">FAX:{$i.fax nocache}</div></td>
+ </tr>
+{if $smarty.foreach.rec.last}
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<p>データが見つかりません。</p>
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;顧客
+{/block}

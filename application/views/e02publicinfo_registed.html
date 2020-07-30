@@ -1,0 +1,175 @@
+{extends file='core/member.html'}
+{block name='title'}(02)公開用出展者データ登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>(02)公開用出展者データ登録</h2>
+
+<p>登録が完了いたしました。</p>
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}
+
+<div id="tabopendata">
+<table class="uniform">
+<tbody>
+<tr>
+<th rowspan="3" class="w200">出展者名</th>
+<td class="w100">表示名</td>
+<td>{$exhibitor.brandname nocache}<br/>
+*こちらの変更をご希望の場合は『出展申込時の登録内容』の変更手続きが必要となります。直接本部事務局へお問い合わせ下さい。
+</td></tr>
+<tr>
+<td>表示名(英語表記)</td>
+<td>{$foreign.brandnameen nocache}</td>
+<tr>
+<td class="nowrap">出展者名</td>
+<td class="nowrap">{$exhibitor.corpname nocache}</td>
+</tr>
+<tr>
+<th>所在地</th>
+{if $foreign.publicaddress==0}
+<td>
+非公開
+</td>
+<td colspan="2">&nbsp;</td>
+{else}
+<td>
+公開する
+</td>
+<td colspan="2">
+{$foreign.zip nocache}
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+</td>
+{/if}
+</tr>
+
+<tr>
+<th>TEL</th>
+{if $foreign.publicphone==0}
+<td>
+非公開
+</td>
+<td colspan="2">&nbsp;</td>
+{else}
+<td>
+公開する
+</td>
+<td colspan="2">
+{$foreign.phone nocache}
+</td>
+{/if}
+</tr>
+
+<tr>
+<th>FAX</th>
+{if $foreign.publicfax==0}
+<td>
+非公開
+</td>
+<td colspan="2"><br /></td>
+{else}
+<td>
+公開する
+</td>
+<td colspan="2">
+{$foreign.fax nocache}</td>
+{/if}
+</tr>
+</tbody>
+</table>
+
+<br/>
+<div id="tabopendata2">
+<table class="uniform">
+
+<tbody>
+<tr>
+<th class="w200">メールアドレス</th>
+<td colspan="2">{$exhibitor.m_email nocache}<br /></td></tr>
+<tr>
+<th>Webサイト<br/>URL</th>
+{if $foreign.publicurl==0}
+<td>
+非公開
+</td>
+<td colspan="2"><br /></td>
+{else}
+<td>
+公開する
+</td>
+<td>
+<span class="example"><label for="koukai_url">アドレス</label> 例)http://www.e-autosalon.net/</span><br />
+{$foreign.url nocache}
+{if $message.url != '' nocache}<span class="linewarn">{$message.url nocache}</span>{/if}
+</td>
+{/if}
+</tr>
+<tr>
+<th>ご来場者問合せ<br/>メールアドレス</th>
+{if $foreign.publicemail==0}
+<td>
+非公開
+</td>
+<td colspan="2"><br /></td>
+{else}
+<td>
+公開する
+</td>
+<td>
+<span class="example"><label for="koukai_mailadd">アドレス</label> 例)aaa@bbb.co.jp/</span><br />
+{$foreign.email nocache}
+{if $message.email != '' nocache}<span class="linewarn">{$message.email nocache}</span>{/if}
+</td>
+{/if}
+</tr>
+
+<tr>
+<th>PRコメント<br/>(100文字以内)</th>
+<td colspan="2">{$foreign.prcomment nocache}
+<span style="color:#ff0000">(ご紹介の参考とさせて頂きます。)</span>
+</td></tr>
+
+<tr>
+<th>ご紹介写真</th>
+<td colspan="2">
+{if $pic}
+<img src="images/{$pic}" width="180" height="135">
+{else}
+画像がアップされていません。
+{/if}
+<ul>
+<li>*画像サイズが大きすぎると、取り込めない場合があります。800×600px以下に変換してからアップロードして下さい。</li>
+<li>*指定した画像は、下の「確認画面へ」ボタンよりお進み頂き、次の確認画面にてご確認下さい。</li>
+<li>*データを<strong>CMYKカラー</strong>で保存されますと、WEB上でのご確認ができない場合がございます。</li>
+<li>データとして破損等なければCMYKでも問題ございませんが、</li>
+<li>WEB上で画像確認なさりたい方は、<strong>RGBカラーで保存したもの</strong>をアップロードして下さい。</li>
+<li>*確認用画像は縦横比が崩れて表示されますが、画像には問題ありませんのでご了承下さい。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+{if uri_match('/op', $rolepermission)}
+<div class="btn-detail" style="margin:20px 0 0;">
+<a href="{uri_class_string()}"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+</div>
+{/if}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e02publicinfo_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_class_string()}">公開用出展者データ登録</a>&nbsp;&gt;&nbsp;登録完了
+{/block}

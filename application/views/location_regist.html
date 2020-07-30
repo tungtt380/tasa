@@ -1,0 +1,56 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &raquo; 開催地 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>登録 &raquo; 開催地</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="regist-nav">
+<form method="post" action="regist_in">
+<table class="uniform">
+
+<tr>
+ <th>コード</th>
+ <td>
+ <input type="text" name="locationcode" value="{$foreign.locationcode nocache}" placeholder="数値２桁を入力" />
+{if $message.locationcode != "" nocache}<span class="linewarn">{$message.locationcode nocache}</span>{/if}
+ <span class="example">例)10</span>
+ </td>
+</tr>
+<tr>
+ <th>並び順</th>
+ <td>
+ <input type="text" name="seqno" value="{$foreign.seqno nocache}" placeholder="数値を入力" />
+{if $message.seqno != "" nocache}<span class="linewarn">{$message.seqno nocache}</span>{/if}
+ <span class="example">例)10</span>
+ </td>
+</tr>
+<tr>
+ <th>開催地</th>
+ <td>
+ <input type="text" name="locationname" value="{$foreign.locationname nocache}" placeholder="開催地を入力" />
+{if $message.locationname != "" nocache}<span class="linewarn">{$message.locationname nocache}</span>{/if}
+ <span class="example">例)幕張メッセ</span>
+ </td>
+</tr>
+<tr>
+ <th>開催地略記</th>
+ <td>
+ <input type="text" name="locationabbr" value="{$foreign.locationabbr nocache}" placeholder="開催地略記を入力" />
+{if $message.locationabbr != "" nocache}<span class="linewarn">{$message.locationabbr nocache}</span>{/if}
+ <span class="example">例)幕張メッセ</span>
+ </td>
+</tr>
+
+</table>
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+</form>
+</div>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/location_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/location/">開催地</a>&nbsp;&gt;&nbsp;登録
+{/block}

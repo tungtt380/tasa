@@ -1,0 +1,62 @@
+{extends file='core/member.html'}
+{block name='title'}請求先 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>請求先一覧</h2>
+<div>
+<p>申込詳細の請求先と別の請求先を追加する場合は、こちらからご登録ください。</p>
+</div>
+
+<div style="margin-top:1em">
+<a href="create"><img src="/images/common/btn_regist.gif" width="100" height="25" alt="新規登録" /></a>
+</div>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th>請求先コード</th>
+<th>企業名</th>
+<th>所在地</th>
+<th>氏名</th>
+<th>連絡先</th>
+</tr>
+<thead>
+<tbody>
+{/if}
+ <tr>
+<td>{if $i.seqno == 0}(デフォルト){else}<a href="change/{$i.billid}">{$i.billid}</a>{/if}</td>
+<td><div class="ruby">{$i.corpkana nocache}</div><span class="nowrap">{$i.corpname nocache}</span></td>
+<td><div class="ruby">{if $i.countrycode != 'JP'}{$i.countrycode nocache}{else}〒{deco_zip($i.countrycode,$i.zip) nocache}{/if}</div>
+{$i.prefecture nocache} {$i.address1 nocache}<br />{$i.address2 nocache}</td>
+<td>{$i.division nocache} {$i.position nocache}<br/><div class="ruby">{$i.fullkana nocache}</div><span class="nowrap">{$i.fullname nocache}</span></td>
+<td><span class="labelcount">TEL</span> {deco_phone($i.countrycode,$i.phone) nocache}<br/>
+<span class="labelcount">FAX</span> {deco_phone($i.countrycode,$i.fax) nocache}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<ul>
+<li>データが見つかりません。</li>
+</ul>
+</div>
+{/foreach}
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;請求先
+{/block}

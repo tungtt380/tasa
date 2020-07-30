@@ -1,0 +1,38 @@
+{extends file='core/member.html'}
+{block name='title'}変更の確認 &raquo; メールアドレス &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>メールアドレスの変更確認</h2>
+<div class="article">
+<p>メールアドレスを変更してよろしいですか？<br>
+よろしければ「変更」ボタンを押してください。</p>
+</div>
+<div id="change-nav">
+<form method="post" action="change_confirm_in">
+<div id="tabs">
+<table class="uniform">
+<thead>
+<tr>
+<th colspan="2" class="main">メールアドレス</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="w200">変更前</th>
+<td>{$session.email nocache}</td>
+</tr>
+<tr>
+<th class="w200">変更後</th>
+<td>{$foreign.newemail nocache}</td>
+</tr>
+</tbody>
+</table>
+</div>
+<input type="image" src="/images/common/btn_change.gif" id="action" name="action" value="変更">
+</form>
+</div>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/email/change/">メールアドレス</a>&nbsp;&gt;&nbsp;確認
+{/block}

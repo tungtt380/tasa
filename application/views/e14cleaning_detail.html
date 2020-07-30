@@ -1,0 +1,53 @@
+{extends file='core/member.html'}
+{block name='title'}(14)小間内清掃申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>(14)小間内清掃申込</h2>
+
+{include file='core/ex_insupport.html' nocache}
+{include file='core/exhform.html' nocache}
+
+<div id="tabcorp"> 
+{include file='core/e14view.html' nocache}
+</div>
+
+<div id="tabbilling"> 
+<table class="uniform"> 
+<thead> 
+<tr><th colspan="2">ご請求先</th></tr> 
+</thead>
+<tbody>  
+<tr>
+<th class="w200">所在地</th><td>
+{if $lists[$foreign.billid].seqno == 0}(デフォルト請求先){else}(追加請求先){/if}<br/>
+〒{$lists[$foreign.billid].zip}<br/>
+{$lists[$foreign.billid].prefecture} {$lists[$foreign.billid].address1} {$lists[$foreign.billid].address2}<br/>
+{$lists[$foreign.billid].corpname}<br/>
+{$lists[$foreign.billid].position} {$lists[$foreign.billid].fullname}
+</td>
+</tr>
+<tr>
+<th class="w200">支払方法</th>
+<td>
+<span class="red"><b>海外ご出展者様は、最終日に現金でのお支払いをお願いします。</b></span><br/>
+{if $foreign.paymethod == 1}<b>集金</b>（開催最終日に領収書をもってお伺いします） {else}
+<b>銀行振込</b>（開催終了後に請求書を送付いたします）{/if}</td>
+</tr>
+</tbody>
+</table>
+
+<a href="./change/{$foreign.appid}"><img src="/images/common/btn_change.gif" id="action" name="action" value="変更" /></a>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e14cleaning_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e14cleaning/">小間内清掃申込</a>&nbsp;&gt;&nbsp;登録
+{/block}

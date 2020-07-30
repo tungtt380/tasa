@@ -1,0 +1,348 @@
+{extends file='core/public.html'}
+{block name='title'}Confirm &laquo; Application Form for Exhibition &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>Confirm</h2>
+<p style="margin:0 0 20px;">
+Confirm the values that you entered, press the &quot;Registration&quot; button.
+</p>
+{if uri_class_string() == '/'}
+<form method="post" action="/regist_confirm_in">
+{else}
+<form method="post" action="{uri_class_string()}/regist_confirm_in">
+{/if}
+<div id="tabcorp">
+<table class="uniform">
+
+<tr><th colspan="2" class="sub">Company Name</th></tr>
+
+<th class="w200">Company Name</th>
+<td><div class="ruby">{$foreign.corpkana nocache}</div>{$foreign.corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">Address</th>
+<td>
+{$foreign.country nocache}<br/>
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">Person</th>
+<td>
+{$foreign.position nocache}
+<div class="ruby">{$foreign.fullkana nocache}</div>{$foreign.fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.fax nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">URL</th>
+<td>{if isset($foreign.url)}http://{$foreign.url nocache}{/if}</td>
+</tr>
+
+</table>
+</div>
+
+<div id="tabshow">
+<table class="uniform" summary="Display Name">
+<tr><th colspan="2" class="sub">Display Name</th></tr>
+
+<tr>
+<th class="w200">Display Name</th>
+<td>
+<div class="ruby">{$foreign.brandkana nocache}</div>{$foreign.brandname nocache}
+</td>
+</tr>
+
+</table>
+</div>
+
+<div id="tabmanage">
+<table class="uniform" summary="Person in charge of exhibit">
+<tr><th colspan="2" class="sub">Person in charge of exhibit</th></tr>
+
+<tr>
+<th class="w200">Company Name</th>
+<td><div class="ruby">{$foreign.m_corpkana nocache}</div>{$foreign.m_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">Address</th>
+<td>
+〒{$foreign.m_zip nocache}<br/>
+{$foreign.m_prefecture nocache}
+{$foreign.m_address1 nocache}
+{$foreign.m_address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">Person</th>
+<td>
+{$foreign.m_division nocache} {$foreign.m_position nocache}<br/>
+<div class="ruby">{$foreign.m_fullkana nocache}</div>{$foreign.m_fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.m_phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.m_fax nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">Mobile</th>
+<td>{$foreign.m_mobile nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">E-mail</th>
+<td>{$foreign.m_email nocache}</td>
+</tr>
+</table>
+</div>
+
+<div id="tabbill">
+<table class="uniform" summary="Invoice">
+
+<tr><th colspan="2" class="sub">Invoice</th></tr>
+<tr>
+<th class="w200">Company Name</th>
+<td><div class="ruby">{$foreign.b_corpkana nocache}</div>{$foreign.b_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">Address</th>
+<td>
+〒{$foreign.b_zip nocache}<br/>
+{$foreign.b_prefecture nocache}
+{$foreign.b_address1 nocache}
+{$foreign.b_address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">Person</th>
+<td>
+{$foreign.b_division nocache} {$foreign.b_position nocache}<br/>
+<div class="ruby">{$foreign.b_fullkana nocache}</div>{$foreign.b_fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.b_phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.b_fax nocache}</td>
+</tr>
+
+</table>
+</div>
+
+<div id="tabcontact">
+<table class="uniform" summary="Contact">
+
+<tr><th colspan="2" class="sub">Contact</th></tr>
+
+<tr>
+<th class="w200">Company Name</th>
+<td><div class="ruby">{$foreign.c_corpkana nocache}</div>{$foreign.c_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">Address</th>
+<td>
+〒{$foreign.c_zip nocache}<br/>
+{$foreign.c_prefecture nocache}
+{$foreign.c_address1 nocache}
+{$foreign.c_address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">Person</th>
+<td>
+{$foreign.c_division nocache} {$foreign.c_position nocache}<br/>
+<div class="ruby">{$foreign.c_fullkana nocache}</div>{$foreign.c_fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.c_phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.c_fax nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">Mobile</th>
+<td class="w200">{$foreign.c_mobile nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">E-mail</th>
+<td>{$foreign.c_email nocache}</td>
+</tr>
+</table>
+</div>
+
+<div id="tabdist">
+<table class="uniform" summary="Documents">
+
+<tr><th colspan="2" class="sub">Documents</th></tr>
+
+<tr>
+<th class="w200">Company Name</th>
+<td><div class="ruby">{$foreign.d_corpkana nocache}</div>{$foreign.d_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">Address</th>
+<td>
+〒{$foreign.d_zip nocache}<br/>
+{$foreign.d_prefecture nocache}
+{$foreign.d_address1 nocache}
+{$foreign.d_address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">Person</th>
+<td>
+{$foreign.d_division nocache} {$foreign.d_position nocache}<br/>
+<div class="ruby">{$foreign.d_fullkana nocache}</div>{$foreign.d_fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.d_phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.d_fax nocache}</td>
+</tr>
+
+</table>
+</div>
+
+<div id="tabdetail">
+<table class="uniform" summary="Details of Exhibit">
+<tr><th colspan="2" class="sub">Details of Exhibit</th></tr>
+<tr>
+<th class="w200">Category</th>
+<td>
+{foreach from=$category name=rec key=k item=i}
+{if ($i=="チューニング")}{assign "i" "Tuning up"}{/if}
+{if ($i=="ドレスアップ")}{assign "i" "Dressing up"}{/if}
+{if ($i=="インポートカー")}{assign "i" "Imported Car"}{/if}
+{if ($i=="その他")}{assign "i" "Other"}{/if}
+{assign var="key" value="q_category_{$k}"}
+{if isset($foreign.$key) && $foreign.$key != ''}{$i}&nbsp;{/if}
+{/foreach}
+</td>
+</tr>
+
+<tr>
+<th class="w200">Vehicles brought in :</th>
+<td>
+{foreach from=$section name=rec key=k item=i}
+{if ($i=="スポーツカー")}{assign "i" "Sports car"}{/if}
+{if ($i=="セダン")}{assign "i" "Sedan"}{/if}
+{if ($i=="ミニバン")}{assign "i" "Minivan"}{/if}
+{if ($i=="ステーションワゴン")}{assign "i" "Station Wagon"}{/if}
+{if ($i=="コンパクトカー")}{assign "i" "Compact Car"}{/if}
+{if ($i=="その他")}{assign "i" "Other"}{/if}
+{assign var="key" value="q_section_{$k}"}
+{if isset($foreign.$key) && $foreign.$key != ''}{$i}&nbsp;{/if}
+{/foreach}
+</td>
+</tr>
+
+<tr>
+<th class="w200">Total number of vehicles to be brought in :</th>
+<td>{$foreign.q_entrycars nocache}car(s)</td>
+</tr>
+
+<tr>
+<th class="w200">We would like to sell the following products at the show :</th>
+<td>{$foreign.q_salesitem nocache}</td>
+</tr>
+
+</table>
+
+<table class="uniform" summary="Application for Booths/Spaces">
+<thead>
+<tr><th colspan="2" class="sub">Application for Booths/Spaces</th></tr>
+</thead>
+<tbody>
+{if $foreign.q_boothcount1 >= 1}
+<tr>
+<th class="w200">Booth Assignment</th>
+<td>{$booth[$foreign.q_booth1]}</td>
+</tr>
+{/if}
+{if $foreign.q_boothcount2 >= 1}
+<tr>
+<th class="w200">Booth Assignment(additional)</th>
+<td>{$booth[$foreign.q_booth2]}</td>
+</tr>
+{/if}
+{if $foreign.q_boothcount3 >= 1}
+<tr>
+<th class="w200">Booth Assignment(additional)</th>
+<td>{$booth[$foreign.q_booth3]}</td>
+</tr>
+{/if}
+<tr>
+<th class="w200">Note</th>
+<td>{$foreign.remark nocache}</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+<input type="image" src="/images/common/btn_regist_02.en.gif" id="action" name="action" value="Regist">
+{if uri_class_string() == '/'}
+<a href="/regist"><img src="/images/common/btn_cancel.en.gif" width="100" height="25" alt="Cancel" style="float:right;" /></a>
+{else}
+<a href="{uri_class_string()}/regist"><img src="/images/common/btn_cancel.en.gif" width="100" height="25" alt="Cancel" style="float:right;" /></a>
+{/if}
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<style>#contents th.sub { background:#4D80C1!important; color:#fff!important; }</style>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/exhibitor_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;Application Form for Exhibition&nbsp;&gt;&nbsp;Confirm
+{/block}

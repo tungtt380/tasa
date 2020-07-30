@@ -1,0 +1,17 @@
+{extends file='core/member.html'}
+{block name='title'}電気供給申込 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>電気供給申込</h2>
+<div class="article">
+<p>電気工事設計図等をご記入の上、下記まで<b>FAX</b>でご提出ください。</p>
+</div>
+
+{include file='core/ex_iida.html' nocache}
+
+<!--
+<h2>申込書類のダウンロード</h2>
+<p><a href="{uri_folder_string()}/e06electric/download"><img style="vertical-align:text-bottom" src="/images/common/ico_pdf.png" alt="[PDF]" />電気供給申込書(PDFファイル:xxKB)</a></p>
+-->
+
+{/block}

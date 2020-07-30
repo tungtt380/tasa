@@ -1,0 +1,327 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class E14cleaning extends ExhOP_Controller {
+
+	protected $form_appno    = 14;
+	protected $form_prefix   = 'e14cleaning';
+	protected $table_name    = 'v_exapply_14';
+	protected $table_prefix  = FALSE;
+	protected $table_expire  = TRUE;
+	protected $foreign_keyid = 'appid';
+	protected $foreign_token = 'token';
+	protected $foreign_value = array(
+		'appid'       => 'trim',
+		'exhboothid'  => 'trim',
+		'appno'       => 'trim',
+		'seqno'       => 'trim',
+		'billid'      => 'trim|required',
+		'cleanbooth'  => 'trim|xss_clean|required|is_natural',
+		'paymethod'   => 'trim|required',
+	);
+
+	protected function setup_form(&$data)
+	{
+		$this->load->helper('form');
+	}
+
+	protected function setup_form_ex(&$data)
+	{
+		// Upgrade CI3 - Avoid duplicate class name between Member Controller and Member Lib - Start by TTM
+		// if ($this->member->get_exhid()) {
+		// 	$exhid = $this->member->get_exhid();
+		if ($this->member_lib->get_exhid()) {
+			$exhid = $this->member_lib->get_exhid();
+		// Upgrade CI3 - Avoid duplicate class name between Member Controller and Member Lib - End by TTM
+		} else {
+			$exhid = $data['foreign']['exhid'];
+		}
+        // 出展者情報の表示
+        $this->load->model('exhibitors_model');
+        $data['exhibitor'] = $this->exhibitors_model->read($exhid);
+        // 請求先情報の表示
+        $this->load->model('billing_model');
+        $data['lists'] = $this->billing_model->readExhibitors($exhid);
+	}
+
+	protected function get_record(&$data, $uid)
+	{
+		// 小間から出展者IDを取るようにする.
+		parent::get_record($data, $uid);
+
+        $this->db->where('exhboothid', $data['foreign']['exhboothid']);
+		$this->db->where('expired', 0);
+        $query = $this->db->get('exhibitor_booth');
+        if ($query->num_rows() > 0) {
+			$row = $query->row_array();
+            $data['foreign']['exhid'] = $row['exhid'];
+		}
+	}
+
+	function create_record(&$foreign)
+	{
+		$foreign['appno'] = $this->form_appno;
+		$foreign['seqno'] = 0;
+
+		if ($foreign['flag']==1) {
+			return parent::update_record($foreign);
+		} else {
+			$appid = parent::create_record($foreign);
+			$foreign['appid'] = $appid;
+		}
+	}
+
+    function detail($uid='')
+    {
+        // 出展者から見た場合はdetailを表示
+        if (uri_folder_string() == '/ex') {
+			$this->load->model('exapply_model');
+			// Upgrade CI3 - Avoid duplicate class name between Member Controller and Member Lib - Start by TTM
+            // $exhid = $this->member->get_exhid();
+			// $exhboothid = $this->member->get_exhboothid();
+			$exhid = $this->member_lib->get_exhid();
+			$exhboothid = $this->member_lib->get_exhboothid();
+			// Upgrade CI3 - Avoid duplicate class name between Member Controller and Member Lib - End by TTM
+            $uid = $this->exapply_model->get_appid($exhboothid, $this->form_appno);
+        }
+
+        $data = $this->setup_data();
+        $this->setup_form($data);
+        $this->get_record($data, $uid);
+        if (!isset($data['foreign'][$this->foreign_keyid])) {
+            redirect(uri_redirect_string() . '/create/'.$exhid.'/'.$exhboothid, 'location', 302);
+        }
+
+        $this->setup_form_ex($data);
+        $this->parser->parse($this->form_prefix.'_'.__FUNCTION__, $data);
+    }
+
+    function index()
+    {
+        $this->slash_complete();
+        $data = $this->setup_data();
+
+        if (uri_folder_string() =='/ex') {
+			// 出展者から見た場合は詳細を表示
+			// Upgrade CI3 - Avoid duplicate class name between Member Controller and Member Lib - Start by TTM
+            // if ($this->member->get_exhid() != '') {
+			if ($this->member_lib->get_exhid() != '') {
+			// Upgrade CI3 - Avoid duplicate class name between Member Controller and Member Lib - End by TTM
+                redirect(uri_class_string() . '/detail');
+            }
+            exit;
+        }
+
+		// 出展者小間(eb)+出展者(e)をベースに申請書類一覧を構築
+		$this->db->select("eb.exhboothid, eb.exhid, eb.exhboothno");
+		$this->db->select("e.corpname, e.corpkana, e.brandname, s.spaceabbr");
+		$this->db->select("v.cleanbooth, v.paymethod");
+		$this->db->select("v.appid, v.created, v.updated");
+		$this->db->from('exhibitor_booth eb');
+		$this->db->join('booths b', 'b.boothid = eb.boothid');
+		$this->db->join('v_spaces s', 's.spaceid = b.spaceid');
+		$this->db->join('exhibitors e', 'e.exhid = eb.exhid');
+		$this->db->join('v_exapply_14 v', 'v.exhboothid = eb.exhboothid', 'left');
+        $this->db->where('eb.expired', '0');
+        $this->db->where('e.expired', '0');
+        $this->db->where_in('e.statusno', array('500','401','400'));
+		$query = $this->db->get();
+		if ($query !== FALSE) { 
+			if ($query->num_rows() > 0) {
+				$data['lists'] = $query->result_array();
+			}
+		}
+		$this->parser->parse($this->form_prefix.'_'.__FUNCTION__, $data);
+	}
+
+	// Upgrade PHP7 - Silence “Declaration … should be compatible” error in PHP 7 - Start by TTM
+	// public function create($exhid, $boothid)
+	public function create($exhid = null, $boothid = null)
+	// Upgrade PHP7 - Silence “Declaration … should be compatible” error in PHP 7 - End by TTM
+	{
+		$data['foreign']['exhid'] = $exhid;
+		$data['foreign']['exhboothid'] = $boothid;
+		$this->session->set_flashdata('foreign', $data['foreign']);
+		redirect(uri_redirect_string() . '/../../regist');
+	}
+
+	// 請求先の取得
+	function regist()
+	{
+		$data = $this->setup_data();
+
+		$this->setup_form($data);
+		$data['foreign'] = $this->session->flashdata('foreign');
+		$data['message'] = $this->session->flashdata('message');
+		$this->session->keep_flashdata('foreign');
+
+		if (!isset($data['foreign']['exhid']) || !isset($data['foreign']['exhboothid'])) {
+			redirect(uri_redirect_string() . '/');
+		}
+		$this->setup_form_ex($data);
+		$this->parser->parse($this->form_prefix.'_'.__FUNCTION__, $data);
+	}
+
+	function regist_confirm()
+	{
+		$data = $this->setup_data();
+		$this->setup_form($data);
+		$data['foreign'] = $this->session->flashdata('foreign');
+		$data['message'] = $this->session->flashdata('message');
+
+		$this->db->select('appid, token');
+		$this->db->where('exhboothid',$data['foreign']['exhboothid']);
+		$query = $this->db->get('v_exapply_14');
+		if ($query->num_rows() > 0) {
+			$appid = $query->row_array();
+			$data['foreign']['appid']=$appid['appid'];
+			$data['foreign']['token']=$appid['token'];
+			$data['foreign']['flag']=1;
+		} else {
+			$data['foreign']['flag']=0;
+		}
+		$this->session->set_flashdata('foreign', $data['foreign']);
+
+		$this->setup_form_ex($data);
+		$this->parser->parse($this->form_prefix.'_'.__FUNCTION__, $data);
+	}
+
+	function registed()
+	{
+		$data = $this->setup_data();
+	
+		$this->setup_form($data);
+		$data['foreign'] = $this->session->flashdata('foreign');
+		$data['message'] = $this->session->flashdata('message');
+
+		$this->session->keep_flashdata('foreign');
+
+		$this->setup_form_ex($data);
+		$this->parser->parse($this->form_prefix.'_'.__FUNCTION__, $data);
+	}
+
+	function change($uid='')
+	{
+		$data = $this->setup_data();
+
+		$this->setup_form($data);
+		$data['foreign'] = $this->session->flashdata('foreign');
+		$data['message'] = $this->session->flashdata('message');
+		if (isset($data['message']) && !empty($data['message'])) {
+			$this->session->keep_flashdata('foreign');
+		} else {
+			$this->get_record($data, $uid);
+		}
+
+		$this->setup_form_ex($data);
+		$this->parser->parse($this->form_prefix.'_'.__FUNCTION__, $data);
+
+	}
+
+	function change_confirm()
+	{
+		$data = $this->setup_data();
+		$this->setup_form($data);
+		$data['foreign'] = $this->session->flashdata('foreign');
+		$data['message'] = $this->session->flashdata('message');
+		$this->session->keep_flashdata('foreign');
+
+		$this->setup_form_ex($data);
+		$this->parser->parse($this->form_prefix.'_'.__FUNCTION__, $data);
+	}
+
+	function changed()
+	{
+		$data = $this->setup_data();
+
+		$this->setup_form($data);
+		$data['foreign'] = $this->session->flashdata('foreign');
+		$data['message'] = $this->session->flashdata('message');
+		$this->session->keep_flashdata('foreign');
+
+		$this->setup_form_ex($data);
+		$this->parser->parse($this->form_prefix.'_'.__FUNCTION__, $data);
+	}
+
+	function delete($uid='')
+	{
+		$data = $this->setup_data();
+
+		$this->setup_form($data);
+		$this->get_record($data, $uid);
+		$this->session->set_flashdata('foreign', $data['foreign']);
+
+		$this->setup_form_ex($data);
+		$this->parser->parse($this->form_prefix.'_'.__FUNCTION__, $data);
+	}
+
+    public function after_regist(&$data)
+    {
+        $this->after_notify($data, 'regist');
+    }
+
+    public function after_change(&$data)
+    {
+        $this->after_notify($data, 'change');
+    }
+
+    protected function after_notify(&$data, $action='thanks')
+    {
+        // 更新日はデータベース日付なので、もう一度取り直す.
+        $uid = $data['foreign'][$this->foreign_keyid];
+        $this->get_record($data, $uid);
+        $this->setup_form_ex($data);
+
+        $this->load->library('email');
+		$this->config->load('bcc', FALSE, TRUE);
+
+        $mailto = array($data['exhibitor']['c_email']);
+        if ($_SERVER['HTTP_HOST'] == 'cus.tokyoautosalon.jp') {
+			$bcc = $this->config->item(strtolower(substr(__CLASS__,0,3)));
+            $mailfrom = 'info@tokyoautosalon.jp';
+            $namefrom = 'TOKYO AUTO SALON';
+        } else {
+			$bcc = $this->config->item(strtolower(substr(__CLASS__,0,3)));
+            $mailfrom = 'miko@tokyoautosalon.jp';
+            $namefrom = 'TOKYO AUTO SALON(TEST MAIL)';
+        }
+
+        $text = $this->parser->parse('mail/'.strtolower(__CLASS__).'_'.$action.'.txt', $data, TRUE);
+        if (strpos($text, "\n") !== FALSE) {
+            list($subject, $message) = explode("\n", $text, 2);
+        } else {
+            $subject = 'TOKYO AUTO SALON 2020';
+            $message = $text;
+        }
+
+        $this->email->from($mailfrom, mb_convert_encoding($namefrom,'ISO-2022-JP','UTF-8'));
+        $this->email->to($mailto);
+        $this->email->bcc($bcc);
+        $this->email->reply_to($mailfrom);
+        $this->email->subject(mb_convert_encoding($subject,'ISO-2022-JP','UTF-8'));
+        $this->email->message(mb_convert_encoding($message,'ISO-2022-JP','UTF-8'));
+        $this->email->send();
+    }
+
+    protected function download_build()
+    {
+        $this->db->select("eb.exhboothid, eb.exhid, eb.exhboothno");
+        $this->db->select("e.corpname, e.brandname, s.spaceabbr");
+        $this->db->select("v.cleanbooth");
+        $this->db->select("v.billid");
+        $this->db->select("bb.zip b_zip, bb.countrycode b_countrycode, bb.prefecture b_prefecture");
+        $this->db->select("bb.address1 b_address1, bb.address2 b_address2");
+        $this->db->select("bb.division b_division, bb.position b_position");
+        $this->db->select("bb.fullname b_fullname, bb.fullkana b_fullkana");
+        $this->db->select("bb.phone b_phone, bb.fax b_fax");
+        $this->db->select("v.appid, v.created, v.updated");
+        $this->db->from('exhibitor_booth eb');
+        $this->db->join('booths b', 'b.boothid = eb.boothid');
+        $this->db->join('v_spaces s', 's.spaceid = b.spaceid');
+        $this->db->join('exhibitors e', 'e.exhid = eb.exhid');
+        $this->db->join('v_exapply_14 v', 'v.exhboothid = eb.exhboothid', 'left');
+        $this->db->join('exhibitor_bill bb', 'bb.billid = v.billid', 'left');
+        $this->db->where('eb.expired', '0');
+        $this->db->where('e.expired', '0');
+        $this->db->where_in('e.statusno', array('500','401','400'));
+	}
+}

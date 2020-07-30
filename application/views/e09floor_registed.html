@@ -1,0 +1,131 @@
+{extends file='core/member.html'}
+{block name='title'}(09)天井・二階工事申請 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>天井・二階建工事登録</h2> 
+<p>登録が完了いたしました。</p>
+
+{include file='core/ex_murayama.html'}
+{include file='core/exhform.html'}
+{include file='core/ex_constructor.html'}
+
+<table class="uniform" width="700"> 
+ 
+<tr> 
+<tr><th colspan="2">天井・二階建工事業者<br/>(登録済みの施工業者と異なる場合は天井・二階建工事業者ご入力下さい。)</th></tr> 
+
+<tbody> 
+<tr>
+<td colspan="2">■天井・二階建工事業者の連絡窓口<span style="color:#ff0000">*</span><br/>
+{if $foreign.outsourcing==1}
+天井・二階建工事業者を追加登録(以下にアンカー工事業者をご記入ください)<br />
+{else}
+上記登録の装飾業者に同じ(ご記入の必要はございません)<br/>
+{/if}
+
+</td></tr>
+{if $foreign.outsourcing==1}
+<tr>
+<th style="width:6em">工事業者名</th> 
+</tr> 
+
+<tr>
+<td colspan="2">■工事業者<span style="color:#ff0000">*</span><br/>
+〒{$lists.0.zip} {$lists.0.prefecture} {$lists.0.address1} {$lists.0.address2} {$lists.0.corpname} {$lists.0.position} {$lists.0.fullname}
+<br />
+{if $message.billid != '' nocache}<span class="linewarn">{$message.billid nocache}</span>{/if}
+</td>
+</tr>
+{/if}
+</tbody> 
+</table> 
+
+<div id="tabcorp"> 
+<table class="uniform"> 
+</tbody>
+<tr> 
+<th align="left">■天井工事</th>
+</tr>
+<tr>
+<td>
+{if $foreign.ceiling==1}
+行う
+{else}
+行わない
+{/if}
+
+</td></tr>
+<tr>
+<td>
+(1)ブース平面および立体図*該当箇所を明示したもの<br>
+(2)天井構造を説明するのに必要な詳細図面(使用防炎材などの文字説明含む)<br>
+<br>
+天井部分の面積
+{$foreign.ceilingsize nocache}
+平方メートル/小間面積
+{$foreign.ceilingarea nocache}
+平方メートル<br/>
+<br/>
+●天井工事を行う理由<br/>
+{$foreign.ceilingreason nocache}
+<br/></td></tr>
+<tr><th align="left">■二階工事</th></tr>
+<tr>
+<td>
+{if $foreign.floor==1}
+行う
+{else}
+行わない
+{/if}
+</td></tr>
+<tr>
+<td>
+▼「行う」をご選択の場合は以下必須入力になります。<br/>
+●以下の書類を作成して提出して下さい
+(1)ブース平面および立体図*該当箇所を明示したもの<br>
+(2)天井構造を説明するのに必要な詳細図面(使用防炎材などの文字説明含む)<br>
+<br>
+●二階床面積(付帯する階段・スロープ等含む)<br/>
+{$foreign.floorsize nocache}
+平方メートル/小間面積
+{$foreign.floorarea nocache}
+平方メートル<br/>
+<br/>
+●二階の使用目的(ひとつのみ、チェックしてください)<br/>
+{if $foreign.purpose2f==1}
+来場者の利用がある<br/>
+{elseif $foreign.purpose2f==2}
+スタッフ等の特定の者が利用する<br/>
+{else}
+その他(具体的に使用目的をご記入下さい)<br/>
+{$foreign.reason2f nocache}
+{/if}
+<br/>
+●二階の床下(一階部分)の使用目的(ひとつのみ、チェックしてください)<br />
+{if $foreign.purpose1f==1}
+来場者の利用がある<br/>
+{elseif $foreign.purpose1f==2}
+スタッフ等の特定の者が利用する<br/>
+{else}
+その他(具体的に使用目的をご記入下さい)<br/>
+{$foreign.reason1f nocache}
+{/if}
+</td></tr>
+</tbody> 
+</table> 
+
+{include file="core/ex_2ndfloor.html"}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e09floor_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e09floor/">天井・二階工事申請</a>&nbsp;&gt;&nbsp;編集
+{/block}

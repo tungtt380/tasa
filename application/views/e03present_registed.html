@@ -1,0 +1,178 @@
+{extends file='core/member.html'}
+{block name='title'}(03)アンケート協賛登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>各種申請 &raquo; (03)アンケート協賛登録</h2>
+<p>登録が完了いたしました。</p>
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}
+ 
+<div> 
+<table class="uniform"> 
+ 
+<tr> 
+<thead> 
+<tr><th colspan="3">「協賛企業」としてご紹介させて頂く際の社名(ブランド名)、問合せ先(所在地、電話番号)</th></tr> 
+</thead> 
+<tbody> 
+<th class="w200">協賛社名</th> 
+<td colspan="2">
+{$foreign.corpname nocache}
+</td> 
+</tr> 
+ 
+<tr> 
+<th rowspan="3" class="w200">お問合せ先</th>
+<td class="w100">所在地</td> 
+<td> 
+{$foreign.zip nocache}
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+<br/> 
+</td> 
+</tr> 
+ 
+<tr> 
+<td class="w100">TEL</td> 
+<td> 
+{$foreign.phone nocache}
+</td> 
+</tr> 
+ 
+<tr> 
+<td class="w100">FAX</td> 
+<td> 
+{$foreign.fax nocache}
+</td> 
+</tr> 
+ 
+</tbody> 
+</table> 
+</div>
+
+<div> 
+<table> 
+<tbody> 
+<tr> 
+<td>
+<b>○アンケート回答者プレゼント協賛商品（オリジナルパーツなど）</b><br/>
+・ご協賛いただいた賞品を会期中アンケートにお答えいただいた来場者へのプレゼント賞品<br/>
+として活用させていただきます。<br/>
+恒例のプレゼント企画は、楽しみにしておられる来場者も多く、注目度の高いものです。<br/>
+ただし、協賛賞品はオリジナルパーツなどに限定させていただき、販促品・ノベルティグッズ<br/>
+などはご遠慮いただいております。<br/>
+<strong>・協賛メリット：</strong>
+<ol><br/>
+<il>１、ショー会場内「アンケート投票所」にて、ご協賛社名、商品名、商品写真をパネルで展示。</il><br/>
+<il>２、会期中「公式Webサイト」にて、ご協賛社名、商品名、商品写真を掲出。</il><br/>
+<il>３、後援各誌内の告知広告」にてご協賛商品の写真と商品名およびご協賛社名を紹介。</il></ol>
+<br><span style="color:#ff0000">
+            *協賛賞品の写真１点をご用意頂き、以下フォームよりご送信下さい</span><br>
+・アンケート回答者プレゼントの抽選は２月中旬頃を予定しております。当選者が決定次第ご連絡<br/>
+  させていただきますので、<strong>３月中旬頃</strong>までにご当選者への賞品の発送をお願い申し上げます。
+<br /></tb></tr>
+</tbody>
+</table>
+</div>
+
+<div> 
+<table width="550" border="0" cellpadding="0" cellspacing="0" class="tbl1">
+<tbody> 
+<tr><td valign="top" bgcolor="#FFFFCC" class="ft41"><span style="color:#000000">
+<strong>---写真データの注意事項---</strong><br/>
+ファイル名には必ず<b>拡張子(○○○.jpg)をつけてください</b>。<br/></span>
+
+<table width="440" bordercolor="white" border="0" align="center" cellpadding="5" cellspacing="0">
+<tr>
+<td bgcolor="#003399" class="ft5"><span class="ft4" style="color:#000000">
+画像データサイズ<br/>
+解像度<b>300</b>(pixcel/inch)<b>4cm×5.66cm</b>(A4サイズ)<b>(約1MB)</b></span>
+</td></tr>
+</table>
+<br /></td></tr>
+</tbody>
+</table>
+</div>
+
+<div> 
+<table> 
+<tbody> 
+<tr> 
+<tb><span style="color:#ff0000">
+*指定した画像は下の「確認する」ボタンよお進み頂き、次の確認画面にてご確認下さい。</span>
+<!--
+*データを<strong>CMYKカラー</strong>で保存されますと、WEB上でのご確認ができない場合がございます。
+<br/>データとして破損等なければCMYKでも問題ございませんが、
+<br/>WEB上で画像確認なさりたい方は、<strong>RGBカラーで保存したもの</strong>をアップロードして下さい。
+-->
+<br/>*確認用画像は縦横比が崩れて表示されますが、画像には問題ありませんのでご了承下さい。
+
+</tb></tr>
+</tbody>
+</table>
+</dov>
+
+<div> 
+<table class="uniform"> 
+<tbody> 
+
+<tr>
+<th class="w200"></th><th colspan="2">ご協賛商品<span style="color:#ff0000">*</span></th>
+<th>商品の画像</th><br/>
+</tr> 
+
+{foreach from=$foreign2 name=foreign_name key=foreign_key item=foreign_item}
+<tr>
+<th rowspan="3" class="w200"><b>{$foreign_key}</b></th>
+<td class="w100">ご協賛商品名</td>
+<td>
+<span class="example"><label for="sponsors_products_a"></label></span>
+{$foreign_item.itemname nocache}
+<td rowspan="3">
+{if $pic.$foreign_key}
+<img src="images/{$pic.$foreign_key}" width="180" height="135">
+{else}
+画像がアップされていません。
+{/if}
+<br/></td></tr>
+<tr>
+<td class="w100">標準価格</td>
+<td>
+<span class="example"><label for="sponsors_price_a"></label></span>
+{$foreign_item.itemprice nocache}
+<br/></td></tr>
+<tr>
+<td class="w100">個数</td>
+<td>
+<span class="example"><label for="sponsors_num_a"></label></span>
+{$foreign_item.quantity nocache}
+<br/></td></tr>
+{/foreach}
+
+</tbody>
+</table>
+
+{if uri_folder_string() == '/op'}
+<p class="btn">
+<a href="{uri_folder_string()}/e03present/"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+</p>
+{/if}
+</div>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/e.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e03present_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e03present/">アンケート協賛登録</a>&nbsp;&gt;&nbsp;登録完了
+{/block}

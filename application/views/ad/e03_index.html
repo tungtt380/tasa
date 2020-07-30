@@ -1,0 +1,53 @@
+{extends file='core/member.html'}
+{block name='title'}アンケート協賛登録 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>アンケート協賛登録</h2> 
+
+<div id="tabcorp"> 
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead>
+<tr> 
+<th class="nowrap">コード</th>
+<th class="nowrap">出展者名/表示名</th>
+<th class="nowrap">小間番号</th>
+<th class="nowrap">画像ファイル名</th>
+</tr>
+</thead>
+{/if}
+<tr>
+<td><div class="ruby">{$i.exhid}</div>{$i.exhboothid}</td>
+<td><div class="ruby">{$i.corpname}</div>{$i.brandname}</td>
+<td>{$i.exhboothno}</td>
+<td>{$i.seqno} {$i.itemphoto}
+{if isset($i.itemphoto)}<br/>
+<img src="/op/e03present/images/{$i.itemphoto}" width="90" height="60">{/if}
+</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</table>
+</div>
+
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;アンケート協賛登録
+{/block}

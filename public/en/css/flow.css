@@ -1,0 +1,47 @@
+@charset "utf-8";
+#main {
+	padding:60px 0 0;
+}
+#canvas {
+	width:550px;
+	padding:20px 20px;
+	margin:0 auto 20px;
+	background:#fff;
+	border-radius: 5px;		/* CSS3草案 */
+	-webkit-border-radius: 5px;	/* Safari,Google Chrome用 */
+	-moz-border-radius: 5px;	/* Firefox用 */
+	border:1px solid #999999;
+
+}
+#canvas h1 {
+	margin:0 0 15px;
+}
+#canvas h2 {
+	width:100%;
+	text-align:left;
+	margin:0 0 15px;
+	height:30px;
+	line-height:33px;
+	color:#fff;
+	font-size:14px;
+	text-indent:10px;
+	margin:0 0 15px;
+	background:#009c74;
+	border-radius: 5px;		/* CSS3草案 */
+	-webkit-border-radius: 5px;	/* Safari,Google Chrome用 */
+	-moz-border-radius: 5px;	/* Firefox用 */
+}
+#canvas #pic {
+	text-align:center;
+	margin:0 auto 15px;
+}
+#canvas #info span.red {
+	color:#c00;
+}
+#footer {
+	font-size:10px;
+	color:#eee;
+	text-align:center;
+	margin:0 auto;
+	background:none;
+}

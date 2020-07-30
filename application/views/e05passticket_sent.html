@@ -1,0 +1,71 @@
+{extends file='core/member.html'}
+{block name='title'}(05)パス類追加請求 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>パス類追加請求</h2> 
+<div>
+<p>以下は、<span class="red">既に発送した分も含めた合計枚数</span>になります。</p>
+<p>こちらでよろしければ「発送」ボタンを押してください。</p>
+</div>
+
+{include file='core/exhform.html'}
+
+<a href="../history/{$foreign.exhid}/{$foreign.exhboothid nocache}">今までのお申込み履歴</a>
+
+<div> 
+<table class="uniform">
+<colgroup>
+<colgroup>
+<colgroup>
+<thead>
+<tr>
+<th>種類</th>
+<th>送付枚数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="w200">搬入出リボン（有料：@&yen;100-税込）<br/>※現地発行も可：（有料：@&yen;100-税込）<br/>☆搬入出日のみ有効</th>
+<td class="center">{$foreign.quantity_1|default:0 nocache}枚</td>
+</tr>
+<tr>
+<th class="w200">搬入出車両証(無料)<br/>☆搬入出日のみ有効</th>
+<td class="center">{$foreign.quantity_2|default:0 nocache}枚</td>
+</tr>
+<tr>
+<th class="w200">出展者パス(有料＠￥8,000(税込)<br/>☆搬入出日/会期中とも有効</th>
+<td class="center">{$foreign.quantity_3|default:0 nocache}枚</td>
+</tr>
+<tr>
+<th class="w200">特別招待券(有料＠￥3,000(税込)<br/>☆2019/1/11(金)のみ有効</th>
+<td class="center">{$foreign.quantity_4|default:0 nocache}枚</td>
+</tr>
+<tr>
+<th class="w200">一般招待券(有料＠￥2,000(税込)<br/>☆2019/1/12(土)/2019/1/13(日)のみ有効</th>
+<td class="center">{$foreign.quantity_5|default:0 nocache}枚</td>
+</tr>
+</tbody>
+</table>
+
+<form method="post" action="../sent_in">
+<input type="hidden" name="appid" value="{$foreign.appid}" />
+<input type="hidden" name="exhboothid" value="{$foreign.exhid}" />
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid}" />
+<input type="submit" name="action" value="発送" />
+</form>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/e.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e05passticket_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e05passticket/">パス類追加請求</a>&nbsp;&gt;&nbsp;編集
+{/block}

@@ -1,0 +1,66 @@
+{extends file='core/member.html'}
+{block name='title'}ダウンロード &laquo; 出展申込者 &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>出展者申込 - ダウンロード</h2>
+<p>以下のファイルがダウンロード可能です。</p>
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th>型番</th>
+<th>内容</th>
+<th colspan="2">ダウンロード</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALL</td>
+<td>一覧表示(全申込み)</td>
+<td><a href="{uri_folder_string()}/exhibitor/download/all"><img src="/images/common/ico_csv.png" width="24" height="24" />CSVファイル</a></td>
+<td></td>
+</tr>
+<tr>
+<td>001</td>
+<td>受理済出展者リスト(全申込み)</td>
+<td><a href="{uri_folder_string()}/exhibitor/download/001"><img src="/images/common/ico_csv.png" width="24" height="24" />CSVファイル</a></td>
+<td><a href="{uri_folder_string()}/exhibitor/download/001xls"><img src="/images/common/ico_xlsx.png" width="24" height="24" />Excelファイル</a></td>
+</tr>
+<tr>
+<td>003</td>
+<td>設定会員種別確認用リスト(全申込み)</td>
+<td><a href="{uri_folder_string()}/exhibitor/download/003"><img src="/images/common/ico_csv.png" width="24" height="24" />CSVファイル</a></td>
+<td></td>
+</tr>
+<tr>
+<td>YAMATO</td>
+<td>B2用送付先リスト(全申込)</td>
+<td></td>
+<td><a href="{uri_folder_string()}/exhibitor/download/yamato"><img src="/images/common/ico_xlsx.png" width="24" height="24" />Excelファイル</a></td>
+</tr>
+<tr>
+<td>SAWAGA</td>
+<td>e秘伝用送付先リスト(全申込)</td>
+<td><a href="{uri_folder_string()}/exhibitor/download/sagawa"><img src="/images/common/ico_csv.png" width="24" height="24" />CSVファイル</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="info">
+注意<br/>
+CSVファイルはShift-JISのため、常用漢字でない文字（「﨑」「髙」など）が化けます。</br>
+また、Excelで読み込むと数字と認識されることがありますので、あらかじめご了承ください。</br>
+</div>
+<a href="./"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="../">出展申込者</a>&nbsp;&gt;&nbsp;ダウンロード
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/exhibitor_list.js"></script>
+{/block}

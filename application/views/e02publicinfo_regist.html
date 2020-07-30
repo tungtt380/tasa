@@ -1,0 +1,183 @@
+{extends file='core/member.html'}
+{block name='title'}(02)公開用出展者データ登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>公開用出展者データ登録</h2>
+<p>公開用出展者データの登録をおこないます。</p>
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}
+
+{include file='core/ex_sans.html'}
+{include file='core/exhform.html'}
+
+<form method="post" action="regist_in" ENCTYPE="multipart/form-data"> 
+<input type="hidden" name="exhid" value="{$foreign.exhid}"/>
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid}"/>
+
+<div id="tabopendata">
+<table class="uniform">
+<tbody>
+<tr>
+<th rowspan="3" class="w200">出展者名</th>
+<td>表示名</td>
+<td>{$exhibitor.brandname nocache}</td>
+</tr>
+<tr>
+<td>表示名(英語表記)</td>
+<td>
+<input type="text" id="brandnameen" name="brandnameen" size="48" value="{$foreign.brandnameen nocache}" placeholder="表示名(英語表記)は半角英数字のみで入力"><br>
+{if $message.brandnameen != '' nocache}<span class="linewarn">{$message.brandnameen nocache}</span>{/if}
+※公式サイトの英語ページでのみ使用致します
+</td>
+<tr>
+<td>出展者名</td>
+<td>{$exhibitor.corpname nocache}</td>
+</tr>
+</tbody>
+</table>
+<!--<p>*こちらの変更をご希望の場合は『出展申込時の登録内容』の変更手続きが必要となります。直接本部事務局へお問い合わせ下さい。</p>-->
+
+<table class="uniform">
+<tbody>
+<tr>
+<th rowspan="2" class="w200">所在地</th>
+<td>
+<input type="radio" id="publicaddress" name="publicaddress" value="0" {if $foreign.publicaddress==0}checked="checked"{/if}>非公開
+</td>
+<td colspan="2"></td>
+</tr>
+<tr>
+<td><input type="radio" id="publicaddress" name="publicaddress" value="1" {if $foreign.publicaddress==1}checked="checked"{/if}>公開する</td>
+<td colspan="2">
+<span class="example"><label for="sekou_zip">郵便番号</label> 例)1234567</span> 
+<input type="text" id="zip" name="zip" size="8" maxlength="8" value="{$foreign.zip nocache}" placeholder="郵便番号"> 
+<div id="zip" class="clearfix"><span id="zipdir" class="zipsearch">郵便番号から住所を検索</span><span id="ziprev" class="revsearch">住所から郵便番号を検索</span></div>
+{if $message.zip != '' nocache}<span class="linewarn">{$message.zip nocache}</span>{/if}
+<span class="example"><label for="sekou_address_one">町名番地</label> 例)東京都新宿区新宿6-27-30</span> 
+{form_dropdown_ex('prefecture',$prefecture,$foreign.prefecture,'東京都','id="prefecture"')}
+{if $message.prefecture != '' nocache}<span class="linewarn">{$message.prefecture nocache}</span>{/if}
+
+<input type="text" id="address1" name="address1" size="31" maxlength="60" value="{$foreign.address1 nocache}" placeholder="町名番地"> 
+{if $message.address1 != '' nocache}<span class="linewarn">{$message.address1 nocache}</span>{/if}
+<br/> 
+<span class="example"><label for="address2">ビルマンション名</label> 例)○○ビル3F</span> 
+<input type="text" id="address2" name="address2" size="48" maxlength="60" value="{$foreign.address2 nocache}" placeholder="ビル・マンション名"> 
+{if $message.address2 != '' nocache}<span class="linewarn">{$message.address2 nocache}</span>{/if}
+<br/> 
+</td></tr>
+
+<tr>
+<th rowspan="2">TEL</th>
+<td><input type="radio" id="publicphone" name="publicphone" value="0" {if $foreign.publicphone==0}checked="checked"{/if}>非公開</td>
+<td colspan="2"><br /></td>
+</tr>
+<tr>
+<td><input type="radio" id="publicphone" name="publicphone" value="1" {if $foreign.publicphone==1}checked="checked"{/if}>公開する</td>
+<td colspan="2">
+<span class="example"><label for="koukai_phone">TEL</label>(数字) 例)0312345678</span>
+<input type="text" id="phone" name="phone" size="15" maxlength="15" value="{$foreign.phone nocache}" placeholder="TEL"> 
+{if $message.phone != '' nocache}<span class="linewarn">{$message.phone nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th rowspan="2">FAX</th>
+<td><input type="radio" id="publicfax" name="publicfax" value="0" {if $foreign.publicfax==0}checked="checked"{/if}>非公開</td>
+<td colspan="2"><br /></td>
+</tr>
+<tr>
+<td><input type="radio" id="publicfax" name="publicfax" value="1" {if $foreign.publicfax==1}checked="checked"{/if}>公開する</td>
+<td colspan="2">
+<span class="example"><label for="koukai_fax">FAX</label>(数字) 例)0312345678</span>
+<input type="text" id="fax" name="fax" size="15" maxlength="15" value="{$foreign.fax nocache}" placeholder="FAX"> 
+{if $message.fax != '' nocache}<span class="linewarn">{$message.fax nocache}</span>{/if}
+</td></tr>
+</tbody>
+</table>
+
+<br/>
+<div id="tabopendata2">
+<table class="uniform">
+
+<tbody>
+<tr>
+<th class="w200">メールアドレス</th>
+<td colspan="2">{$exhibitor.m_email nocache}<span style="color:#ff0000"><br />※このメールアドレスは現在記入頂いている出展者のメールアドレスで、一般向けに公開されるアドレスではありません。Web上に公開されるメールアドレスは、下の『ご来場者問合せメールアドレス』にご記入ください。</span></td></tr>
+<tr>
+<th rowspan="2">Webサイト<br/>URL</th>
+<td><input type="radio" id="publicurl" name="publicurl" value="0" {if $foreign.publicurl==0}checked="checked"{/if}>非公開</td>
+<td colspan="2"><br /></td>
+</tr>
+<tr>
+<td><input type="radio" id="publicurl" name="publicurl" value="1" {if $foreign.publicurl==1}checked="checked"{/if}>公開する</td>
+<td>
+<span class="example"><label for="koukai_url">アドレス</label> 例)www.e-autosalon.net</span>
+<br/>http://<input type="text" id="url" name="url" size="60" value="{$foreign.url nocache}" placeholder="URL"> 
+{if $message.url != '' nocache}<span class="linewarn">{$message.url nocache}</span>{/if}
+</td>
+</tr>
+<tr>
+<th rowspan="2">ご来場者問合せ<br/>メールアドレス</th>
+<td><input type="radio" id="publicemail" name="publicemail" value="0" {if $foreign.publicemail==0}checked="checked"{/if}>非公開</td>
+<td colspan="2"><br /></td>
+</tr>
+<tr>
+<td><input type="radio" id="publicemail" name="publicemail" value="1" {if $foreign.publicemail==1}checked="checked"{/if}>公開する</td>
+<td>
+<span class="example"><label for="koukai_mailadd">アドレス</label> 例)aaa@bbb.co.jp</span>
+<input type="text" id="email" name="email" size="40" value="{$foreign.email nocache}"> 
+{if $message.email != '' nocache}<span class="linewarn">{$message.email nocache}</span>{/if}
+</td>
+</tr>
+
+<tr>
+<th>PRコメント<br/>(100文字以内)</th>
+<td colspan="2">
+<div><textarea id="prcomment" name="prcomment" cols="50" rows="4">{$foreign.prcomment nocache}</textarea></div>
+{if $message.prcomment != '' nocache}<span class="linewarn">{$message.prcomment nocache}</span>{else}
+<span style="color:#ff0000">(ご紹介の参考とさせて頂きます。)</span>
+{/if}
+</td></tr>
+
+<tr>
+<th>ご紹介写真</th>
+<td colspan="2">
+<div>アップロード<input name="photo" type="file" class="bt1" value="ファイルを選択">
+</div>
+<span class="red" style="font-size:12px; font-weight:bold;">画像名は必ず半角英数字の画像名にしてからアップしてください。</span>
+<ul>
+<li>*画像サイズが大きすぎると、取り込めない場合があります。800×600px以下に変換してからアップロードして下さい。</li>
+<li>*指定した画像は、下の「確認画面へ」ボタンよりお進み頂き、次の確認画面にてご確認下さい。</li>
+<li>*データを<strong>CMYKカラー</strong>で保存されますと、WEB上でのご確認ができない場合がございます。</li>
+<li>データとして破損等なければCMYKでも問題ございませんが、</li>
+<li>WEB上で画像確認なさりたい方は、<strong>RGBカラーで保存したもの</strong>をアップロードして下さい。</li>
+<li>*確認用画像は縦横比が崩れて表示されますが、画像には問題ありませんのでご了承下さい。</li>
+</ul>
+</td>
+</tr>
+
+
+</tbody>
+</table>
+
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="確認画面へ" />
+
+</div>
+</div>
+</div>
+
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e02publicinfo_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e02publicinfo/">公開用出展者データ</a>&nbsp;&gt;&nbsp;登録
+{/block}

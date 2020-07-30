@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="/css/reset.css" rel="stylesheet" />
+<link type="text/css" href="/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-1.8.3.min.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/js/IE9.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js"></script>
+<script>
+    DD_belatedPNG.fix('a,img,div');
+</script>
+<![endif]-->
+{block name='headjs'}{/block}
+<title>{block name='title'}CONTROL PANEL{/block}</title>
+</head>
+<body class="{block name='theme'}object{/block}">
+<div id="wrapper">
+
+<div id="header">
+{block name='header'}
+<h1><img src="/images/common/logo.gif" width="264" height="37" /></h1>
+{block name='headernav'}
+<div id="headerNav" class="clearfix"></div>
+{/block}
+{/block}
+</div>
+
+<div id="canvas" class="clearfix">
+{block name='canvas'}
+<div id="nav">
+{block name='mnav'}{/block}
+</div>
+<div id="contents">
+<div class="inner">
+{block name='contents'}{/block}
+</div>
+</div>
+{/block}
+</div>
+
+<div id="footer">
+{block name='footer'}<p>COPYRIGHT &copy; 1983-{$smarty.now|date_format:'%Y'} Tokyo autosalon association(TASA)</p>{/block}
+</div>
+
+</div>
+{block name='footjs'}{/block}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(
+  ['a._setAccount', 'UA-24139751-1'],
+  ['a._setDomainName', '.tokyoautosalon.jp'],
+  ['a._setAllowHash', false],
+  ['a._trackPageview'],
+  ['b._setAccount', 'UA-179236-27'],
+  ['b._setDomainName', '.tokyoautosalon.jp'],
+  ['b._setAllowHash', false],
+  ['b._trackPageview'],
+  ['b._setAccount', 'UA-24139751-2'],
+  ['b._setDomainName', '.tokyoautosalon.jp'],
+  ['b._setAllowHash', false],
+  ['b._trackPageview']
+  );
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

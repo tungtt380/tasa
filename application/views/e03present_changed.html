@@ -1,0 +1,99 @@
+{extends file='core/member.html'}
+{block name='title'}(03)アンケート協賛編集 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>アンケート協賛編集</h2> 
+<p>編集が完了いたしました。</p>
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}
+ 
+<div id="tabs"> 
+<table class="uniform"> 
+<tr> 
+<th colspan="2" class="sub">協賛企業名</th>
+</tr>
+
+<tr>
+<th class="w200">協賛企業名</th>
+<td>{$foreign.corpname nocache}</td>
+</tr>
+
+<tr>
+<th colspan="2" class="sub">所在地</th>
+</tr>
+ 
+<tr>
+<th class="w200">郵便番号</th>
+<td>{$foreign.zip nocache}</td>
+</tr>
+<tr>
+<th class="w200">町名番地</th>
+<td>{$foreign.prefecture nocache}&nbsp;{$foreign.address1 nocache}</td>
+</tr>
+<tr>
+<th class="w200">ビルマンション名</th>
+<td>{$foreign.address2 nocache}</td>
+</tr>
+
+ 
+<tr> 
+<th class="w200">TEL</th> 
+<td>{$foreign.phone nocache}
+{if $message.phone != '' nocache}<span class="linewarn">{$message.phone nocache}</span>{/if}</td> 
+</tr> 
+ 
+<tr> 
+<th class="w200">FAX</th> 
+<td>{$foreign.fax nocache}
+{if $message.fax != '' nocache}<span class="linewarn">{$message.fax nocache}</span>{/if}</td> 
+</tr> 
+</table>
+
+<table class="uniform"> 
+<tr>
+<th colspan="2" class="sub">協賛商品</th>
+</tr>
+{foreach from=$foreign2 name=foreign_name key=foreign_key item=foreign_item}
+<tr>
+<th class="w200">商品の画像</th>
+<td>{if $pic.$foreign_key}<img src="images/{$pic.$foreign_key}" width="180" height="135">{else}画像がアップされていません。{/if}</td>
+</tr>
+<tr>
+<th class="w200">協賛商品名</th>
+<td>{$foreign_item.itemname nocache}</td>
+</tr>
+<tr>
+<th class="w200">標準価格</th>
+<td>{$foreign_item.itemprice nocache}</td>
+</tr>
+<tr>
+<th class="w200">個数</th>
+<td>{$foreign_item.quantity nocache}</td>
+</tr>
+{/foreach}
+
+</table>
+</div>
+<div class="btn-detail" style="margin:20px 0 0;">
+<a href="{uri_folder_string()}/exhibitor/"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+</div>
+</div>
+</div>
+
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/sponsor_change.js"></script>
+<script type="text/javascript" src="/js/e04construction_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e03present/">アンケート協賛編集</a>&nbsp;&gt;&nbsp;登録完了
+{/block}

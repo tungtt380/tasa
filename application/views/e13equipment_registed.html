@@ -1,0 +1,126 @@
+{extends file='core/member.html'}
+{block name='title'}(13)車両専用展示用オプション備品申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>Bスペース用オプション備品登録</h2> 
+<p>登録が完了いたしました。</p>
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}
+
+<div id="tabcorp"> 
+<table class="uniform"> 
+<tr><th colspan="2">品名</th><th>単価(税別)</th><th>数量</th></tr> 
+{if $foreign.quantity_1}
+<tr><td colspan="2">インフォメーションカウンター[カギつき]<br/>(GR-615/W600×D450×H900)<br/> 
+※鍵を紛失した場合は、別途\1,000頂戴いたします。</td> 
+<td align="right">&yen;15,000</td> 
+<td class="center">
+{$foreign.quantity_1|default:0 nocache}台
+{if isset($message.quantity_1)}<span class="linewarn">{$message.quantity_1 nocache}</span>{/if}</td> 
+</tr>
+{/if}
+
+{if $foreign.quantity_2 || $foreign.quantity_3 || $foreign.quantity_4 || $foreign.quantity_5}
+<tr> 
+<td rowspan="4">スタンド椅子(BC-38)<br/> 
+※インフォメーションカウンター<br/> 
+とセットでご使用する場合は、<br/> 
+「Cタイプ」をお選びください。</td> 
+<td>
+A(H450)
+</td><td rowspan="4" align="right">&yen;3,500</td> 
+<td class="center">
+{if $foreign.quantity_2}
+{$foreign.quantity_2|default:0 nocache}台
+{if isset($message.quantity_2)}<span class="linewarn">{$message.quantity_2 nocache}</span>{/if}</td> 
+{/if}
+</tr> 
+<tr><td>
+B(H500)
+</td> 
+<td class="center">
+{if $foreign.quantity_3}
+{$foreign.quantity_3|default:0 nocache}台
+{if isset($message.quantity_3)}<span class="linewarn">{$message.quantity_3 nocache}</span>{/if}</td> 
+{/if}
+</td></tr> 
+<tr><td>
+C(H600)
+</td> 
+<td class="center">
+{if $foreign.quantity_4}
+{$foreign.quantity_4|default:0 nocache}台
+{if isset($message.quantity_4)}<span class="linewarn">{$message.quantity_4 nocache}</span>{/if}</td> 
+{/if}
+</td></tr> 
+<tr><td>
+D(H750)
+</td> 
+<td class="center">
+{if $foreign.quantity_5}
+{$foreign.quantity_5|default:0 nocache}台
+{if isset($message.quantity_5)}<span class="linewarn">{$message.quantity_5 nocache}</span>{/if}</td> 
+{/if}
+</td></tr> 
+{/if}
+{if $foreign.quantity_6 || $foreign.quantity_7}
+<tr><td rowspan="2">カタログスタンド</td>
+<td>
+A4
+</td><td rowspan="2" align="right">&yen;5,500</td> 
+<td class="center">
+{if $foreign.quantity_6}
+{$foreign.quantity_6|default:0 nocache}台
+{if isset($message.quantity_6)}<span class="linewarn">{$message.quantity_6 nocache}</span>{/if}</td> 
+{/if}
+</td> 
+</tr> 
+<tr><td>
+B4
+</td>
+<td class="center">
+{if $foreign.quantity_7}
+{$foreign.quantity_7|default:0 nocache}台
+{if isset($message.quantity_7)}<span class="linewarn">{$message.quantity_7 nocache}</span>{/if}</td> 
+{/if}
+</td> 
+</tr> 
+{/if}
+</table>
+
+<table class="uniform">
+<tr><th colspan="2">ご請求先</th></tr>
+<tr>
+<th class="w200">ご請求先</th>
+<td>
+〒{$lists.0.zip}<br>
+{$lists.0.prefecture} {$lists.0.address1} {$lists.0.address2}<br>
+{$lists.0.corpname}<br>
+{$lists.0.position} {$lists.0.fullname}
+<br />
+{if $message.billid != '' nocache}<span class="linewarn">{$message.billid nocache}</span>{/if}
+</td>
+</tr> 
+</table>
+{if uri_folder_string() == '/op'}
+<p class="btn"><a href="{uri_folder_string()}/e13equipment/"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る"></a></p>
+{/if}
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/e.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e13equipment_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e13equipment/">リース備品申込</a>&nbsp;&gt;&nbsp;登録
+{/block}
+
+

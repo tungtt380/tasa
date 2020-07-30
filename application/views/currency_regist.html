@@ -1,0 +1,50 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &raquo; 通貨 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>登録 &raquo; 通貨</h2>
+<div class="article">
+<p>通貨コードは<a href="http://ja.wikipedia.org/wiki/ISO_4217">ISO4217</a>をご使用ください。</p>
+</div>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="regist-nav">
+<form method="post" action="regist_in">
+<table class="uniform">
+
+<tr>
+ <th>国コード</th>
+ <td>
+ <input type="text" name="countrycode" value="{$foreign.countrycode nocache}" placeholder="国コードを入力" />
+{if $message.countrycode != "" nocache}<span class="linewarn">{$message.countrycode nocache}</span>{/if}
+ <span class="example">例)JP</span>
+ </td>
+</tr>
+<tr>
+ <th>通貨コード</th>
+ <td>
+ <input type="text" name="currencycode" value="{$foreign.currencycode nocache}" placeholder="通貨単位を入力" />
+{if $message.currencycode != "" nocache}<span class="linewarn">{$message.currencycode nocache}</span>{/if}
+ <span class="example">例)JPY</span>
+ </td>
+</tr>
+<tr>
+ <th>通貨記号</th>
+ <td>
+ <input type="text" name="currencysymbol" value="{$foreign.currencysymbol nocache}" placeholder="通貨略記を入力" />
+{if $message.currencysymbol != "" nocache}<span class="linewarn">{$message.currencysymbol nocache}</span>{/if}
+ <span class="example">例)\</span>
+ </td>
+</tr>
+
+</table>
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+</form>
+</div>
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/currency_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/currency/">通貨</a>&nbsp;&gt;&nbsp;登録
+{/block}

@@ -1,0 +1,84 @@
+{extends file='core/member.html'}
+{block name='title'}(07)幕張新都心食事券 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>幕張新都心食事券登録</h2> 
+{if (($rolename == 'exhibitor' || $rolename == 'promotion') && $smarty.now > "2019-12-07 00:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">幕張新都心飲食共通利用券申込の受付けは締め切らせていただきました。</p>    
+{else}
+<p style="margin:0 0 20px;"> 幕張新都心食事券を希望される場合は下記より申請してください。すでに申請されている場合は、追加の申請となりますので<span class="red">追加分のみの枚数</span>を記入してください。</p> 
+{/if}
+{if isset($message.__all)}
+<div class="blockwarn"><p>{$message.__all nocache}</p></div>
+{/if}
+
+{include file="core/ex_messe.html"}
+{include file="core/exhform.html"}
+
+<div class="section">
+
+<p>申請入力頂く際のご注意</p>
+<ul>
+<li><span class="red">*</span>マークは入力必須項目ですので必ずご記入ください。</li>
+<li>半角カタカナはご利用頂けません。</li>
+<li>英数字は半角でご入力ください。</li>
+</ul>
+</div>
+
+<form method="post" action="regist_in"> 
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid nocache}">
+
+<div id="tabcorp"> 
+<table class="uniform">
+<tr> 
+<th colspan="2" class="main">幕張新都心飲食共通利用券</th>
+</tr>
+<tr>
+<th class="w200">利用券の追加枚数</th>
+<td>これまでの申込枚数：<span class="red">{$quant|default:0 nocache}枚</span>に、以下の枚数を追加申込みします。<br />
+@1,000円券×<input type="text" id="addquantity" name="addquantity" size="8" maxlength="8" value="{$foreign.addquantity nocache}">枚<br/>
+(250円券×3枚＋100円券×2枚＋50円券×１枚)
+{if $message.addquantity != '' nocache}<span class="linewarn">{$message.addquantity nocache}</span>{/if}
+</td>
+</tr>
+</table>
+
+<table class="uniform">
+<tr> 
+<th colspan="2" class="sub">ご請求先</th>
+</tr>
+<tr>
+<th class="w200">ご請求先</th>
+<td><select name="billid">
+{foreach from=$lists name=rec item=i}
+<option value="{$i.billid}" {if $foreign.billid==$i.billid}selected{/if}>〒{$i.zip} {$i.prefecture} {$i.address1} {$i.address2} {$i.corpname} {$i.position} {$i.fullname}</option>
+{/foreach}
+</select>
+<br />
+{if $message.billid != '' nocache}<span class="linewarn">{$message.billid nocache}</span>{/if}
+</td>
+</tr>
+</table>
+{if (($rolename == 'exhibitor' || $rolename == 'promotion') && $smarty.now > "2019-12-07 00:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">幕張新都心飲食共通利用券申込の受付けは締め切らせていただきました。</p>    
+{else}
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="入力内容確認画面へ">
+{/if}
+</form>
+ 
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e07voucherticket_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e07voucherticket/">幕張新都心食事券</a>&nbsp;&gt;&nbsp;登録
+{/block}

@@ -1,0 +1,69 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &raquo; 小間形状 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>登録 &raquo; 小間形状</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="regist-nav">
+<form method="post" action="regist_in">
+<table class="uniform">
+
+<tr class="required">
+ <th>イベント名</th>
+ <td>
+{form_dropdown('eventid',$event,$foreign.eventid,'id="eventid"')}
+ </td>
+</tr>
+<tr>
+ <th>小間形状番号</th>
+ <td>
+ <input type="text" id="boothno" name="boothno" maxlength="4" value="{$foreign.boothno nocache}" />
+{if $message.boothno != "" nocache}<span class="linewarn">{$message.boothno nocache}</span>{/if}
+ <span class="example">例)3</span>
+ </td>
+</tr>
+<tr>
+ <th>小間種別</th>
+ <td>
+{form_dropdown('spaceid',$space,$foreign.spaceid,'id="spaceid"')}
+ </td>
+</tr>
+<tr>
+ <th>小間形状名</th>
+ <td>
+ <input type="text" id="boothname" name="boothname" maxlength="20" value="{$foreign.boothname nocache}" />
+{if $message.boothname != "" nocache}<span class="linewarn">{$message.boothname nocache}</span>{/if}
+ <span class="example">例)A1×1</span>
+ </td>
+</tr>
+<tr>
+ <th>小間形状(表示用)</th>
+ <td>
+ <input type="text" id="boothabbr" name="boothabbr" maxlength="20" value="{$foreign.boothabbr nocache}" />
+{if $message.boothabbr != "" nocache}<span class="linewarn">{$message.boothabbr nocache}</span>{/if}
+ <span class="example">例)1×1</span>
+ </td>
+</tr>
+<tr>
+ <th>小間数(表示用)</th>
+ <td>
+ <input type="text" id="boothcount" name="boothcount" maxlength="3" value="{$foreign.boothcount nocache}" />
+{if $message.boothcount != "" nocache}<span class="linewarn">{$message.boothcount nocache}</span>{/if}
+ <span class="example">例)1</span>
+ </td>
+</tr>
+
+</table>
+<input type="hidden" id="allow" name="allow" value="1" />
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録" />
+</form>
+</div>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/booth_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/booth/">小間形状</a>&nbsp;&gt;&nbsp;登録
+{/block}

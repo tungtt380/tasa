@@ -1,0 +1,101 @@
+{extends file='core/member.html'}
+{block name='title'}マッチング詳細 &raquo; 顧客マッチング &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>顧客マッチング - {$detail.brandname nocache}</h2>
+<h3>出展者情報</h3>
+
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th>出展者コード</th>
+<th>出展会社名</th>
+<th>表示名</th>
+<th>住所</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../exhibitor/detail/{$detail.exhid}">{$detail.exhid}</a></td>
+<td><div class="ruby"><span title="{$detail.corpkana}">{$detail.corpkana|truncate:20 nocache}</span></div>
+{if isset($detail.customerid) && $detail.customerid != ''}
+    <span title="{$detail.corpname nocache}"><a href="../customer/detail/{$detail.customerid}">{$detail.corpname|truncate:20 nocache}</a></span></td>
+{else}
+    <span title="{$detail.corpname nocache}">{$detail.corpname|truncate:20 nocache}</span></td>
+{/if}
+<td><div class="ruby"><span title="{$detail.brandkana nocache}">{$detail.brandkana|truncate:20 nocache}</span></div>
+    <span title="{$detail.brandname nocache}">{$detail.brandname|truncate:20 nocache}</span></td>
+<td>〒{$detail.zip nocache}<br/>
+{$detail.prefecture nocache}
+{$detail.address1 nocache}
+{$detail.address2 nocache}</td>
+</tr>
+</tbody>
+</table>
+
+<div class="center"><form id="create" method="post" action="../create_in">
+<input type="image" src="/images/common/btn_regist.gif" id="action" name="action" value="初回出展(顧客登録)">
+<input type="hidden" id="exhid" name="exhid" value="{$detail.exhid}" />
+</form></div>
+
+<h3>マッチした稼働中の顧客情報</h3>
+<div id="cnav" class="clearfix">
+<div class="search">
+<form id="search" method="post" action="../detailsearch_in">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="hidden" id="exhid" name="exhid" value="{$detail.exhid}" />
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+
+{foreach from=$customer name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div>
+<form id="update" method="post" action="../change_in">
+<input type="hidden" id="exhid" name="exhid" value="{$detail.exhid}" />
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th>選択</th>
+<th>顧客コード</th>
+<th>出展会社名</th>
+<th>住所</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td>{if $i.exhid}引継済{else}<input type="radio" name="customerid" value="{$i.customerid}">{/if}</td>
+<td><a href="{uri_folder_string()}/customer/detail/{$i.customerid}">{$i.customerid}</a></td>
+<td><div class="ruby"><span title="{$detail.corpkana}">{$i.corpkana|truncate:20 nocache}</span></div>{$i.corpname}</td>
+<td>〒{$i.zip nocache}<br/>
+{$i.prefecture nocache}
+{$i.address1 nocache}
+{$i.address2 nocache}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+<input type="image" src="/images/common/btn_takeover.gif" id="action" name="action" value="継続出展(顧客更新)" />
+</form>
+</div>
+{/if}
+{foreachelse}
+<p>見つかりません。</p>
+{/foreach}
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/exmatch_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;申込内容詳細
+{/block}
+

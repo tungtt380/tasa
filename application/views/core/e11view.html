@@ -1,0 +1,182 @@
+<div>
+<table class="uniform">
+<tbody>
+<tr><th colspan="2">ご請求先</th></tr>
+<td colspan="2">
+{foreach from=$lists name=rec item=i}
+{if $foreign.billid == $i.billid}
+〒{$i.zip} {$i.prefecture} {$i.address1} {$i.address2} {$i.corpname} {$i.position} {$i.fullname}
+{/if}
+{/foreach}
+</tr>
+</tbody>
+</table>
+
+<table class="uniform">
+<thead>
+<tr><th colspan="2">ご連絡先</th></tr>
+</thead>
+<tbody>
+<td colspan="2">
+{if $foreign.contact == 0}
+上記連絡先と同じ
+{/if}
+{if $foreign.contact == 1}
+別の連絡先 (以下)
+{/if}
+</td>
+</tbody>
+</table>
+
+{if $foreign.contact == 1}
+<table class="uniform">
+<tr><th colspan="2" class="main">連絡先</th></tr>
+<th class="w200">会社名</th>
+<td>
+{$foreign.corpname nocache}
+</td>
+</tr>
+
+<tr>
+<th>所在地 </th>
+<td>
+〒{$foreign.zip nocache}
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+</td>
+</tr>
+<tr>
+<th class="w200">担当部署 </th>
+<td>
+{$foreign.division nocache}
+</td></tr>
+<tr>
+<th class="w200">担当者 </th>
+<td>
+{$foreign.fullname nocache}
+</td></tr>
+<tr>
+<th class="w200">メールアドレス </th>
+<td>
+{$foreign.email nocache}
+</td></tr>
+<tr>
+<th>携帯番号</th>
+<td>
+{$foreign.mobile nocache}
+</td>
+</tr>
+<tr>
+<th>TEL</th>
+<td>
+{$foreign.phone nocache}
+</td>
+</tr>
+
+<tr>
+<th>FAX</th>
+<td>
+{$message.fax nocache}
+</td>
+</tr>
+</tbody>
+</table>
+{/if}
+
+■レンタル内容価格(税別)<br>
+
+<table class="uniform">
+<thead>
+	<tr>
+		<th><strong>セット名</strong></th>
+		<th><strong>セット内容</strong></th>
+		<th><strong>価格(税別)</strong></th>
+		<th><strong>数量</strong></th>
+	</tr>
+</thead>
+<tbody>
+<tr>
+	<th class="w100">Aプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>42インチ液晶モニター</li>
+			<li>BDプレイヤーorデジタルメディアプレイヤー<br>動画は(.mov .wmv .mp4 .aviのみ可能)</li>
+			<li>自立スタンドor壁掛け金具</li>
+			<li>スピーカー(45ｗ×2)アンプ(×1)</li>
+		</ul>
+	</th>
+	<th>&yen;130,000</th>
+	<td><div align="center">{$foreign.quantity_1 nocache}
+	<input type="hidden" id="quantity_1" name="quantity_1" size="8" maxlength="8" value="{$foreign.quantity_1 nocache}">
+	</div></td>
+</tr>
+<tr>
+	<th class="w100">Bプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>32インチ液晶モニター</li>
+			<li>BDプレイヤーorデジタルメディアプレイヤー<br>動画は(.mov .wmv .mp4 .aviのみ可能)</li>
+			<li>自立スタンドor壁掛け金具</li>
+			<li>スピーカー(45ｗ×2)アンプ(×1)</li>
+		</ul>
+	</th>
+	<th>&yen;115,000</th>
+	<td><div align="center">{$foreign.quantity_2 nocache}
+	<input type="hidden" id="quantity_2" name="quantity_2" size="8" maxlength="8" value="{$foreign.quantity_2 nocache}">
+	</div></td>
+</tr>
+<tr>
+	<th class="w100">Cプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>24インチ液晶モニター</li>
+			<li>BDプレイヤーorデジタルメディアプレイヤー<br>動画は(.mov .wmv .mp4 .aviのみ可能)</li>
+			<li>自立スタンドor壁掛け金具</li>
+			<li>スピーカー(45ｗ×2)アンプ(×1)</li>
+		</ul>
+	</th>
+	<th>&yen;65,000</th> 
+	<td><div align="center">{$foreign.quantity_3 nocache}
+	<input type="hidden" id="quantity_3" name="quantity_3" size="8" maxlength="8" value="{$foreign.quantity_3 nocache}">
+	</div></td>
+</tr>
+<tr>
+	<th class="w100">Dプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>有線ハンドマイク×1</li>
+			<li>CDプレイヤー×1</li>
+			<li>スピーカー(45w×2)</li>
+			<li>アンプ</li>
+			<li>イコライザー</li>
+		</ul>
+	</th>
+	<th>&yen;60,000</th>
+	<td><div align="center">{$foreign.quantity_4 nocache}
+	<input type="hidden" id="quantity_4" name="quantity_4" size="8" maxlength="8" value="{$foreign.quantity_4 nocache}">
+	</div></td>
+</tr>
+<tr>
+	<th class="w100">Eプラン</th>
+	<th class="w300" style="text-align:left; white-space:nowrap; padding:.5em .2em">
+		<ul style="list-style-type:disc">
+			<li>有線ハンドマイク×1</li>
+			<li>CDプレイヤー×1</li>
+			<li>スピーカー(200w×2)</li>
+			<li>アンプ</li>
+			<li>イコライザー</li>
+		</ul>
+	</th>
+	<th>&yen;100,000</th>
+	<td><div align="center">{$foreign.quantity_5 nocache}
+	<input type="hidden" id="quantity_5" name="quantity_5" size="8" maxlength="8" value="{$foreign.quantity_5 nocache}">
+	</div></td>
+</tr>
+</table>
+
+※40インチ以上のモニターを希望する際は、弊社にてご相談ください。<br>
+※上記以外にもさまざまな機材をご用意できますので、お気軽にご相談ください。<br>
+※商品の破損等が発生した場合、実費にてご請求させていただきます。あらかじめご了承ください。<br>
+
+</div>

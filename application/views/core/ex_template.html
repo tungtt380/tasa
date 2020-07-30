@@ -1,0 +1,18 @@
+{*問い合わせ先のテンプレートとして作成*}
+<div id="contactaddress">
+<table class="uniform">
+<tr>
+<th class="center">{if $withfax}手続き先{/if}問合せ先</th>
+<th class="center">申込期限</th>
+</tr>
+<tr><td class="center">
+{$corpname}<br/>
+<span class="labelcount">FAX</span> {$fax}
+<span class="labelcount">TEL</span> {$tel}<br/>
+〒{$zip} {$address1}{if $address2} {$address2}{if $address3} {$address3}{/if}{/if}<br/>
+{if $email}E-MAIL: {$email}<br/>{/if}
+</td>
+<td class="center"><b>{$limited_at}</b></td>
+</tr>
+</table>
+</div>

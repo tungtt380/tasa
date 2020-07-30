@@ -1,0 +1,52 @@
+{extends file='core/member.html'}
+{block name='title'}都道府県 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>都道府県</h2>
+<div id="cnav" class="clearfix">
+<a href="regist"><img src="/images/common/btn_regist.gif" width="100" height="25" alt="新規作成" /></a>
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter" >
+<thead>
+ <tr>
+ <th width="100">コード</th>
+ <th>都道府県名</th>
+ </tr>
+</thead>
+<tbody>
+{/if}
+ <tr>
+ <td width="100"><a href="change/{$i.prefcode}">{$i.prefcode}</a></td>
+ <td>{$i.prefname nocache}</td>
+ </tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<ul>
+<li>データが見つかりません.</li>
+</ul>
+</div>
+{/foreach}
+{/block}
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;都道府県
+{/block}

@@ -1,0 +1,24 @@
+{extends file='core/member.html'}
+{block name='title'}(01)展示車両登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>手続き書類１　展示車両編集（車両諸元表入力）</h2>
+<p>削除が完了いたしました。</p>
+
+{if isset($message.__all)}
+<div class="blockwarn"><p>{$message.__all nocache}</p></div> 
+{/if}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e01car_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e01car/">展示車両登録</a>&nbsp;&gt;&nbsp;編集
+{/block}

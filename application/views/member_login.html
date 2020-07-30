@@ -1,0 +1,25 @@
+{extends file='core/secure.html'}
+
+{block name='canvas'}
+<h1><img src="/images/common/logo.gif" width="264" height="37" alt="TASA 東京オートサロン事務局 Control Panel var 1.0" /></h1>
+<div id="column">
+<form id="formlogin" name="formlogin" method="post" action="login_in">
+<div class="col1">
+<input type="text" id="username" name="username" size="40" value="{$foreign.username}" placeholder="ユーザー名">
+{if isset($message.username)}<br /><span class="linewarn" style="margin:0 0 20px; display:block;">{$message.username nocache}</span>{/if}
+</div>
+<div class="col1">
+<input type="password" id="password" name="password" size="40" value="" placeholder="パスワード">
+{if isset($message.password)}<br /><span class="linewarn" style="margin:0 0 20px; display:block;">{$message.password nocache}</span>{/if}
+</div>
+<div class="col2">
+<input type="checkbox" id="remember" name="remember" value="1">&nbsp;ログイン状態を保持する
+</div>
+<div class="col3">
+<input type="image" src="/images/home/login_off.gif" name="action" value="ログイン">
+</div>
+</form>
+</div>
+{/block}
+
+{block name='title'}ログイン - {$smarty.block.parent}{/block}

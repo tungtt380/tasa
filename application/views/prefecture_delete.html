@@ -1,0 +1,30 @@
+{extends file='core/member.html'}
+{block name='title'}削除 &raquo; 都道府県 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>削除 &raquo; 都道府県</h2>
+<p class="faxmark">以下のデータを削除してよろしいですか？
+<br />注意！削除すると元に戻せなくなります。</p>
+<div id="delete-nav">
+<form method="post" action="../delete_in">
+<table class="uniform">
+
+<tr>
+<th>コード</th>
+<td>{$foreign.prefcode nocache}</td>
+</tr>
+<tr>
+<th>都道府県名</th>
+<td>{$foreign.prefname nocache}</td>
+</tr>
+
+</table>
+<input type="hidden" id="prefcode" name="prefcode" value="{$foreign.prefcode nocache}">
+<input type="image" src="/images/common/btn_delete.gif" id="action" name="action" value="削除">
+</form>
+</div>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/prefecture/">都道府県</a>&nbsp;&gt;&nbsp;削除
+{/block}

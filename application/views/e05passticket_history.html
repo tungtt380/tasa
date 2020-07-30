@@ -1,0 +1,63 @@
+{extends file='core/member.html'}
+{block name='title'}(05)パス類追加請求 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>パス類追加請求履歴</h2> 
+<div>
+出展者名：{$contact.corpname}<br /><br/>
+</div>
+
+<div id="tabcorp"> 
+<table class="listform tablesorter"> 
+<thead>
+<tr> 
+<th>
+お申込日 / 発送日
+</th>
+<th>
+追加パス種別
+</th>
+<th>
+枚数
+</th>
+<th>
+合計枚数
+</th>
+</tr>
+</thead>
+<tbody>
+{foreach from=$lists name=rec item=i}
+{if $i.sent}
+ <tr>
+ <td>{$i.updated} (発送)</td>
+ <td>{$i.itemname}</td>
+ <td colspan="2"></td>
+ </tr>
+{else}
+ <tr>
+ <td>{$i.updated}</td>
+ <td>{$i.itemname}</td>
+ <td>{$i.addquantity}</td>
+ <td>{$i.quantity}</td>
+ </tr>
+{/if}
+{/foreach}
+</tbody>
+</table>
+
+<a href="javascript:history.back();">[戻る]</a>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/e05passticket_history.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e05passticket/">パス類追加請求</a>&nbsp;&gt;&nbsp;編集
+{/block}

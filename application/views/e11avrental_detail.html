@@ -1,0 +1,28 @@
+{extends file='core/member.html'}
+{block name='title'}(11)AV機材レンタル申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>AV機材レンタル登録</h2> 
+
+{include file='core/ex_nexel.html'}
+{include file='core/exhform.html'}
+
+{include file="core/e11view.html"}
+{if uri_folder_string() == '/op' || uri_folder_string() == '/ex'}
+<a href="./change/{$foreign.appid}"><img src="/images/common/btn_change_02.gif" id="action" name="action" value="変更"></a>
+{/if}
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e11avrental_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e11avrental/">AV機材レンタル申込</a>&nbsp;&gt;&nbsp;編集
+{/block}

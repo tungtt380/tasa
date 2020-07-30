@@ -1,0 +1,11 @@
+Packages
+application/cache/*
+application/logs/*
+application/userdata/.*
+application/userdata/**/*
+public/phpmyadmin
+application/config/database.php
+application/config/service.php
+_Docker/working/test.sql
+.idea
+# _Docker/working/init_db/tasa*

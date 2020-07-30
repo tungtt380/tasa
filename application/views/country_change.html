@@ -1,0 +1,51 @@
+{extends file='core/member.html'}
+{block name='title'}変更 &raquo; 国名 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>変更</h2>
+<p>変更に使用するコードは、<a href="http://ja.wikipedia.org/wiki/ISO_3166-1" target="_blank">ISO3166-1(alpha-2)</a>を参照してください。</p>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="change-nav">
+<form method="post" action="../change_in">
+<table class="uniform">
+
+<tr>
+<th>コード</th>
+<td>
+{$foreign.countrycode nocache}
+<input type="hidden" id="countrycode" name="countrycode" value="{$foreign.countrycode nocache}" placeholder="英字２桁で入力" />
+</td>
+</tr>
+
+<tr>
+<th>国名</th>
+<td>
+<input type="text" id="countryname" name="countryname" value="{$foreign.countryname nocache}" placeholder="国名を入力" />
+{if $message.countoryname != '' nocache}<span class="linewarn">{$message.countryname nocache}</span>{/if}
+<span class="example">例) 日本</span>
+</td>
+</tr>
+
+<tr>
+ <th>非表示</th>
+ <td>
+ <input type="hidden" name="allow" value="1" />
+ <input type="checkbox" name="allow" value="0" style="width:auto;height:auto;"{if $foreign.allow == 0} checked="checked"{/if} />選択肢として表示しない
+ <span class="example">非表示にする場合はチェック</span>
+ </td>
+</tr>
+
+</table>
+<div class="del-btn"><a href="../delete/{$foreign.countrycode nocache}"><img src="/images/common/btn_delete.gif" width="150" height="25" alt="削除" /></a></div>
+<input type="image" src="/images/common/btn_change.gif" id="action" name="action" value="変更">
+</form>
+</div>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/country_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/country/">国名</a>&nbsp;&gt;変更
+{/block}

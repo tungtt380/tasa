@@ -1,0 +1,38 @@
+{extends file='public.html'}
+{block name='title'}COLOR &raquo; {$smarty.block.parent}{/block}
+{block name='header'}{/block}
+{block name='footer'}{/block}
+
+{block name='contents'}
+{foreach from=$color1 name=rec key=k item=i}
+{if $smarty.foreach.rec.first}
+<table border="1">
+<thead>
+<tr><th colspan="2"><img src="/images/test1.jpg" width="320"></th></tr>
+<tr><td>Color</td><td>Count</td></tr>
+</thead>
+<tbody>
+{/if}
+<tr><td bgcolor="{$k}">{$k}</td><td>{$i}</td></tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{/foreach}
+
+{foreach from=$color2 name=rec key=k item=i}
+{if $smarty.foreach.rec.first}
+<table border="1">
+<thead>
+<tr><th colspan="2"><img src="/images/test2.jpg" width="320"></th></tr>
+<tr><td>Color</td><td>Count</td></tr>
+</thead>
+<tbody>
+{/if}
+<tr><td bgcolor="{$k}">{$k}</td><td>{$i}</td></tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{/foreach}
+{/block}

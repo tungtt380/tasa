@@ -1,0 +1,17 @@
+{extends file='core/member.html'}
+{block name='title'}弁当類申込 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>弁当類申込</h2>
+<div class="article">
+<p>申込数などをご記入の上、下記まで<b>FAX</b>でご提出ください。</p>
+</div>
+
+{include file='core/ex_wako.html' nocache}
+
+<!--
+<h2>申込書類のダウンロード</h2>
+<p><a href="{uri_folder_string()}/e15lunchbox/download"><img style="vertical-align:text-bottom" src="/images/common/ico_pdf.png" alt="[PDF]" />弁当類申込書(PDFファイル:xxKB)</a></p>
+-->
+
+{/block}

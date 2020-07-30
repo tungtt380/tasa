@@ -1,0 +1,47 @@
+{extends file='core/member.html'}
+{block name='title'}変更 &raquo; 通貨 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>変更 &raquo; 通貨</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="change-nav">
+<form method="post" action="../change_in">
+<table class="uniform">
+
+<tr>
+<th>国コード</th>
+<td>{$foreign.countrycode nocache}
+<input type="hidden" name="countrycode" value="{$foreign.countrycode nocache}">
+</td>
+</tr>
+<tr>
+ <th>通貨コード</th>
+ <td>
+ <input type="text" name="currencycode" value="{$foreign.currencycode nocache}" placeholder="通貨コードを入力" />
+{if $message.currencycode != "" nocache}<span class="linewarn">{$message.currencycode nocache}</span>{/if}
+ <span class="example">例)JPY</span>
+ </td>
+</tr>
+<tr>
+ <th>通貨記号</th>
+ <td>
+ <input type="text" name="currencysymbol" value="{$foreign.currencysymbol nocache}" placeholder="通貨記号を入力" />
+{if $message.currencysymbol != "" nocache}<span class="linewarn">{$message.currencysymbol nocache}</span>{/if}
+ <span class="example">例)\</span>
+ </td>
+</tr>
+
+</table>
+<div class="del-btn"><a href="../delete/{$foreign.countrycode nocache}"><img src="/images/common/btn_delete.gif" width="150" height="25" alt="削除" /></a></div>
+<input type="image" src="/images/common/btn_change.gif" id="action" name="action" value="変更">
+</form>
+</div>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/currency_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/currency/">通貨</a>&nbsp;&gt;&nbsp;変更
+{/block}

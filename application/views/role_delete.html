@@ -1,0 +1,36 @@
+{extends file='core/member.html'}
+{block name='title'}削除 &raquo; 役割 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>削除 &raquo; 役割</h2>
+<p class="faxmark">以下のデータを削除してよろしいですか？
+<br />注意！削除すると元に戻せなくなります。</p>
+<form method="post" action="../delete_in">
+<table class="uniform">
+
+<tr>
+<th>accountcode</th>
+<td>{$foreign.accountcode nocache}</td>
+</tr>
+<tr>
+<th>並び順</th>
+<td>{$foreign.seqno nocache}</td>
+</tr>
+<tr>
+<th>役割名</th>
+<td>{$foreign.rolename nocache}</td>
+</tr>
+<tr>
+<th>コメント</th>
+<td>{$foreign.comment nocache}</td>
+</tr>
+
+</table>
+<input type="hidden" id="roleid" name="roleid" value="{$foreign.roleid nocache}">
+<input type="image" src="/images/common/btn_delete.gif" id="action" name="action" value="削除">
+</form>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/role/">役割</a>&nbsp;&gt;&nbsp;削除
+{/block}

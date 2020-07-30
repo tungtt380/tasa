@@ -1,0 +1,374 @@
+{extends file='core/member.html'}
+{block name='title'}変更完了 &laquo; 出展申込者 &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>出展者申込 - {$title}</h2>
+<div class="article">
+{foreach from=$message item=i}
+<p>{$i}</p>
+{/foreach}
+</div>
+
+<div id="tabcorp">
+<table class="uniform">
+
+<tr>
+<thead>
+<tr><th colspan="2" class="sub">出展会社名</th></tr>
+</thead>
+<tbody>
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.corpkana nocache}</div>{$foreign.corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>
+〒{$foreign.zip nocache}<br/>
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">代表者名</th>
+<td>
+{$foreign.position nocache}
+<div class="ruby">{$foreign.fullkana nocache}</div>{$foreign.fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.fax nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">Webサイト</th>
+<td>{if isset($foreign.url)}http://{$foreign.url nocache}{/if}</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div id="tabshow">
+<table class="uniform" summary="表示名">
+<thead>
+<tr><th colspan="2" class="sub">表示名</th></tr>
+</thead>
+<tbody>
+<tr>
+<th class="w200">表示名</th>
+<td>
+<div class="ruby">{$foreign.brandkana nocache}</div>{$foreign.brandname nocache}
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="tabmanage">
+<table class="uniform" summary="出展責任者">
+<thead>
+<tr><th colspan="2" class="sub">出展責任者</th></tr>
+</thead>
+
+<tbody>
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.m_corpkana nocache}</div>{$foreign.m_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>
+〒{$foreign.m_zip nocache}<br/>
+{$foreign.m_prefecture nocache}
+{$foreign.m_address1 nocache}
+{$foreign.m_address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">担当者名</th>
+<td>
+{$foreign.m_division nocache} {$foreign.m_position nocache}<br/>
+<div class="ruby">{$foreign.m_fullkana nocache}</div>{$foreign.m_fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.m_phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.m_fax nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">携帯</th>
+<td>{$foreign.m_mobile nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">メールアドレス</th>
+<td>{$foreign.m_email nocache}</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="tabbill">
+<table class="uniform" summary="請求先">
+<thead>
+<tr><th colspan="2" class="sub">請求先</th></tr>
+</thead>
+
+<tbody>
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.b_corpkana nocache}</div>{$foreign.b_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>
+〒{$foreign.b_zip nocache}<br/>
+{$foreign.b_prefecture nocache}
+{$foreign.b_address1 nocache}
+{$foreign.b_address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">担当者名</th>
+<td>
+{$foreign.b_division nocache} {$foreign.b_position nocache}<br/>
+<div class="ruby">{$foreign.b_fullkana nocache}</div>{$foreign.b_fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.b_phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.b_fax nocache}</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div id="tabcontact">
+<table class="uniform" summary="連絡先">
+<thead>
+<tr><th colspan="2" class="sub">連絡先</th></tr>
+</thead>
+
+<tbody>
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.c_corpkana nocache}</div>{$foreign.c_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>
+〒{$foreign.c_zip nocache}<br/>
+{$foreign.c_prefecture nocache}
+{$foreign.c_address1 nocache}
+{$foreign.c_address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">担当者名</th>
+<td>
+{$foreign.c_division nocache} {$foreign.c_position nocache}<br/>
+<div class="ruby">{$foreign.c_fullkana nocache}</div>{$foreign.c_fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.c_phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.c_fax nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">携帯</th>
+<td>{$foreign.c_mobile nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">メールアドレス</th>
+<td>{$foreign.c_email nocache}</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="tabdist">
+<table class="uniform" summary="送付先">
+<thead>
+<tr><th colspan="2" class="sub">配布物送付先</th></tr>
+</thead>
+
+<tbody>
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.d_corpkana nocache}</div>{$foreign.d_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>
+〒{$foreign.d_zip nocache}<br/>
+{$foreign.d_prefecture nocache}
+{$foreign.d_address1 nocache}
+{$foreign.d_address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">担当者名</th>
+<td>
+{$foreign.d_division nocache} {$foreign.d_position nocache}<br/>
+<div class="ruby">{$foreign.d_fullkana nocache}</div>{$foreign.d_fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.d_phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.d_fax nocache}</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div id="tabdetail">
+<table class="uniform" summary="出展内容">
+<thead>
+<tr><th colspan="2" class="sub">出展内容</th></tr>
+</thead>
+
+<tr>
+<th class="w200">カテゴリー</th>
+<td>
+{foreach from=$category name=rec key=k item=i}
+{assign var="key" value="q_category_{$k}"}
+{if isset($foreign.$key) && $foreign.$key != ''}■{$i}&nbsp;{/if}
+{/foreach}
+</td>
+</tr>
+
+<tr>
+<th class="w200">展示車両</th>
+<td>
+{foreach from=$section name=rec key=k item=i}
+{assign var="key" value="q_section_{$k}"}
+{if isset($foreign.$key) && $foreign.$key != ''}■{$i}&nbsp;{/if}
+{/foreach}
+</td>
+</tr>
+
+<tr>
+<th class="w200">展示予定台数</th>
+<td>{$foreign.q_entrycars nocache}台</td>
+</tr>
+
+<tr>
+<th class="w200">物販内容</th>
+<td>{$foreign.q_salesitem nocache}</td>
+</tr>
+</table>
+
+<table class="uniform" summary="出展申込記入欄">
+<tr>
+<th rowspan="2">希望小間形状</th>
+<th>小間数</th>
+</tr>
+
+{if $foreign.q_boothcount1 >= 1}
+<tr><td>{$booth[$foreign.q_booth1]}</td><td>{$foreign.q_boothcount1}</td></tr>
+{/if}
+{if $foreign.q_boothcount2 >= 1}
+<tr><td>{$booth[$foreign.q_booth2]}</td><td>{$foreign.q_boothcount2}</td></tr>
+{/if}
+{if $foreign.q_boothcount3 >= 1}
+<tr><td>{$booth[$foreign.q_booth3]}</td><td>{$foreign.q_boothcount3}</td></tr>
+{/if}
+{if $foreign.q_boothcount4 >= 1}
+<tr><td>{$booth[$foreign.q_booth4]}</td><td>{$foreign.q_boothcount4}</td></tr>
+{/if}
+<tr>
+<th>備考</th>
+<td>{$foreign.remark}</td>
+</tr>
+</table>
+
+<table class="uniform" summary="プロモーションコード">
+<tr><th colspan="2" class="sub">プロモーションコード</th></tr>
+<tr>
+<th class="w200">コード</th>
+<td>{$foreign.promotion nocache}</td>
+</tr>
+</tbody>
+</table>
+
+<table class="uniform" summary="事務局メモ">
+<tr><th colspan="2" class="sub">事務局メモ</span></th></tr>
+<tr>
+<th class="w200">メモ</th>
+<td>{$foreign.comment|nl2br nocache}</td>
+</tr>
+<tr>
+<th class="w200">申込日時</th>
+<td>{$foreign.accepted nocache}</td>
+</tr>
+</table>
+
+</div>
+
+
+<div class="btn-detail" style="margin:20px 0 0;">
+<a href="{uri_folder_string()}/exhibitor/"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<style>#contents th.sub { background:#4D80C1; color:#fff; }</style>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/exhibitor_change.js"></script>
+{/block}
+
+{block name='pan'}
+<div id="pan">
+{$smarty.block.parent}&nbsp;&gt;&nbsp;出展者修正&nbsp;&gt;&nbsp;変更完了
+</div>
+{/block}

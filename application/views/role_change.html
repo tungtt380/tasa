@@ -1,0 +1,58 @@
+{extends file='core/member.html'}
+{block name='title'}変更 &raquo; 役割 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>変更 &raquo; 役割</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="change-nav">
+<form method="post" action="../change_in">
+<table class="uniform">
+
+<tr>
+<th>コード</th>
+<td>{$foreign.roleid nocache}
+<input type="hidden" id="roleid" name="roleid" value="{$foreign.roleid nocache}">
+</td>
+</tr>
+<tr>
+ <th>並び順</th>
+ <td>
+ <input type="text" id="seqno" name="seqno" maxlength="" value="{$foreign.seqno nocache}" />
+{if $message.seqno != "" nocache}<span class="linewarn">{$message.seqno nocache}</span>{/if}
+ <span class="example">例)10</span>
+ </td>
+</tr>
+<tr>
+ <th>役割名</th>
+ <td>
+ <input type="text" id="rolename" name="rolename" maxlength="16" value="{$foreign.rolename nocache}" />
+{if $message.rolename != "" nocache}<span class="linewarn">{$message.rolename nocache}</span>{/if}
+ <span class="example">rolename</span>
+ </td>
+</tr>
+<tr>
+ <th>コメント</th>
+ <td>
+ <input type="text" id="comment" name="comment" maxlength="65535" value="{$foreign.comment nocache}" />
+{if $message.comment != "" nocache}<span class="linewarn">{$message.comment nocache}</span>{/if}
+ <span class="example">例)コメント</span>
+ </td>
+</tr>
+
+</table>
+<div class="del-btn"><a href="../delete/{$foreign.roleid nocache}"><img src="/images/common/btn_delete.gif" width="150" height="25" alt="削除" /></a></div>
+<input type="image" src="/images/common/btn_change.gif" id="action" name="action" value="変更">
+</form>
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/role_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/role/">役割</a>&nbsp;&gt;&nbsp;変更
+{/block}

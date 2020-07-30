@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+#header{
+	padding:110px 0 0;
+}
+
+#canvas {
+	width:310px;
+	text-align:center;
+	padding:20px 0 0;
+	margin:0 auto 20px;
+	background:#fff;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border:1px solid #999999;
+
+}
+
+#canvas h1 {
+	margin:0 0 15px;
+}
+
+#canvas .col1 input {
+	line-height: 30px;
+	margin: 0 0 10px;
+	background-color: #eeeeee;
+	width: 250px;
+	height: 30px;
+	padding:0;
+	border:none;
+}
+#canvas .col2 {
+	width:250px;
+	margin:0 30px 15px;
+	text-align:left;
+	color:#000;
+	font-size:12px;
+	line-height:12px;
+}
+#canvas .col3 {
+	padding:0;
+	margin:0 30px 20px;
+	width:250px;
+	height:35px;
+}
+
+#footer {
+	font-size:10px;
+	color:#eee;
+	text-align:center;
+	margin:0 auto;
+	background:none;
+}

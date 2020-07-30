@@ -1,0 +1,53 @@
+{extends file='core/member.html'}
+{block name='title'}削除 &raquo; 出展料 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>削除 &raquo; 出展料</h2>
+<p class="faxmark">以下のデータを削除してよろしいですか？
+<br />注意！削除すると元に戻せなくなります。</p>
+<div id="delete-nav">
+<form method="post" action="../delete_in">
+<table class="uniform">
+
+<tr>
+<th>イベント名</th>
+<td>{$event[$foreign.eventid] nocache}</td>
+</tr>
+<tr>
+<th>並び順</th>
+<td>{$foreign.seqno nocache}</td>
+</tr>
+<tr>
+<th>小間種別</th>
+<td>{$foreign.spacename nocache} <span class="ruby">(略記:{$foreign.spacename nocache})</span></td>
+</tr>
+<tr>
+<th>定価</th>
+<td>{$foreign.assocprice nocache}</td>
+</tr>
+<tr>
+<th>最大受付数</th>
+<td>{$foreign.maxspaces nocache}</td>
+</tr>
+<tr>
+<th>コメント</th>
+<td>{$foreign.comments nocache}</td>
+</tr>
+<tr>
+<th>展示車数制限</th>
+<td>{$foreign.carlimits nocache}</td>
+</tr>
+<tr>
+<th>売却予定数</th>
+<td>{$foreign.forsale_count nocache}</td>
+</tr>
+
+</table>
+<input type="hidden" name="spaceid" value="{$foreign.spaceid nocache}">
+<input type="image" src="/images/common/btn_delete.gif" id="action" name="action" value="削除">
+</form>
+</div>
+{/block}
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/space/">出展料</a>&nbsp;&gt;&nbsp;削除
+{/block}

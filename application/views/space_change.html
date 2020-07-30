@@ -1,0 +1,104 @@
+{extends file='core/member.html'}
+{block name='title'}変更 &raquo; 出展料 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>変更 &raquo; 出展料</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="change-nav">
+<form method="post" action="../change_in">
+<table class="uniform">
+
+<tr class="required">
+ <th>イベント名</th>
+ <td>
+{form_dropdown('eventid',$event,$foreign.eventid,'id="eventid"')}
+ </td>
+</tr>
+<tr>
+ <th>並び順</th>
+ <td>
+ <input type="text" name="seqno" value="{$foreign.seqno nocache}" placeholder="数値を入力" />
+{if $message.seqno != "" nocache}<span class="linewarn">{$message.seqno nocache}</span>{/if}
+ <span class="example">例)10</span>
+ </td>
+</tr>
+<tr>
+ <th>小間種別</th>
+ <td>
+ <input type="text" name="spacename" value="{$foreign.spacename nocache}" placeholder="" />
+{if $message.spacename != "" nocache}<span class="linewarn">{$message.spacename nocache}</span>{/if}
+ <span class="example">例)Aスペース</span>
+ </td>
+</tr>
+<tr>
+ <th>小間種別(略記)</th>
+ <td>
+ <input type="text" name="spaceabbr" value="{$foreign.spaceabbr nocache}" placeholder="" />
+{if $message.spaceabbr != "" nocache}<span class="linewarn">{$message.spaceabbr nocache}</span>{/if}
+ <span class="example">例)A</span>
+ </td>
+</tr>
+<tr>
+ <th>正会員価格</th>
+ <td>
+ <input type="text" name="memberprice" value="{$foreign.memberprice|number_format nocache}" placeholder="数値で入力" />
+{if $message.memberprice != "" nocache}<span class="linewarn">{$message.memberprice nocache}</span>{/if}
+ <span class="example">例)294000</span>
+ </td>
+</tr>
+<tr>
+ <th>準会員価格</th>
+ <td>
+ <input type="text" name="assocprice" value="{$foreign.assocprice|number_format nocache}" placeholder="" />
+{if $message.assocprice != "" nocache}<span class="linewarn">{$message.assocprice nocache}</span>{/if}
+ <span class="example">例)294000  ※準会員価格が存在しない時は正会員価格と同じ価格を入力してください。</span>
+ </td>
+</tr>
+<tr>
+ <th>売却予定数</th>
+ <td>
+ <input type="text" name="forsale_count" value="{$foreign.forsale_count nocache}" placeholder="数値で入力" />
+{if $message.forsale_count != "" nocache}<span class="linewarn">{$message.forsale_count nocache}</span>{/if}
+ <span class="example">例)50</span>
+ </td>
+</tr>
+<tr>
+ <th>最大受付数</th>
+ <td>
+ <input type="text" name="maxspaces" value="{$foreign.maxspaces nocache}" placeholder="数値で入力" />
+{if $message.maxspaces != "" nocache}<span class="linewarn">{$message.maxspaces nocache}</span>{/if}
+ <span class="example">例)50</span>
+ </td>
+</tr>
+<tr>
+ <th>コメント</th>
+ <td>
+ <input type="text" name="comments" value="{$foreign.comments nocache}" placeholder="comments" />
+{if $message.comments != "" nocache}<span class="linewarn">{$message.comments nocache}</span>{/if}
+ <span class="example">例)コメント</span>
+ </td>
+</tr>
+<tr>
+ <th>展示車数制限</th>
+ <td>
+ <input type="text" name="carlimits" value="{$foreign.carlimits nocache}" placeholder="数値で入力" />
+{if $message.carlimits != "" nocache}<span class="linewarn">{$message.carlimits nocache}</span>{/if}
+ <span class="example">例)1</span>
+ </td>
+</tr>
+
+</table>
+<input type="hidden" id="spaceid" name="spaceid" value="{$foreign.spaceid}" />
+<input type="hidden" id="token" name="token" value="{$foreign.token}" />
+<div class="del-btn"><a href="../delete/{$foreign.spaceid nocache}"><img src="/images/common/btn_delete.gif" width="150" height="25" alt="削除" /></a></div>
+<input type="image" src="/images/common/btn_change.gif" id="action" name="action" value="変更">
+</form>
+</div>
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/space_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/space/">出展料</a>&nbsp;&gt;&nbsp;変更
+{/block}

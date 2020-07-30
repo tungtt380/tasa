@@ -1,0 +1,26 @@
+{extends file='core/member.html'}
+{block name='title'}(11)AV機材レンタル申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>AV機材レンタル編集</h2> 
+<p>AV機材レンタルの編集を完了いたしました。</p> 
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}<br/>
+
+{include file='core/exhform.html' nocache}
+{include file='core/e11view.html' nocache}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e11avrental_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e11avrental/">AV機材レンタル申込</a>&nbsp;&gt;&nbsp;編集
+{/block}

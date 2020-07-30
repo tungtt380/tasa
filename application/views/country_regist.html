@@ -1,0 +1,43 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &raquo; 国名 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>登録</h2>
+<p>登録に使用するコードは、<a href="http://ja.wikipedia.org/wiki/ISO_3166-1" target="_blank">ISO3166-1(alpha-2)</a>を参照してください。</p>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+
+<div id="regist-nav">
+<form method="post" action="regist_in">
+<table class="uniform">
+
+<tr>
+<th>コード</th>
+<td>
+<input type="text" id="countrycode" name="countrycode" value="{$foreign.countrycode nocache}" />
+{if $message.countrycode != '' nocache}<span class="linewarn">{$message.countrycode nocache}</span>{/if}
+<span class="example">例) JP</span>
+</td>
+</tr>
+
+<tr>
+<th>国名</th>
+<td>
+<input type="text" id="countryname" name="countryname" value="{$foreign.countryname nocache}" />
+{if $message.countryname != '' nocache}<span class="linewarn">{$message.countryname nocache}</span>{/if}
+<span class="example">例) 日本</span>
+</td>
+</tr>
+
+</table>
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+</form>
+</div>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/country_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/country/">国名</a>&nbsp;&gt;登録
+{/block}

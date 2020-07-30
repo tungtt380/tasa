@@ -1,0 +1,59 @@
+{extends file='core/memberwindow.html'}
+{block name='title'}履歴 &raquo; 幕張新都心食事券 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='canvas'}
+<div id="contents" style="width:800px;margin-left:15px;">
+<h2>幕張新都心食事券履歴</h2>
+<div>
+出展者名：{$exhibitor.corpname}<br/>
+表示名：{$exhibitor.brandname}
+</div>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div id="tabhistory"> 
+<table class="listform tablesorter"> 
+<thead>
+<tr> 
+<th>お申込日</th>
+<th>ご担当者</th>
+<th>内容</th>
+<th>枚数</th>
+<th>合計枚数</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td>{$i.updated}</td>
+<td>{$exhibitor.c_fullname} / {$exhibitor.corpname}</td>
+<td>幕張新都心飲食共通利用券</td>
+<td>{$i.addquantity}</td>
+<td>{$i.quantity}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+</div>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;幕張新都心食事券履歴
+{/block}

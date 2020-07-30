@@ -1,0 +1,24 @@
+{if isset($constructor['outsourcing'])}
+現在登録されている施工業者は以下になります。<br />
+<div>
+<table class="exhform">
+<colgroup class="w200">
+<colgroup>
+<tbody>
+{if $constructor['outsourcing'] != 0}
+<tr><th>施工業者名</th><td>{$constructor.corpname}</td></tr>
+<tr><th>所在地</th><td>〒{$constructor.zip} {$constructor.prefecture}{$constructor.address1} {$constructor.address2}</td></tr>
+<tr><th>担当者</th><td>{$constructor.fullname}</td></tr>
+<tr><th>TEL</th><td>{$constructor.phone}</td></tr>
+<tr><th>FAX</th><td>{$constructor.fax}</td></tr>
+{else}
+<tr><th>ブース装飾</th><td>自社(出展者)が施工</td>
+{/if}
+</tbody>
+</table>
+</div>
+{else}
+<div style="margin:1em 0">
+<p><b><span class="red">施工業者が登録されていません。</span></b></p>
+</div>
+{/if}

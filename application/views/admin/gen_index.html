@@ -1,0 +1,27 @@
+{extends file='core/public.html'}
+{block name='title'}テンプレート生成 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>テンプレート生成</h2>
+<div class="article">
+<p>テンプレートを生成するための管理者ライブラリです</p>
+</div>
+<ul>
+<li><a href="./info">PHPinfo</a></li>
+<li><a href="./model">モデル生成</a></li>
+<li><a href="./view">ビュー生成</a></li>
+<li><a href="./js">JavaScript生成</a></li>
+</ul>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}">開発者</a>
+&nbsp;&gt;&nbsp;テンプレート
+{/block}

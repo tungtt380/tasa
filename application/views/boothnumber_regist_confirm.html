@@ -1,0 +1,67 @@
+{extends file='core/member.html'}
+{block name='title'}小間割登録 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>小間割登録</h2> 
+<div class="article">
+<p>以下の小間割でよろしければ登録ボタンを押してください</p>
+</div>
+
+<div id="tabbooth"> 
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<form method="post" action="{uri_folder_string()}/boothnumber/regist_confirm_in">
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+<table class="tablesorter">
+<thead> 
+<tr>
+<th>小間番号</th> 
+<th>スペース</th> 
+<th>小間形状</th> 
+<th>小間数</th> 
+<th>出展者名</th>
+<th>受付ID</th>
+<th>通番</th>
+<!--<th>合同出展</th>-->
+<th>表示名</th>
+<th>ステータス</th>
+</tr>
+</thead> 
+<tbody> 
+{/if}
+<tr>
+ <td style="text-align:right">{$i.exhboothno}{if $i.exhboothno != $boothnumber[$i.exhboothid]}<span class="red">→{$boothnumber[$i.exhboothid]}</span>{/if}<input type="hidden" name="exhboothno[]" value="{if isset($boothnumber[$i.exhboothid])}{$boothnumber[$i.exhboothid]}{else}{$i.exhboothno}{/if}" size="8" maxlength="4"></td>
+ <td>{$i.spaceabbr}</td>
+ <td>{$i.boothabbr}</td>
+ <td>{$i.boothcount}</td>
+ <td>{$i.corpname}</td>
+ <td>{$i.exhid}<input type="hidden" name="exhid[]" value="{$i.exhid}"></td>
+ <td>{$i.seqno}</td>
+<!--<td></td>-->
+ <td>{$i.brandname}</td>
+ <td>{$i.statusno}<input type="hidden" name="exhboothid[]" value="{$i.exhboothid}"></td>
+ </tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+</form>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;小間割登録
+{/block}

@@ -1,0 +1,190 @@
+{extends file='core/member.html'}
+{block name='title'}請求書詳細 &laquo; 請求 &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>請求 &raquo; 請求書詳細</h2>
+<div class="article">
+</div>
+
+<div id="tabbill">
+<table class="uniform" summary="請求先">
+<tr><th colspan="2" class="sub">請求先</th></tr>
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.corpkana nocache}</div>{$foreign.corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>
+〒{$foreign.zip nocache}<br/>
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">担当者名</th>
+<td>
+{$foreign.division nocache} {$foreign.position nocache}<br/>
+<div class="ruby">{$foreign.fullkana nocache}</div>{$foreign.fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.fax nocache}</td>
+</tr>
+</table>
+</div>
+
+<form method="POST" action="../issue/{$foreign.invoiceno}">
+{foreach from=$foreign.detail name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div>
+<table class="listform tablesorter">
+<colgroup>
+<colgroup>
+<colgroup class="nowrap">
+<colgroup class="nowrap" style="width:4.5em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup>
+<thead>
+<tr><th colspan="8" style="text-align:center;font-weight:bold;height:30px;">請求項目</th></tr>
+<tr>
+<th>会社名/表示名</th>
+<th>会員</th>
+<th>請求項目/種別/形状</th>
+<th>小間数</th>
+<th>単価</th>
+<th>請求金額</th>
+<th>項目割引</th>
+<th style="width: 60px">内税表示</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td>{$i.itemname}</td>
+<td><div>{if ($i.tas != 0 || $i.tascount >= 3)}TAS{/if}</div>{if $i.napac != 0}NAPAC{/if}</td>
+<td>{$i.itemdetail}
+<td class="right">{$i.quantity}</td>
+<td class="right">&yen;{$i.unitprice|number_format}</td>
+<td class="right">&yen;{$i.price|number_format}</td>
+<td class="right"><span class="grey">&yen;{$i.discount|number_format}</span></td>
+<td class="center"><input type="checkbox" name="uchizei_{$i.invoicedid}" value="1" {if $i.tax_exclude_flag == 0}checked{/if}></td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+<tfoot>
+<tr>
+<td colspan="5" class="right">合計</td>
+<td class="right">&yen;{($foreign.subtotal)|number_format}</td>
+<td colspan="2" class="right">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="5" class="right">合計値引額</td>
+<td class="right">&yen;{($foreign.discount)|number_format}</td>
+<td colspan="2" class="right">&nbsp;</td>
+</tr>
+
+{if $i.itemtype == 0}
+<tr>
+<td colspan="5" class="right">請求予定額（税抜）</td>
+<td class="right">&yen;{($foreign.subtotal - $foreign.discount)|number_format}</td>
+<td colspan="2" class="right">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="5" class="right">消費税</td>
+<td class="right">&yen;{($foreign.intax)|number_format}</td>
+<td colspan="2" class="right">&nbsp;</td>
+</tr>
+{/if}
+
+<tr>
+<td colspan="5" class="right">請求予定額（税込）</td>
+<td class="right">&yen;{($foreign.amount)|number_format}</td>
+<td colspan="2" class="right">&nbsp;</td>
+</tr>
+
+
+</tfoot>
+</table>
+</div>
+{/if}
+{/foreach}
+
+{if uri_folder_string() == '/op'}
+{if $foreign.issued}
+<div>
+<label for="comment">メッセージを一時的に変更する場合は、下記を修正してください。</label><br/>
+<textarea id="comment" name="comment" rows="3" cols="80">{$foreign.comment}</textarea>
+</div>
+<a href="../"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" style="float:right;" /></a>
+<input type="image" src="/images/common/btn_invoice_issuance.gif" width="150" id="action" name="action" value="請求書再発行">
+<a href="../expire/{$foreign.invoiceno}"><img src="/images/common/btn_invoice_expire.gif" width="150" height="25" alt="削除"></a>
+<input onclick="submitAction('../quotation/{$foreign.invoiceno}')" type="image" src="/images/common/btn_quotation.gif" width="150" id="action2" name="action2" value="見積書発行">
+<script>
+    function submitAction(url)
+    {
+        $Form = $('form');
+        var prev_action = $Form.attr('action');
+        $('form').attr('action', url);
+        // $('form').submit();
+        setTimeout(function(){
+            $('form').attr('action', prev_action);
+        }, 3000);
+        return false;
+    }
+</script>
+</form>
+{else}
+<div>
+<label for="comment">メッセージを一時的に変更する場合は、下記を修正してください。</label><br/>
+<textarea id="comment" name="comment" rows="3" cols="80">{$foreign.comment}</textarea><br/>
+</div>
+<a href="../"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" style="float:right;" /></a>
+<input type="image" src="/images/common/btn_invoice_issuance.gif" width="150" id="action" name="action" value="請求書発行">
+<a href="../expire/{$foreign.invoiceno}"><img src="/images/common/btn_invoice_expire.gif" width="150" height="25" alt="請求取消"></a>
+<input onclick="submitAction('../quotation/{$foreign.invoiceno}')" type="image" src="/images/common/btn_quotation.gif" width="150" id="action2" name="action2" value="見積書発行">
+<script>
+    function submitAction(url)
+    {
+        $Form = $('form');
+        var prev_action = $Form.attr('action');
+        $('form').attr('action', url);
+        $('form').submit();
+        setTimeout(function(){
+            $('form').attr('action', prev_action);
+        }, 3000);
+        return false;
+    }
+</script>
+</form>
+{/if}
+{else}
+<a href="../"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+{/if}
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<style>#contents th.sub { background:#4D80C1; color:#fff; }</style>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/detail.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent} &gt; 請求 &gt; 請求書詳細
+{/block}

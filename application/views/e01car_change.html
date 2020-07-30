@@ -1,0 +1,313 @@
+{extends file='core/member.html'}
+{block name='title'}(01)展示車両登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>手続書類１　展示車両編集（車両諸元表入力）</h2>
+<p>展示車両の編集をおこないます。</p>
+
+<!-- 2016-12-7 再開用コメント -->
+{if (($rolename == 'exhibitor') && ($smarty.now > "2019-12-09 10:00:00"|strtotime && $smarty.now < "2020-01-10 00:00:00"|strtotime)) || ($rolename == 'promotion' && ($smarty.now > "2019-12-09 10:00:00"|strtotime && $smarty.now < "2020-01-10 10:00:00"|strtotime))}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+スペックボード作成の受付けは締め切らせていただきました。<br>
+今後のご修正、ご登録は事務局作成のスペックボードには反映されませんのでご了承ください。<br>
+ホームページ上では随時修正情報を反映させていただきます。<br>
+また修正した内容でスペックボードデータをダウンロードも可能です。
+</p>
+<!-- //2016-12-7 再開用コメント -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2020-01-10 00:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">展示車両の登録・編集は締め切らせて頂きました。
+</p>
+<!-- 2016-11-30 一時クローズのコメント 2016-12-7 再開時表示消し -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2019-12-05 09:00:00"|strtotime && $smarty.now < "2019-12-09 10:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">スペックボード作成作業の為、登録を一旦締め切らせていただいております。<br>
+12/9 9:00より再開予定です。今しばらくお待ちください。<br>
+※12/9以降に新規ご登録いただいた車両のスペックボードは作成されません。
+</p>
+{/if}
+<!-- // 2016-11-30 一時クローズのコメント 2016-12-7 再開時表示消し -->
+
+{if isset($message.__all)}
+<div class="blockwarn"><p>{$message.__all nocache}</p></div> 
+{/if}
+<form method="post" action="../change_in" ENCTYPE="multipart/form-data"> 
+<input type="hidden" name="appid" value="{$foreign.appid nocache}">
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid nocache}">
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input type="hidden" name="appno" value="{$foreign.appno nocache}">
+<input type="hidden" name="seqno" value="{$foreign.seqno nocache}">
+<input type="hidden" name="spec" value="{$foreign.spec nocache}">
+<input type="hidden" name="token" value="{$foreign.token nocache}">
+
+<div id="tabmachine1">
+<table class="uniform">
+<tbody>
+<tr>
+<th class="w200">表示名</th>
+<td>
+<input type="text" id="sharyo_hyouzicorpname" name="brandname" size="48" {if uri_folder_string() != '/op'}maxlength="60"{/if} value="{$foreign.brandname nocache}" placeholder="名称" readonly="readonly">
+<br/>
+{if $message.brandname != '' nocache}<span class="linewarn">{$message.brandname nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th class="w200">表示名(英語表記)</th>
+<td>
+<input type="text" id="sharyo_dispen" name="brandnameen" size="48" value="{$foreign.brandnameen nocache}" placeholder="表示名(英語表記)は半角英数字のみで入力"><br>
+{if $message.brandnameen != '' nocache}<span class="linewarn">{$message.brandnameen nocache}</span>{/if}
+※公式サイトの英語ページでのみ使用致します
+</td></tr>
+
+<tr>
+<th style="width:6em">出展車両名<br/>(オリジナル車両名)</th>
+<td>
+<span class="example"><label for="sharyo_sharyokana">フリガナ</label></span>
+<input type="text" id="sharyo_sharyokana" name="carkana" size="48" {if uri_folder_string() != '/op'}maxlength="40"{/if} value="{$foreign.carkana nocache}" placeholder="フリガナ">
+{if $message.carkana != '' nocache}<span class="linewarn">{$message.carkana nocache}</span>{/if}
+<br/>
+<span class="example"><label for="sharyo_sharyoname">出展車両名</label></span>
+<input type="text" id="sharyo_sharyoname" name="carname" size="48" {if uri_folder_string() != '/op'}maxlength="25"{/if} value="{$foreign.carname nocache}" placeholder="名称">
+{if $message.carname != '' nocache}<span class="linewarn">{$message.carname nocache}</span>{/if}
+<br/>
+<span class="example"><label for="sharyo_sharyonameen">出展車両名(英語表記)</label></span>
+<input type="text" id="sharyo_sharyonameen" name="carnameen" size="48" value="{$foreign.carnameen nocache}" placeholder="出展車両名(英語表記)は半角英数字のみで入力"><br>
+{if $message.carnameen != '' nocache}<span class="linewarn">{$message.carnameen nocache}</span>{/if}
+※公式サイトの英語ページでのみ使用致します
+<br/>
+</td></tr>
+
+<tr>
+<th>ベース車両メーカー(ブランド)名</th>
+<td>
+<select id="sharyo_sharyobaseen" name="basecarbrand">
+<option name="">【選択してください】</option>
+<optgroup label="国産車">
+<option name="DAIHATSU"{if $foreign.basecarbrand=="DAIHATSU"} selected="selected"{/if}>DAIHATSU</option>
+<option name="HINO"{if $foreign.basecarbrand=="HINO"} selected="selected"{/if}>HINO</option>
+<option name="HONDA"{if $foreign.basecarbrand=="HONDA"} selected="selected"{/if}>HONDA</option>
+<option name="LEXUS"{if $foreign.basecarbrand=="LEXUS"} selected="selected"{/if}>LEXUS</option>
+<option name="MAZDA"{if $foreign.basecarbrand=="MAZDA"} selected="selected"{/if}>MAZDA</option>
+<option name="MITSUBISHI"{if $foreign.basecarbrand=="MITSUBISHI"} selected="selected"{/if}>MITSUBISHI</option>
+<option name="NISSAN"{if $foreign.basecarbrand=="NISSAN"} selected="selected"{/if}>NISSAN</option>
+<option name="SUBARU"{if $foreign.basecarbrand=="SUBARU"} selected="selected"{/if}>SUBARU</option>
+<option name="SUZUKI"{if $foreign.basecarbrand=="SUZUKI"} selected="selected"{/if}>SUZUKI</option>
+<option name="TOYOTA"{if $foreign.basecarbrand=="TOYOTA"} selected="selected"{/if}>TOYOTA</option>
+<option name="その他国産車"{if $foreign.basecarbrand=="その他国産車"} selected="selected"{/if}>その他国産車</option>
+</optgroup>
+<optgroup label="輸入車">
+<option name="Audi"{if $foreign.basecarbrand=="Audi"} selected="selected"{/if}>Audi</option>
+<option name="BMW"{if $foreign.basecarbrand=="BMW"} selected="selected"{/if}>BMW</option>
+<option name="Ferrari"{if $foreign.basecarbrand=="Ferrari"} selected="selected"{/if}>Ferrari</option>
+<option name="Lamborghini"{if $foreign.basecarbrand=="Lamborghini"} selected="selected"{/if}>Lamborghini</option>
+<option name="Mercedes-Benz/AMG"{if $foreign.basecarbrand=="Mercedes-Benz/AMG"} selected="selected"{/if}>Mercedes-Benz/AMG</option>
+<option name="Porsche"{if $foreign.basecarbrand=="Porsche"} selected="selected"{/if}>Porsche</option>
+<option name="RENAULT"{if $foreign.basecarbrand=="RENAULT"} selected="selected"{/if}>RENAULT</option>
+<option name="Volkswagen"{if $foreign.basecarbrand=="Volkswagen"} selected="selected"{/if}>Volkswagen</option>
+<option name="その他輸入車"{if $foreign.basecarbrand=="その他輸入車"} selected="selected"{/if}>その他輸入車</option>
+</optgroup>
+</select>
+</td></tr>
+
+<tr>
+<th>ベース車両名</th>
+<td>
+<input type="text" id="sharyo_sharyobase" name="basecarname" size="32" {if uri_folder_string() != '/op'}maxlength="25"{/if} value="{$foreign.basecarname nocache}" placeholder="車両名">
+{if $message.basecarname != '' nocache}<span class="linewarn">{$message.basecarname nocache}</span>{/if}
+<br/></td></tr>
+
+<tr>
+<th>ベース車詳細</th>
+<td>
+<span class="example"><label for="sharyo_kata">形式</label></span>
+<input type="text" id="sharyo_kata" name="basecartype" size="15" {if uri_folder_string() != '/op'}maxlength="15"{/if} value="{$foreign.basecartype nocache}" placeholder="形式">
+{if $message.basecartype != '' nocache}<span class="linewarn">{$message.basecartype nocache}</span>{/if}
+<br/>
+<span class="example"><label for="sharyo_nen">年式</label></span>
+<input type="text" id="sharyo_nen" name="basecaryear" size="15" {if uri_folder_string() != '/op'}maxlength="8"{/if} value="{$foreign.basecaryear nocache}" placeholder="年式">
+{if $message.basecaryear != '' nocache}<span class="linewarn">{$message.basecaryear nocache}</span>{/if}
+<br/></td></tr>
+
+<!--
+<tr>
+<th>ブース種別</th>
+<td>
+<input type="radio" id="sharyo_buse_a" name="boothtype" value="1" {if $foreign.boothtype!=2}checked="checked"{/if} >A.(C・D・Sスペース）
+<input type="radio" id="sharyo_buse_b" name="boothtype" value="2" {if $foreign.paymethod==2}checked="checked"{/if} >B.(B・E・Fスペース）
+<br/></td></tr>
+-->
+
+<tr>
+<th>コンテスト<br>エントリー部門</th>
+<td>
+<input type="radio" id="sharyo_consept" name="sectionno" value="1" {if $foreign.sectionno==1 or !$foreign.sectionno}checked="checked"{/if} >1.コンセプトカー部門
+<input type="radio" id="sharyo_tuning" name="sectionno" value="2" {if $foreign.sectionno==2}checked="checked"{/if} >2.ドレスアップカー部門
+<br/><input type="radio" id="sharyo_sedan" name="sectionno" value="3" {if $foreign.sectionno==3}checked="checked"{/if} >3.チューニングカー部門
+<input type="radio" id="sharyo_wagon" name="sectionno" value="4" {if $foreign.sectionno==4}checked="checked"{/if} >4.セダン部門
+<br/><input type="radio" id="sharyo_miniban" name="sectionno" value="5" {if $foreign.sectionno==5}checked="checked"{/if} >5.ミニバン/ワゴン部門
+<input type="radio" id="sharyo_conpact" name="sectionno" value="6" {if $foreign.sectionno==6}checked="checked"{/if} >6.SUV部門
+<br/><input type="radio" id="sharyo_inport" name="sectionno" value="7" {if $foreign.sectionno==7}checked="checked"{/if} >7.Kカー/コンパクトカー部門
+<input type="radio" id="sharyo_eco" name="sectionno" value="8" {if $foreign.sectionno==8}checked="checked"{/if} >8.インポートカー部門
+<br/><input type="radio" id="sharyo_sankou" name="sectionno" value="9" {if $foreign.sectionno==9}checked="checked"{/if} >9.参考出品
+<br/><span class="red">※コンテスト不参加、競技用車両、当コンテスト受賞歴のある車両は参考出品となります。</span></td></tr>
+
+<tr>
+<th>公道走行について</th>
+<td>
+<input type="radio" id="sharyou_koudou_ng" name="enableroad" value="0" {if $foreign.enableroad==0}checked="checked"{/if} >公道走行不可
+<dl>
+<dt style="color:#000"><input type="checkbox" id="sharyo_kyougi" name="enablerace" value="1" {if $foreign.enablerace==1}checked="checked"{/if}>競技用車両</dt>
+<dd style="color:#000">*競技用車両もしくは競技専用部品などを装着している車両</dd>
+<dt style="color:#000"><input type="checkbox" id="sharyou_koudou_sankou" name="prototype" value="1" {if $foreign.prototype==1}checked="checked"{/if}>展示用車両</dt>
+<dd style="color:#000">*コンセプトカー、もしくは展示用に過度な装飾を施しその状態では公道走行不可の車両</dd>
+</dl>
+<input type="radio" id="sharyo_koudou_ok" name="enableroad" value="1" {if $foreign.enableroad==1}checked="checked"{/if}>公道走行可
+<br/>
+<p style="color:#f00">※公道走行可能な部品を使用したカスタム車両でも、一部に公道走行不可な装飾(フロントガラスのステッカー、灯火類の改造 など)を施している場合は、公道走行不可を選択してください。</p>
+</td></tr>
+
+<tr>
+<th>販売可能車両</th>
+<td>
+<input type="radio" id="sharyo_sales_on" name="sales" value="1" {if $foreign.sales==1}checked="checked"{/if} >可
+<input type="radio" id="sharyo_sales_off" name="sales" value="0" {if $foreign.sales==0}checked="checked"{/if} >不可
+</td></tr>
+
+<tr>
+<th>販売参考価格</th>
+<td>
+<input type="radio" id="sharyo_reference_on" name="reference" value="1" {if $foreign.reference==1}checked="checked"{/if} >掲載可
+参考販売価格(税込)<input type="text" name="referenceprice" value="{$foreign.referenceprice nocache}" placeholder="例) 2390000"> / 
+<input type="radio" id="sharyo_reference_off" name="reference" value="0" {if $foreign.reference==0}checked="checked"{/if} >掲載不可
+<div style="color:red">※車両紹介webサイトに掲載予定です。</div>
+</td></tr>
+
+{if (($rolename == 'exhibitor') && $smarty.now > "2019-12-09 10:00:00"|strtotime) || ($rolename == 'promotion' && $smarty.now > "2019-12-09 10:00:00"|strtotime)}
+<tr>
+<th>スペックボードの作成</th>
+<td>
+<input type="hidden" name="stand" value="{$foreign.stand}">
+<input type="radio" id="sharyo_specbord_on" name="stand" value="1" {if $foreign.stand==1}checked="checked"{/if} disabled="disabled">希望する
+<input type="radio" id="sharyo_specbord_off" name="stand" value="0" {if $foreign.stand==0}checked="checked"{/if} disabled="disabled">希望しない
+<p style="font-weight: bold; color: #f00; font-size: 1em;">
+スペックボード作成の受付けは締め切らせていただきました。</p>
+</td>
+</tr>
+{else}
+<tr>
+<th>スペックボードの作成</th>
+<td>
+<input type="radio" id="sharyo_specbord_on" name="stand" value="1" {if $foreign.stand==1}checked="checked"{/if}>希望する
+<input type="radio" id="sharyo_specbord_off" name="stand" value="0" {if $foreign.stand==0}checked="checked"{/if}>希望しない
+</td>
+</tr>
+{/if}
+
+<tr>
+<th>公開可能日時</th>
+<td>
+<input type="text" id="dateformat" name="publicdate" class="datepicker" value="{if $foreign.publicdate}{$foreign.publicdate}{else}2019-10-25 12:00{/if}">
+例) 2020-01-01 12:00<br/>※登録時に公開可能な場合は、そのままでお願いいたします。
+</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div id="tabmachine2">
+<table class="uniform">
+<tbody>
+<tr>
+<td>◆車両制作コンセプトを100文字以内でご記入下さい
+
+<br/><textarea id="sharyo_consept_mess" name="concept" cols="50" rows="2">{$foreign.concept nocache}</textarea>
+{if $message.concept != '' nocache}<span class="linewarn">{$message.concept nocache}</span>{/if}
+<br/></td></tr>
+
+<!--
+<tr>
+<td>◆参考までに車両制作の進行状況をご記入下さい（予定で結構です）
+<br/><input type="radio" id="sharyo_condition_full" name="complete" value="1" {if $foreign.complete==1}checked="checked"{/if}>すでに完成
+<br/><input type="radio" id="sharyo_making" name="complete" value="0" {if $foreign.complete==0}checked="checked"{/if} >制作中（完成度
+<input type="text" id="sharyo_making_par" name="progress" size="10" maxlength="10" value="{$foreign.progress nocache}">％くらい）
+{if $message.progress != '' nocache}<span class="linewarn">{$message.progress nocache}</span>{/if}
+<br/></td></tr>
+-->
+
+<tr>
+<td>◆車両の画像を指定して下さい
+<span style="color:#ff0000"><br/>
+画像サイズが大きすぎると、取り込めない場合があります。800×600px以下に変換してからアップロードして下さい。
+</span><br/>アップロード<br/>
+{if $foreign.photo1}
+<img src="../images/{$foreign.photo1}" width="180" height="135">
+<input type="hidden" id="photo1" name="photo1" value="{$foreign.photo1 nocache}">
+<br />
+{/if}
+<input name="photo1" type="file" class="bt1" value="ファイルを選択"><span class="red" style="font-size:12px; font-weight:bold;">画像名は必ず半角英数字の画像名にしてからアップしてください。</span>
+<br />
+<br />
+*指定した画像は、下の「確認画面へ」ボタンよりお進み頂き、次の確認画面にてご確認下さい。
+</span><br/>
+*データを<strong>CMYKカラー</strong>で保存されますと、WEB上でのご確認ができない場合がございます。
+<br/>データとして破損等なければCMYKでも問題ございませんが、
+<br/>WEB上で画像確認なさりたい方は、<strong>RGBカラーで保存したもの</strong>をアップロードして下さい。
+<br/>*確認用画像は縦横比が崩れて表示されますが、画像には問題ありませんのでご了承下さい。
+<br/></td></tr>
+
+</tbody>
+</table>
+</div>
+
+{if uri_folder_string() == '/op'}
+{if $foreign['spec'] == 0}{include file="part/e01tuning_change.html"}{/if}
+{if $foreign['spec'] == 1}{include file="part/e01dressup_change.html"}{/if}
+{if $foreign['spec'] == 2}{include file="part/e01concept_change.html"}{/if}
+{else}
+{if $foreign['spec'] == 0}{include file="part/e01tuning_change.ex.html"}{/if}
+{if $foreign['spec'] == 1}{include file="part/e01dressup_change.ex.html"}{/if}
+{if $foreign['spec'] == 2}{include file="part/e01concept_change.ex.html"}{/if}
+{/if}
+
+<!-- 2016-12-7 再開用コメント ボタン出力 -->
+{if (($rolename == 'exhibitor') && ($smarty.now > "2019-12-09 10:00:00"|strtotime && $smarty.now < "2020-01-10 00:00:00"|strtotime)) || ($rolename == 'promotion' && ($smarty.now > "2019-12-09 10:00:00"|strtotime && $smarty.now < "2020-01-10 00:00:00"|strtotime))}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+スペックボード作成の受付けは締め切らせていただきました。<br>
+今後のご修正、ご登録は事務局作成のスペックボードには反映されませんのでご了承ください。<br>
+ホームページ上では随時修正情報を反映させていただきます。<br>
+また修正した内容でスペックボードデータをダウンロードも可能です。</p>
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="確認画面へ" />
+<!-- //2016-12-7 再開用コメント -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2020-01-10 00:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">展示車両の登録・編集は締め切らせて頂きました。
+</p>
+<!-- 2016-11-30 一時クローズのコメント -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2019-12-05 09:00:00"|strtotime && $smarty.now < "2019-12-09 10:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+スペックボード作成作業の為、登録を一旦締め切らせていただいております。<br>
+12/9 10:00より再開予定です。今しばらくお待ちください。<br>
+※12/9以降に新規ご登録いただいた車両のスペックボードは作成されません。
+</p>
+<!-- // 2016-11-30 一時クローズのコメント -->
+{else}
+<!-- 2016-11-30 一時クローズの際、登録ボタンを押せなくする -->
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="確認画面へ" />
+{/if}
+<!-- // 2016-11-30 一時クローズの際、登録ボタンを押せなくする -->
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/ui/jquery.ui.timepicker.js"></script>
+<script type="text/javascript" src="/js/jquery/ui/i18n/jquery.ui.datepicker-ja.js"></script>
+<script type="text/javascript" src="/js/jquery/ui/i18n/jquery.ui.timepicker-ja.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e01car_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e01car/">展示車両登録</a>&nbsp;&gt;&nbsp;編集
+{/block}

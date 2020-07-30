@@ -1,0 +1,210 @@
+{extends file='core/member.html'}
+{block name='title'}(01)展示車両登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>手続き書類１　展示車両編集（車両諸元表入力）</h2>
+<p>削除してよろしいですか？<br>
+削除すると元に戻せなくなります。
+{if isset($message.__all)}
+<div class="blockwarn"><p>{$message.__all nocache}</p></div> 
+{/if}
+<form method="post" action="../delete_in"> 
+
+<div id="tabmachine1">
+<table class="uniform">
+<tbody>
+<tr>
+<th style="width:6em">表示名</th>
+<td>
+{$foreign.brandname nocache}
+{if $message.brandname != '' nocache}<span class="linewarn">{$message.brandname nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th class="width:6em">表示名(英語表記)</th>
+<td>
+{$foreign.brandnameen nocache}
+{if $message.brandnameen != '' nocache}<span class="linewarn">{$message.brandnameen nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th style="width:6em">出展車両名<br/>(オリジナル車両名)</th>
+<td>
+<span class="example"><label for="sharyo_sharyokana"><b>フリガナ</b></label></span>
+{$foreign.carkana nocache}
+{if $message.carkana != '' nocache}<span class="linewarn">{$message.carkana nocache}</span>{/if}
+<br/>
+<span class="example"><label for="sharyo_sharyoname"><b>出展車両名</b></label></span>
+{$foreign.carname nocache}
+{if $message.carname != '' nocache}<span class="linewarn">{$message.carname nocache}</span>{/if}
+<br/>
+<span class="example"><label for="sharyo_sharyonameen"><b>出展車両名(英語表記)</b></label></span>
+{$foreign.carnameen nocache}
+{if $message.carnameen != '' nocache}<span class="linewarn">{$message.carnameen nocache}</span>{/if}
+<br/>
+</td></tr>
+
+<tr>
+<th>ベース車両メーカー(ブランド)名</th>
+<td>
+{$foreign.basecarbrand nocache}
+{if $message.basecarbrand != '' nocache}<span class="linewarn">{$message.basecarbrand nocache}</span>{/if}
+<br/></td></tr>
+
+<tr>
+<th>ベース車両名</th>
+<td>
+{$foreign.basecarname nocache}
+{if $message.basecarname != '' nocache}<span class="linewarn">{$message.basecarname nocache}</span>{/if}
+<br/></td></tr>
+
+<tr>
+<th>ベース車詳細</th>
+<td>
+<span class="example"><label for="sharyo_kata"><b>形式</b></label></span>
+{$foreign.basecartype nocache}
+{if $message.basecartype != '' nocache}<span class="linewarn">{$message.basecartype nocache}</span>{/if}
+<br/>
+<span class="example"><label for="sharyo_nen"><b>年式</b></label></span>
+{$foreign.basecaryear nocache}
+{if $message.basecaryear != '' nocache}<span class="linewarn">{$message.basecaryear nocache}</span>{/if}
+<br/></td></tr>
+
+<!--
+<tr>
+<th>ブース種別</th>
+<td>
+{if $foreign.boothtype==1}
+A.(C・D・Sスペース）
+{else}
+B.(B・E・Fスペース）
+{/if}
+<br/></td></tr>
+-->
+<tr>
+<th>コンテスト<br>エントリー部門</th>
+<td>
+{if $foreign.sectionno==1}
+1.コンセプトカー部門
+{elseif $foreign.sectionno==2}
+2.ドレスアップカー部門
+{elseif $foreign.sectionno==3}
+3.チューニングカー部門
+{elseif $foreign.sectionno==4}
+4.セダン部門
+{elseif $foreign.sectionno==5}
+5.ミニバン/ワゴン部門
+{elseif $foreign.sectionno==6}
+6.SUV部門
+{elseif $foreign.sectionno==7}
+7.Kカー/コンパクトカー部門
+{elseif $foreign.sectionno==8}
+8.インポートカー部門
+{elseif $foreign.sectionno==9}
+参考出品
+{/if}
+<br/><span class="red"> ※競技専用車両は参考出品となります</span></td></tr>
+
+<tr>
+<th>公道走行について</th>
+<td>
+{if $foreign.enableroad==0}
+公道走行不可
+<dl>
+{if $foreign.enablerace==1}
+<dt style="color:#000">　　　　競技専用</dt>
+<dd style="color:#000">　　　　*競技専用車両もしくは競技専用車両部品などを装着している車両</dd>
+{/if}
+{if $foreign.prototype==1}
+<dt style="color:#000">　　　　参考出品</dt>
+<dd style="color:#000">　　　　*コンセプトカー、もしくは展示用に過度な装飾を施しその状態では公道走行不可の車両</dd>
+{/if}
+</dl>
+{else}
+公道走行可
+{/if}
+
+<br/></td></tr>
+
+<tr>
+<th>スペックボードの作成</th>
+<td>
+{if $foreign.stand==1}
+希望する
+{else}
+希望しない
+{/if}
+</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<div id="tabmachine2">
+<table class="uniform">
+<tbody>
+<tr>
+<td>◆車両制作コンセプトを100文字以内でご記入下さい
+
+<br/>
+{$foreign.concept nocache}
+{if $message.concept != '' nocache}<span class="linewarn">{$message.concept nocache}</span>{/if}
+<br/></td></tr>
+
+<!--
+<tr>
+<td>◆参考までに車両制作の進行状況をご記入下さい（予定で結構です）
+<br/>
+{if $foreign.complete==1}
+すでに完成
+{else}
+制作中（完成度{$foreign.progress nocache}％くらい）
+{/if}
+{if $message.progress != '' nocache}<span class="linewarn">{$message.progress nocache}</span>{/if}
+<br/></td></tr>
+-->
+
+<tr>
+<td>◆車両の画像を指定して下さい
+<span style="color:#ff0000"><br/>
+画像サイズが大きすぎると、取り込めない場合があります。800×600px以下に変換してからアップロードして下さい。
+</span><br/>
+{if $foreign.photo1}
+<img src="../images/{$foreign.photo1}" width="180" height="135">
+<br />
+{/if}
+<span style="color:#ff0000"><br/>
+*指定した画像は、下の「確認画面へ」ボタンよりお進み頂き、次の確認画面にてご確認下さい。
+</span><br/>
+*データを<strong>CMYKカラー</strong>で保存されますと、WEB上でのご確認ができない場合がございます。
+<br/>データとして破損等なければCMYKでも問題ございませんが、
+<br/>WEB上で画像確認なさりたい方は、<strong>RGBカラーで保存したもの</strong>をアップロードして下さい。
+<br/>*確認用画像は縦横比が崩れて表示されますが、画像には問題ありませんのでご了承下さい。
+<br/></td></tr>
+
+</tbody>
+</table>
+</div>
+
+{if $foreign['spec'] == 0}{include file="part/e01tuning_detail.html"}{/if}
+{if $foreign['spec'] == 1}{include file="part/e01dressup_detail.html"}{/if}
+{if $foreign['spec'] == 2}{include file="part/e01concept_detail.html"}{/if}
+
+<input type="hidden" name="appid" value="{$foreign.appid nocache}">
+<input type="image" src="/images/common/btn_delete.gif" id="action" name="action" value="削除">
+</form>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e01car_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e01car/">展示車両登録</a>&nbsp;&gt;&nbsp;編集
+{/block}

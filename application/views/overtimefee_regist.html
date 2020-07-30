@@ -1,0 +1,115 @@
+{extends file='core/member.html'}
+{block name='title'}請求額決定 &laquo; 有料残業請求登録 &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>有料残業請求登録 &raquo; 請求額決定</h2>
+
+{if isset($message.__all) && $message.__all != ''}
+<div class="blockwarn"><span class="linewarn">入力項目に不備があります。以下の入力項目を確認してください。</span>
+{$message.__all nocache}
+</div>
+{else}
+<div class="article">
+<p>請求項目、金額を入力してください。</p>
+</div>
+{/if}
+
+<form method="post" action="../regist_in">
+<div id="tabbill">
+<table class="uniform" summary="請求先">
+<tr><th colspan="2" class="sub">請求先</th></tr>
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$billing.corpkana nocache}</div>{$billing.corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>
+〒{$billing.zip}<br/>
+{$billing.prefecture nocache}
+{$billing.address1 nocache}
+{$billing.address2 nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">担当者名</th>
+<td>
+{$billing.division nocache} {$billing.position nocache}<br/>
+<div class="ruby">{$billing.fullkana nocache}</div>{$billing.fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$billing.phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$billing.fax nocache}</td>
+</tr>
+</table>
+</div>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div>
+<table class="listform tablesorter">
+<colgroup>
+<colgroup>
+<colgroup class="nowrap" style="width:4.5em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup class="nowrap" style="width:7em;">
+<thead>
+<tr>
+<th>会社名/表示名<span class="red">*</span></th>
+<th>請求項目<span class="red">*</span></th>
+<th>時間数<span class="red">*</span></th>
+<th>単価(税込)<span class="red">*</span></th>
+<th>請求金額</th>
+<th>項目割引</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td>{if $i.corpname}
+<div>{$i.corpname}</div>{$i.brandname}<input type="hidden" id="xC{$i.no}" name="itemname{$i.no}" value="{$i.corpname}" class="text">
+{else}
+<div>&nbsp;</div><input type="text" id="xC{$i.no}" name="itemname{$i.no}" value="{$i.itemname}" class="text">
+{/if}</td>
+<td>有料残業代<input type="text" id="xI{$i.no}" name="itemdetail{$i.no}" value="{$i.itemdetail}" class="text"></td>
+<td class="right"><div>&nbsp;</div><input type="text" id="xQ{$i.no}" name="quantity{$i.no}" value="{$i.quantity}" class="numeric"></td>
+<td class="right"><div>&nbsp;</div><input type="text" id="xP{$i.no}" name="unitprice{$i.no}" value="{$i.unitprice}" class="numeric"></td>
+<td class="right"><div>&nbsp;</div><div id="xA{$i.no}" style="margin:5px 0">&yen{$i.amount|number_format}</div></td>
+<td class="right"><div>&nbsp;</div><input type="text" id="xD{$i.no}" name="discount{$i.no}" value="" class="numeric"></td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+</div>
+{/if}
+{/foreach}
+
+<input type="hidden" id="billid" name="billid" value="{$billing.billid nocache}">
+<input type="image" src="/images/common/btn_regist_confirm.gif" id="action" name="action" value="入力内容確認">
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<style>#contents th.sub { background:#4D80C1; color:#fff; }</style>
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/itemfee_regist.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent} &gt; 請求登録 &gt; 請求額決定
+{/block}

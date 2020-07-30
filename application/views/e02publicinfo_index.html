@@ -1,0 +1,95 @@
+{extends file='core/member.html'}
+{block name='title'}公開用出展者データ &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>公開用出展者データ登録</h2>
+<div>
+<p></p>
+</div>
+<div id="cnav" class="clearfix">
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="hidden" id="limit" name="limit" value="{$limit}" />
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div>
+<p><a href="#download">[ダウンロード]</a></p>
+</div>
+
+<table class="listform tablesorter"> 
+<thead>
+<tr> 
+<th>小間番号</th>
+<th>出展者名</th>
+<th>表示名</th>
+<th class="nowrap">申込状況</th>
+<th>更新日</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td class="right">{$i.exhboothno}<!--{$i.exhboothid}-{$i.exhid}--></td>
+<td><div class="ruby">{$i.corpkana}</div>{$i.corpname}</td>
+<td><div class="ruby">{$i.brandkana}</div>{$i.brandname}</td>
+<td>
+{if $i.appid}{if $i.photo}
+写真あり<!--<img src="images/{$i.photo}" width="50" height="50">-->
+{else}
+<!--<img src="/images/common/ico_camera.png">-->
+{/if}{/if}
+</td>
+<td>
+{if $i.appid}{$i.updated}{else}[未登録]{/if}
+</td>
+<td class="nowrap">
+{if $i.appid}
+<a href="change/{$i.appid}">[編集]</a><br>
+<a href="delete/{$i.appid}">[削除]</a>
+{else}
+<a href="create/{$i.exhid}/{$i.exhboothid}">[新規]</a>
+{/if}
+</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+
+<div>
+<p><a href="#top">[&uarr;画面上へ]</a></p>
+</div>
+<div id="download">
+<h3>公開用出展者データのダウンロード</h3>
+<p>
+<a href="download/csv"><img src="/images/common/ico_csv.png" style="vertical-align:text-bottom" width="48" height="48" alt="CSV" title="CSV" />(CSVファイル)</a>
+<a href="download/xlsx"><img src="/images/common/ico_xlsx.png" style="vertical-align:text-bottom" width="48" height="48" alt="Excel2007" title="Excel2007" />(Excelファイル)</a>
+<a href="archive"><img src="/images/common/ico_zip.png" style="vertical-align:text-bottom" width="48" height="48" alt="Zip" title="Zip" />(画像ファイル)</a>
+</p>
+</div>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/exx_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;展示車両登録
+{/block}

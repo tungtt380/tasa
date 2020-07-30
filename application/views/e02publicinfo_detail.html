@@ -1,0 +1,147 @@
+{extends file='core/member.html'}
+{block name='title'}(02)公開用出展者データ登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>(02)公開用出展者データ登録</h2>
+
+<div id="tabopendata">
+<table class="uniform">
+<tbody>
+<tr>
+<th rowspan="3" class="w200">出展者名</th>
+<td class="w100">表示名</td>
+<td>{$exhibitor.brandname nocache}<br/>
+*こちらの変更をご希望の場合は『出展申込時の登録内容』の変更手続きが必要となります。直接本部事務局へお問い合わせ下さい。
+</td></tr>
+<tr>
+<td>表示名(英語表記)</td>
+<td>{$foreign.brandnameen nocache}</td>
+<tr>
+<td class="nowrap">出展者名</td>
+<td class="nowrap">{$exhibitor.corpname nocache}</td>
+</tr>
+<tr>
+<th class="w200">所在地</th>
+{if $foreign.publicaddress==0}
+<td>非公開</td>
+<td colspan="2"><br /></td>
+{else}
+<td>公開する</td>
+<td colspan="2">
+{$foreign.zip nocache}
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+</td>
+{/if}
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+{if $foreign.publicphone==0}
+<td>
+非公開
+</td>
+<td colspan="2">&nbsp;</td>
+{else}
+<td>
+公開する
+</td>
+<td colspan="2">
+{$foreign.phone nocache}
+<br /></td>
+{/if}
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+{if $foreign.publicfax==0}
+<td>非公開</td>
+<td colspan="2">&nbsp;</td>
+{else}
+<td>公開する</td>
+<td colspan="2">{$foreign.fax nocache}</td>
+{/if}
+</tr>
+</tbody>
+</table>
+
+<br/>
+
+<div id="tabopendata2">
+<table class="uniform">
+<tbody>
+<tr>
+<th class="w200">メールアドレス</th>
+<td colspan="2">{$exhibitor.m_email nocache}<br /></td></tr>
+<tr>
+<th class="w200">WebサイトURL</th>
+{if $foreign.publicurl==0}
+<td>
+非公開
+</td>
+<td colspan="2"><br /></td>
+{else}
+<td>
+公開する
+</td>
+<td>
+{$foreign.url nocache}
+</td>
+{/if}
+</tr>
+<tr>
+<th class="w200">ご来場者問合せ<br/>メールアドレス</th>
+{if $foreign.publicemail==0}
+<td>
+非公開
+</td>
+<td colspan="2"><br /></td>
+{else}
+<td>
+公開する
+</td>
+<td>
+{$foreign.email nocache}
+</td>
+{/if}
+</tr>
+
+<tr>
+<th class="w200">PRコメント<br/>(100文字以内)</th>
+<td colspan="2">{$foreign.prcomment nocache}
+<span style="color:#ff0000">(ご紹介の参考とさせて頂きます。)</span>
+</td></tr>
+
+<tr>
+<th class="w200">ご紹介写真</th>
+<td colspan="2">
+{if $pic}
+<img src="images/{$pic}" width="180" height="135">
+{else}
+画像がアップされていません。
+{/if}
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+{if TRUE}
+<a href="change/{$foreign.appid}"><img src="/images/common/btn_change_02.gif" id="action" name="action" value="変更" /></a>
+{/if}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/e.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e02publicinfo_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e02publicinfo/">公開用出展者データ登録</a>&nbsp;&gt;&nbsp;登録確認
+{/block}

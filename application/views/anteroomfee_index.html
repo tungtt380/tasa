@@ -1,0 +1,65 @@
+{extends file='core/member.html'}
+{block name='title'}有料控室請求 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>有料控室請求</h2> 
+<div class="article">選択してください</div>
+
+<div id="cnav" class="clearfix">
+<a href="./create"><img src="/images/common/btn_regist.gif" width="100" height="25" alt="新規作成"></a>
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+
+<br />
+
+<div id="tabbooth"> 
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead> 
+<tr>
+<th>請求先コード</th> 
+<th>請求先</th> 
+<th>割引前予定金額</th> 
+<th>割引額</th> 
+<th>割引後請求金額</th> 
+<th>請求書番号</th>
+</tr>
+</thead> 
+<tbody> 
+{/if}
+<tr>
+ <td>{if $i.invoiceno}{$i.billid}{else}<a href="create/{$i.billid}">{$i.billid}</a>{/if}</td>
+ <td><div class="ruby">{$i.corpkana}</div>{$i.corpname}</td>
+ <td class="right">{if $i.pricetotal}&yen;{$i.pricetotal|number_format}{else}&yen;{$i.price|number_format}{/if}</td>
+ <td class="right">{if $i.pricetotal}&yen;{($i.discount)|number_format}{/if}</td>
+ <td class="right">{if $i.pricetotal}&yen;{($i.pricetotal-($i.discount))|number_format}{/if}</td>
+ <td><a href="../invoice/detail/{$i.invoiceno}">{$i.invoiceno}</a></td>
+ </tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+<p>未請求の項目が見つかりません。</p>
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/exhibitorfee_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;有料控室請求
+{/block}

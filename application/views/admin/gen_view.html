@@ -1,0 +1,24 @@
+{extends file='core/public.html'}
+{block name='title'}ビュー生成完了 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>ビュー生成完了</h2>
+<div class="article">
+<p>ビュー生成が完了しました。</p>
+</div>
+<ul>
+<li><a href="../">戻る</a></li>
+</ul>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}">開発者</a>
+&nbsp;&gt;&nbsp;テンプレート&nbsp;&gt;&nbsp;ビュー生成&nbsp;&gt;&nbsp;完了
+{/block}

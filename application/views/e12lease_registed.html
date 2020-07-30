@@ -1,0 +1,43 @@
+{extends file='core/member.html'}
+{block name='title'}(11)リース備品申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+
+<h2>リース備品登録</h2> 
+<p>リース備録の登録を完了いたしました。</p> 
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}
+<br/>
+
+{include file='core/exhform.html' nocache}
+
+{include file='core/e12view.html' nocache}
+
+<table class="uniform">
+<tr><th colspan="2">ご請求先<br />(ご登録と異なる場合はご請求先をご入力下さい)</th></tr>
+<tr>
+<td>
+〒{$lists[$foreign.billid].zip}<br/>
+{$lists[$foreign.billid].prefecture} {$lists[$foreign.billid].address1} {$lists[$foreign.billid].address2}<br/>
+{$lists[$foreign.billid].corpname}<br/>
+{$lists[$foreign.billid].position} {$lists[$foreign.billid].fullname}
+</td>
+</tr> 
+</tbody>
+</table>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e12lease_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e12lease/">リース備品申込</a>&nbsp;&gt;&nbsp;登録完了
+{/block}

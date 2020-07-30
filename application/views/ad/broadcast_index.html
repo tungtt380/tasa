@@ -1,0 +1,57 @@
+{extends file='core/member.html'}
+{block name='title'}未送信のアカウントメール &raquo; アカウント送付 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>未送信のアカウントメール</h2> 
+<div>
+<p>現在受理済で未送信のアカウント一覧を以下に表示しています。</p>
+<p>メールアドレスの修正は「アカウント」で行います。</p>
+</div>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter"> 
+<thead>
+<tr> 
+<th>コード</th>
+<th>出展者名/表示名</th>
+<th>アカウント名</th>
+<th class="nowrap">メールアドレス</th>
+<th>更新日</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td><div class="ruby">{$i.memberid}</div>{$i.pcode1}-{$i.pcode2}</td>
+<td><div class="ruby">{$i.corpname}</div>{$i.brandname}</td>
+<td>{$i.username}</td>
+<td class="nowrap">{$i.email}</td>
+<td class="nowrap">{$i.updated}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+
+<a href="/op/broadcast/broadmail">[上記の出展者にメール送信]</a>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+全てのアカウントに送付しています.(未送信のアカウントはありません.)
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;アカウント送付&nbsp;&gt;&nbsp;未送信のアカウントメール
+{/block}

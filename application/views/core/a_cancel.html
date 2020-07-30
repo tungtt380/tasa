@@ -1,0 +1,22 @@
+{if (true)}
+<div class="col">
+<h3>各スペース受付状況</h3>
+<ul class="notfi bold">
+{if (isset($soldout) && $soldout != '')}
+    <li class="red big">{$soldout}は募集数に達した為、受付を終了いたしました。</li>
+{/if}
+{if (isset($waiting) && $waiting != '')}
+        <li class="red big">{$waiting}は募集数に達した為、キャンセル待ちにて受付とさせて頂いております。</li>
+{/if}
+</ul>
+<!--
+<div class="col" style="background-color:yellow; padding:6px">
+<b>現在、Dスペースは申し込み多数のため受付保留の状態となっております。</b><br/>
+お申込み内容を確認後、申し込みを受付させていただきます。<br/>
+各出展スペースにて設定する募集数に達した場合は、<br/>
+「受付保留状態」から「キャンセル待ち」となりますことをご了承ください。<br/>
+「キャンセル待ち」となる方にはメールにてご連絡致します。<br/>
+</div>
+-->
+</div>
+{/if}

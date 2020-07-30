@@ -1,0 +1,17 @@
+{extends file='core/public.html'}
+{block name='title'}管理者ホーム &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>管理者ホーム</h2>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;管理者
+{/block}

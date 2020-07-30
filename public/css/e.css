@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* 2011.11.10 ITO */
+#contents table.exhform {
+	width:100%;
+}
+#contents table.exhform th,
+#contents table.exhform td {
+	padding:10px;
+}
+#tabmachine1 table td,#tabmachine2 table td, #tabmachine3 table td {
+	padding:10px!important;
+}
+td input {
+	margin:0 5px 5px 0;
+}
+td input[type='radio'] {
+	margin:0 5px 0 0;
+}
+td input[type='text'] {
+	height: 24px;
+	border: 1px solid #CCC;
+}
+td textarea {
+	margin:10px 10px 10px 0;
+	width:80%;
+	height:80px;
+	border: 1px solid #CCC;
+}
+.w200 {
+	width:200px!important;
+	padding:10px!important;
+}
+.w100 {
+	width:130px!important;
+	padding:10px!important;
+	vertical-align:text-top;
+}
+.btn {
+	text-align:right;
+}
+
+#contents th.sub {
+	background:#4D80C1!important; color:#fff!important;
+}

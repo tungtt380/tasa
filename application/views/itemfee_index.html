@@ -1,0 +1,57 @@
+{extends file='core/member.html'}
+{block name='title'}個別請求 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>個別請求</h2> 
+<div class="article">個別請求を行う請求先を選択してください</div>
+
+<div id="cnav" class="clearfix">
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+
+<div id="tabbooth"> 
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead> 
+<tr>
+<th>請求先コード</th>
+<th>請求先</th> 
+<th>出展者名</th><th>表示名</th> 
+</tr>
+</thead> 
+<tbody> 
+{/if}
+<tr>
+<td><a href="create/{$i.billid}">{$i.billid}</a></td>
+<td{if $i.seqno != 0} class="grey"{/if}>
+<div class="ruby">{$i.corpkana}</div>{$i.corpname}<br>{$i.division} {$i.position} {$i.fullname}</td>
+<td><div class="ruby">{$i.v_corpkana}</div>{$i.v_corpname}</td>
+<td><div class="ruby">{$i.brandkana}</div>{$i.brandname}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+</div>
+{/if}
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/itemfee_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;個別請求
+{/block}

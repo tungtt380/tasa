@@ -1,0 +1,169 @@
+{extends file='core/member.html'}
+{block name='title'}(05)パス類追加請求 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>パス類追加請求</h2> 
+<!-- 2016-1-9 クローズコメント -->
+{if (($rolename == 'exhibitor' || $rolename == 'promotion') && $smarty.now > "2020-01-07 13:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+パス類追加請求の受付けは締め切らせていただきました。<br>以降の追加に関しましては、会場で現金でご購入可能です。
+</p>
+<!-- 2016-12-6 再開用コメント ボタン出力 -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2019-12-09 09:00:00"|strtotime && $smarty.now < "2020-01-07 13:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+締め切り後になります為、着払いでの発送となります。<br>
+ご了承の上、お申し込みください。
+</p>
+<!-- //2016-12-6 再開用コメント -->
+<!-- 2016-11-25 一時クローズのコメント -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2019-11-22 00:00:00"|strtotime && $smarty.now < "2019-12-09 09:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em;">
+パス類追加請求は配送データ集約の為、一旦受付を停止しております。
+<!--<br>
+12/10　10:00より再受付開始予定です。今しばらくお待ちください。-->
+</p>
+{/if}
+<!-- // 2016-11-25 一時クローズのコメント -->
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}
+
+{include file="core/ex_sans.html"}
+{include file="core/exhform.html"}
+
+<div class="section">
+<p>申請入力頂く際のご注意</p>
+<ul>
+<li><span class="red">*</span>マークは入力必須項目ですので必ずご記入ください。</li>
+<li>半角カタカナはご利用頂けません。</li>
+<li>英数字は半角でご入力ください。</li>
+</ul>
+</div>
+
+<p>
+☆出展者パス/搬入出リボン/搬入車両証/特別招待券/一般招待券は、<span class="red">以下の規定枚数をそれぞれ無料で配布します。</span>
+追加をご希望の場合は、下記の申込欄内に必要枚数をご入力の上、送信して下さい。
+</p>
+
+{include file="core/ex_passticket.html"}
+
+<form method="post" action="history" target="_blank"> 
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input name="addpass_submit_a" type="submit" class="bt1" value="今までのお申込み履歴" />
+</form>
+
+<form method="post" action="regist_in"> 
+<input type="hidden" name="exhid" value="{$foreign.exhid}"/>
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid}"/>
+
+
+<input type="hidden" name="quantity_1" value="{$foreign.quantity_1 nocache}">
+<input type="hidden" name="quantity_2" value="{$foreign.quantity_2 nocache}">
+<input type="hidden" name="quantity_3" value="{$foreign.quantity_3 nocache}">
+<input type="hidden" name="quantity_4" value="{$foreign.quantity_4 nocache}">
+<input type="hidden" name="quantity_5" value="{$foreign.quantity_5 nocache}">
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<br>
+<table class="uniform">
+<th colspan="3" style="padding:10px 0;">☆追加枚数記入欄<br/>（上記規定数にプラスする追加枚数をご記入下さい)</th></tr>
+<tr><th rowspan="2" class="w200">搬入出リボン（有料：@&yen;100-税込）<br>※現地発行も可：（有料：@&yen;100-税込）<br/>☆搬入出日のみ有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_1|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>
+<input type="text" id="addquantity_1" name="addquantity_1" size="8" maxlength="8" value="{$foreign.addquantity_1 nocache}">枚
+{if isset($message.addquantity_1)}<span class="linewarn">{$message.addquantity_1 nocache}</span>{/if}
+</td></tr>
+<tr><th rowspan="2" class="w200">搬入出車両証(無料)<br/>☆搬入出日のみ有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_2|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>
+<input type="text" id="addquantity_2" name="addquantity_2" size="8" maxlength="8" value="{$foreign.addquantity_2 nocache}">枚
+{if isset($message.addquantity_2)}<span class="linewarn">{$message.addquantity_2 nocache}</span>{/if}
+</td></tr>
+<th rowspan="2" class="w200">出展者パス(有料:@&yen;8,000- 税込)<br/>☆搬入出日/会期中とも有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_3|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>
+<input type="text" id="addquantity_3" name="addquantity_3" size="8" maxlength="8" value="{$foreign.addquantity_3 nocache}">枚
+{if isset($message.addquantity_3)}<span class="linewarn">{$message.addquantity_3 nocache}</span>{/if}
+</td></tr>
+<tr><th rowspan="2" class="w200">特別招待券(有料:@&yen;3,000- 税込)<br/>☆2020/1/10(金)のみ有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_4|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>
+<input type="text" id="addquantity_4" name="addquantity_4" size="8" maxlength="8" value="{$foreign.addquantity_4 nocache}">枚
+{if isset($message.addquantity_4)}<span class="linewarn">{$message.addquantity_4 nocache}</span>{/if}
+</td></tr>
+<tr><th rowspan="2" class="w200">一般招待券(有料:@&yen;2,000- 税込)<br/>☆2020/1/11(土)/2020/1/12(日)のみ有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_5|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>
+<input type="text" id="addquantity_5" name="addquantity_5" size="8" maxlength="8" value="{$foreign.addquantity_5 nocache}">枚
+{if isset($message.addquantity_5)}<span class="linewarn">{$message.addquantity_5 nocache}</span>{/if}
+</td></tr>
+</tbody> 
+</table> 
+<div>
+<p>※ご請求は、開催後となります。また、ご請求先につきましては、お申込みの際”ご請求先”でご指定いただいたところになります。</p>
+<p>※一度追加でお申込み頂いたものを、キャンセルまたは枚数を減らしたいなどのご変更をご希望の場合には直接東京オートサロン事務局まで、お問い合わせください。</p>
+<p><span class="red"><b>※2019年11月15日(金)</b>までに追加のお申込がない場合は、規定数をお送り致します。その後の追加発給は出来ません。</span></p>
+</div>
+
+<div>
+<table class="uniform">
+<tbody>
+<tr>
+<th>請求先</th>
+</tr>
+<tr>
+<td>■請求先を選択して下さい。<span style="color:#ff0000">*</span><br/>
+<select name="billid">
+{foreach from=$lists name=rec item=i}
+<option value="{$i.billid}" {if $foreign.billid==$i.billid}selected{/if}>〒{$i.zip} {$i.prefecture} {$i.address1} {$i.address2} {$i.corpname} {$i.position} {$i.fullname}</option>
+{/foreach}
+</select>
+<br />
+{if $message.billid != '' nocache}<span class="linewarn">{$message.billid nocache}</span>{/if}
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 2016-1-9 クローズコメント -->
+{if (($rolename == 'exhibitor' || $rolename == 'promotion') && $smarty.now > "2020-01-07 13:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+パス類追加請求の受付けは締め切らせていただきました。<br>以降の追加に関しましては、会場で現金でご購入可能です。
+</p>
+<!-- 2016-12-6 再開用コメント ボタン出力 -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2019-12-09 09:00:00"|strtotime && $smarty.now < "2020-01-07 13:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+締め切り後になります為、着払いでの発送となります。<br>
+ご了承の上、お申し込みください。
+</p>
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="登録" />
+<!-- //2016-12-6 再開用コメント -->
+<!-- 2016-11-25 一時クローズのコメント -->
+{elseif ($rolename == 'exhibitor' || $rolename == 'promotion') && ($smarty.now > "2019-11-22 00:00:00"|strtotime && $smarty.now < "2019-12-09 09:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em;">
+パス類追加請求は配送データ集約の為、一旦受付を停止しております。
+<!--<br>
+12/10　10:00より再受付開始予定です。今しばらくお待ちください。-->
+</p>
+<!-- // 2016-11-25 一時クローズのコメント -->
+{else}
+<!-- 2016-11-25 一時クローズの際、登録ボタンを押せなくする -->
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="登録" />
+{/if}
+</form>
+
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/e.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e05passticket_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e05passticket/">パス類追加請求</a>&nbsp;&gt;&nbsp;登録
+{/block}

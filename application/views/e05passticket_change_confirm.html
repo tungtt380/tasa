@@ -1,0 +1,70 @@
+{extends file='core/member.html'}
+{block name='title'}(05)パス類追加請求 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>パス類追加請求</h2> 
+<p>入力した値はこれでよろしいですか？<br>
+よろしければ「編集」ボタンを押してください。</p>
+
+<div>
+{include file="core/ex_passticket.html"}
+</div>
+
+<a href="./history/{$foreign.exhid}/{$foreign.exhboothid nocache}">今までのお申込み履歴</a>
+
+<div id="tabcorp"> 
+<table class="uniform"> 
+<tbody>
+<tr>
+<th colspan="3">☆追加枚数記入欄*<br/>（上記規定数にプラスする追加枚数をご記入下さい)</th></tr>
+<tr><th rowspan="2">搬入出リボン（有料：@&yen;100-税込）<br>※現地発行も可：（有料：@&yen;100-税込）
+<br/>☆搬入出日のみ有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_1|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>{$foreign.addquantity_1|default:0 nocache}枚</td></tr>
+<tr><th rowspan="2">搬入出車両証(無料)<br/>☆搬入出日のみ有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_2|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>{$foreign.addquantity_2|default:0 nocache}枚</td></tr>
+<th rowspan="2">出展者パス(有料＠&yen;8,000(税込)<br/>☆搬入出日/会期中とも有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_3|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>{$foreign.addquantity_3|default:0 nocache}枚</td></tr>
+<tr><th rowspan="2">特別招待券(有料＠&yen;3,000(税込)<br/>☆2020/01/10(金)のみ有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_4|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>{$foreign.addquantity_4|default:0 nocache}枚</td></tr>
+<tr><th rowspan="2">一般招待券(有料＠&yen;2,000(税込)<br/>☆2020/01/11(土), 2020/01/12(日)のみ有効</th>
+<td>これまでの追加枚数</td><td>{$foreign.quantity_5|default:0 nocache}枚</td></tr><tr><td>今回追加枚数</td>
+<td>{$foreign.addquantity_5|default:0 nocache}枚</td></tr>
+<tr><td colspan="3">
+※ご請求は、開催後となります。また、ご請求先につきましては、お申込みの際 &quot;ご請求先&quot;
+でご指定いただいたところになります。<br/>
+<br/>
+※一度追加でお申込み頂いたものを、キャンセルまたは枚数を減らしたいなどのご変更をご希望の場合<br/>
+には直接東京オートサロン事務局まで、お問い合わせください。</td><tr>
+</tbody> 
+</table>
+<!--<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+今後の追加パスの発送は着払い（佐川急便）での発送となります。<br>ご了承の上、お申し込みください。
+</p>-->
+<form method="post" action="change_confirm_in"> 
+<input type="hidden" name="appid" value="{$foreign.appid nocache}">
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid nocache}">
+<input type="hidden" name="appno" value="{$foreign.appno nocache}">
+<input type="hidden" name="seqno" value="{$foreign.seqno nocache}">
+<input type="hidden" name="token" value="{$foreign.token nocache}">
+<input type="image" src="/images/common/btn_change_02.gif" id="action" name="addpass_submit_b" value="入力内容変更" />
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/sponsor_change.js"></script>
+<script type="text/javascript" src="/js/e04construction_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e05passticket/">パス類追加請求</a>&nbsp;&gt;&nbsp;編集
+{/block}

@@ -1,0 +1,159 @@
+<div id="tabmachine3">
+<table class="uniform">
+<thead>
+<tr><th colspan="3">車両スペック</th></tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="5">エンジン系</th>
+<td>型式</td>
+<td>{$foreign.enginetype nocache}</td>
+</tr>
+<tr>
+<td>排気量</td>
+<td>{$foreign.enginecc nocache} cc</td>
+</tr>
+<tr>
+<td>出力</td>
+<td>
+{$foreign.outputnum nocache}
+{if $foreign.outputunit==1}kw{else}ps{/if} /
+{$foreign.outputrpm nocache}rpm
+</td>
+</tr>
+<tr>
+<td>トルク</td>
+<td>
+{$foreign.torquenum nocache}
+{if $foreign.torqueunit==1}kw{else}Nm{/if} /
+{$foreign.torquerpm nocache}rpm
+</td>
+</tr>
+<tr>
+<td>チューニング内容＆<br>使用パーツ</td>
+<td>{$foreign.enginecomment nocache}</td>
+</tr>
+
+<tr>
+<th rowspan="2">排気系</th>
+<td>マフラー</td>
+<td>{$foreign.muffler nocache}</td>
+</tr>
+<tr>
+<td>EXマニホールド</td>
+<td>{$foreign.manifold nocache}</td>
+</tr>
+
+<tr>
+<th rowspan="3">伝動系</th>
+<td>ミッション</td>
+<td>{$foreign.transmission nocache}</td>
+</tr>
+<tr>
+<td>クラッチ</td>
+<td>{$foreign.clutch nocache}</td>
+</tr>
+<tr>
+<td>デフ</td>
+<td>{$foreign.differential nocache}</td>
+</tr>
+
+<tr>
+<th rowspan="2">外装系</th>
+<td>エアロキット名</td>
+<td>{$foreign.aeroname nocache}</td>
+</tr>
+<tr>
+<td>ドレスアップ内容＆<br>使用パーツ</td>
+<td>{$foreign.dressupcomment nocache}</td>
+</tr>
+
+<tr>
+<th rowspan="6">内装系</th>
+<td>シート</td>
+<td>{$foreign.sheet nocache}</td>
+</tr>
+<tr>
+<td>ステアリング</td>
+<td>{$foreign.steering nocache}</td>
+</tr>
+<tr>
+<td>メーター</td>
+<td>{$foreign.meter nocache}</td>
+</tr>
+<tr>
+<td>オーディオ</td>
+<td>{$foreign.audio nocache}</td>
+</tr>
+<tr>
+<td>カーナビ</td>
+<td>{$foreign.carnavi nocache}</td>
+</tr>
+<tr>
+<td>その他</td>
+<td>{$foreign.etc nocache}</td>
+</tr>
+
+<tr>
+<th rowspan="4">サスペンション</th>
+<td>サスキット名</td>
+<td>{$foreign.suspension nocache}</td>
+</tr>
+<tr>
+<td>ショック</td>
+<td>{$foreign.absorber nocache}</td>
+</tr>
+<tr>
+<td>スプリング</td>
+<td>{$foreign.spring nocache}</td>
+</tr>
+<tr>
+<td>ブレーキ</td>
+<td>{$foreign.brake nocache}</td>
+</tr>
+
+<tr>
+<th rowspan="3">ホイール</th>
+<td>ホイールメーカー・名称</td>
+<td>{$foreign.wheel nocache}</td>
+</tr>
+<tr>
+<td>サイズ(F)</td>
+<td>{$foreign.frontsize nocache}</td>
+</tr>
+<tr>
+<td>サイズ(R)</td>
+<td>{$foreign.rearsize nocache}</td>
+</tr>
+
+<tr>
+<th rowspan="3">タイヤ</th>
+<td>タイヤメーカー・名称</td>
+<td>{$foreign.tire nocache}</td>
+</tr>
+<tr>
+<td>サイズ(F)</td>
+<td>{$foreign.fronttire nocache}</td>
+</tr>
+<tr>
+<td>サイズ(R)</td>
+<td>{$foreign.reartire nocache}</td>
+</tr>
+
+<tr>
+<th>記録等</th>
+<td colspan="2">
+最高速:  {$foreign.maxspeed nocache} km/h<br/>
+0～400m: {$foreign.dragspeed nocache} sec<br/>
+その他:  {$foreign.speedcomment nocache}<br/>
+</td>
+</tr>
+
+<tr>
+<th>その他チューニング</th>
+<td colspan="2">{$foreign.comment nocache}</td>
+</tr>
+
+</tbody>
+</table>
+</div>

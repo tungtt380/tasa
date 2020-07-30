@@ -1,0 +1,217 @@
+{extends file='core/member.html'}
+{block name='title'}(09)天井・二階工事申請 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>天井・二階建工事登録</h2> 
+{if isset($message.__all)}
+<div class="blockwarn"><p>{$message.__all nocache}</p></div>
+{/if}
+<!-- 2016-11-28 23:59:59 クローズのコメント -->
+{if $smarty.now > "2019-11-30 00:00:00"|strtotime}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+web登録は締め切らせていただきました。<!--<br>
+今後のご登録は、出展要項の申請用紙にご記入の上、FAXにてお送りください。-->
+</p>
+{else}
+<p>天井・二階建工事の登録をおこないます。</p> 
+{/if}
+<!-- // 2016-11-28 23:59:59 クローズのコメント -->
+{include file='core/ex_murayama.html' nocache}
+{include file='core/exhform.html' nocache}
+{include file='core/ex_constructor.html' nocache}
+
+<form method="post" action="../change_in"> 
+<input type="hidden" name="appid" value="{$foreign.appid nocache}">
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid nocache}">
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input type="hidden" name="appno" value="{$foreign.appno nocache}">
+<input type="hidden" name="seqno" value="{$foreign.seqno nocache}">
+<input type="hidden" name="token" value="{$foreign.token nocache}">
+
+<table class="uniform">
+<tr>
+<thead>
+<tr><th colspan="2">天井・二階建工事業者<br/>(登録済みの施工業者と異なる場合は天井・二階建工事業者ご入力下さい。)</th></tr>
+</thead>
+<tbody>
+<td colspan="2">■天井・二階建工事業者の連絡窓口を選択して下さい。<span style="color:#ff0000">*</span><br/>
+<input type="radio" id="outsourcing0" name="outsourcing" value="0" {if $foreign.outsourcing==0}checked="checked"{/if}>上記登録の装飾業者
+に同じ(ご記入の必要はございません)<br/>
+<input type="radio" id="outsourcing1" name="outsourcing" value="1" {if $foreign.outsourcing==1}checked="checked"{/if}>天井・二階建工事業
+者を追加登録(以下に天井・二階建て工事業者をご記入ください)
+{if isset($message.outsourcing)}<span class="linewarn">{$message.outsourcing nocache}</span>{/if}
+<br/></td></tr>
+</tbody>
+</table>
+
+<div id="tabcontact">
+<table class="uniform">
+<tr><th colspan="2" class="main">天井・二階建て工事業者名</th></tr>
+<th class="w200">施工業者名 <span class="red">*</span></th>
+<td>
+<input type="text" id="corpname" name="corpname" size="48" maxlength="60" value="{$foreign.corpname nocache}" placeholder="名称">
+<span class="example">例)○○株式会社</span>
+{if $message.corpname != '' nocache}<span class="linewarn">{$message.corpname nocache}</span>{/if}
+</td>
+</tr>
+<tr>
+<th>所在地 <span class="red">*</span></th>
+<td>
+<span class="example"><label for="sekou_zip">郵便番号</label> 例)1234567</span><br />
+<input type="text" id="zip" name="zip" size="8" maxlength="8" value="{$foreign.zip nocache}" placeholder="郵便番号">
+<div id="zip" class="clearfix"><span id="zipdir" class="zipsearch">郵便番号から住所を検索</span><span id="ziprev" class="revsearch">住所
+から郵便番号>を検索</span></div>
+{if $message.zip != '' nocache}<span class="linewarn">{$message.zip nocache}</span>{/if}
+<span class="example"><label for="sekou_address_one">町名番地</label> 例)東京都新宿区新宿6-27-30</span><br />
+{form_dropdown_ex('prefecture',$prefecture,$foreign.prefecture,'東京都','id="prefecture"')}
+{if $message.prefecture != '' nocache}<span class="linewarn">{$message.prefecture nocache}</span>{/if}
+<input type="text" id="address1" name="address1" size="31" maxlength="60" value="{$foreign.address1 nocache}" placeholder="町名番地">
+{if $message.address1 != '' nocache}<span class="linewarn">{$message.address1 nocache}</span>{/if}
+<br/>
+<span class="example"><label for="address2">ビルマンション名</label> 例)○○ビル3F</span><br />
+<input type="text" id="address2" name="address2" size="48" maxlength="60" value="{$foreign.address2 nocache}" placeholder="ビル・マンシ>ョン名">
+{if $message.address2 != '' nocache}<span class="linewarn">{$message.address2 nocache}</span>{/if}
+<br/>
+</td>
+</tr>
+<tr>
+<th class="w200">担当部署 <span class="red">*</span></th>
+<td>
+<input type="text" id="division" name="division" size="48" maxlength="60" value="{$foreign.division nocache}" placeholder="担当部署名">
+{if $message.division != '' nocache}<span class="linewarn">{$message.division nocache}</span>{/if}
+<br/></td></tr>
+<tr>
+<th class="w200">担当者 <span class="red">*</span></th>
+<td>
+<input type="text" id="fullname" name="fullname" size="48" maxlength="60" value="{$foreign.fullname nocache}" placeholder="担当者名">
+{if $message.fullname != '' nocache}<span class="linewarn">{$message.fullname nocache}</span>{/if}
+<br/></td></tr>
+<th class="w200">メールアドレス <span class="red">*</span></th>
+<td>
+<input type="text" id="email" name="email" size="48" maxlength="60" value="{$foreign.email nocache}" placeholder="メールアドレス">
+{if $message.email != '' nocache}<span class="linewarn">{$message.email nocache}</span>{/if}
+<br/></td></tr>
+<tr>
+<th>携帯番号 <span class="red">*</span></th>
+<td>
+<span class="example"><label for="sekou_mobile">携帯番号</label>(数字) 例)0312345678</span><br />
+<input type="text" id="mobile" name="mobile" size="15" maxlength="15" value="{$foreign.mobile nocache}" placeholder="TEL">
+{if $message.mobile != '' nocache}<span class="linewarn">{$message.mobile nocache}</span>{/if}
+</td>
+</tr>
+<tr>
+<th>TEL <span class="red">*</span></th>
+<td>
+<span class="example"><label for="sekou_phone">TEL</label>(数字) 例)0312345678</span><br />
+<input type="text" id="phone" name="phone" size="15" maxlength="15" value="{$foreign.phone nocache}" placeholder="TEL">
+{if $message.phone != '' nocache}<span class="linewarn">{$message.phone nocache}</span>{/if}
+</td>
+</tr>
+<tr>
+<th>FAX <span class="red">*</span></th>
+<td>
+<span class="example"><label for="sekou_fax">FAX</label>(数字) 例)0312345678</span><br />
+<input type="text" id="fax" name="fax" size="15" maxlength="15" value="{$foreign.fax nocache}" placeholder="FAX">
+{if $message.fax != '' nocache}<span class="linewarn">{$message.fax nocache}</span>{/if}
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="tabcorp"> 
+<table class="uniform"> 
+</tbody>
+<tr> 
+<th align="left">■天井工事</th>
+</tr>
+<tr>
+<td><input type="radio" id="ceiling" name="ceiling" value="1" {if $foreign.ceiling==1}checked="checked"{/if}>行う
+<input type="radio" id="ceiling" name="ceiling" value="0" {if $foreign.ceiling==0}checked="checked"{/if}>行わない
+(チェックをしてください）<br/>
+{if isset($message.ceiling)}<span class="linewarn">{$message.ceiling nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>
+▼「行う」をご選択の場合は以下必須入力になります。<br/>
+●以下の書類を作成して提出して下さい<br/>
+(1)ブース平面および立体図*該当箇所を明示したもの<br>
+(2)天井構造を説明するのに必要な詳細図面(使用防炎材などの文字説明含む)<br>
+<br>
+天井部分の面積
+<input type="text" id="ceilingsize" name="ceilingsize" size="5" maxlength="15" value="{$foreign.ceilingsize nocache}">
+平方メートル/小間面積
+<input type="text" id="ceilingarea" name="ceilingarea" size="5" maxlength="15" value="{$foreign.ceilingarea nocache}">
+平方メートル<br/>
+{if isset($message.ceilingsize)}<span class="linewarn">{$message.ceilingsize nocache}</span>{/if}
+{if isset($message.ceilingarea)}<span class="linewarn">{$message.ceilingarea nocache}</span>{/if}
+<br/>
+●天井工事を行う理由<br/>
+<textarea id="corpname" name="ceilingreason" cols="50" rows="2">{$foreign.ceilingreason nocache}</textarea>
+{if isset($message.ceilingreason)}<span class="linewarn">{$message.ceilingreason nocache}</span>{/if}
+<br/></td></tr>
+<tr><th align="left">■二階工事</th></tr>
+<tr>
+<td><input type="radio" id="floor" name="floor" value="1" {if $foreign.floor==1}checked="checked"{/if}>行う
+<input type="radio" id="floor" name="floor" value="0" {if $foreign.floor==0}checked="checked"{/if}>行わない
+(チェックをしてください）<br/>
+{if isset($message.floor)}<span class="linewarn">{$message.floor nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>
+▼「行う」をご選択の場合は以下必須入力になります。<br/>
+●以下の書類を作成して提出して下さい
+(1)ブース平面および立体図*該当箇所を明示したもの<br>
+(2)天井構造を説明するのに必要な詳細図面(使用防炎材などの文字説明含む)<br>
+<br>
+●二階床面積(付帯する階段・スロープ等含む)<br/>
+<input type="text" id="floorsize" name="floorsize" size="5" maxlength="15" value="{$foreign.floorsize nocache}">
+平方メートル/小間面積
+<input type="text" id="floorarea" name="floorarea" size="5" maxlength="15" value="{$foreign.floorarea nocache}">
+平方メートル<br/>
+{if isset($message.floorsize)}<span class="linewarn">{$message.floorsize nocache}</span>{/if}
+{if isset($message.floorarea)}<span class="linewarn">{$message.floorarea nocache}</span>{/if}
+<br/>
+●二階の使用目的(ひとつのみ、チェックしてください)<br/>
+<input type="radio" id="purpose2f" name="purpose2f" value="1" {if $foreign.purpose2f==1}checked="checked"{/if}>来場者の利用がある<br/>
+<input type="radio" id="purpose2f" name="purpose2f" value="2" {if $foreign.purpose2f==2}checked="checked"{/if}>スタッフ等の特定の者が利用する<br/>
+<input type="radio" id="purpose2f" name="purpose2f" value="9" {if $foreign.purpose2f==9}checked="checked"{/if}>その他(具体的に使用目的をご記入下さい)<br/>
+<textarea id="reason2f" name="reason2f" cols="50" rows="5">{$foreign.reason2f nocache}</textarea><br/>
+{if isset($message.purpose2f)}<span class="linewarn">{$message.purpose2f nocache}</span>{/if}
+{if isset($message.reason2f)}<span class="linewarn">{$message.reason2f nocache}</span>{/if}
+<br/>
+●二階の床下(一階部分)の使用目的(ひとつのみ、チェックしてください)<br />
+<input type="radio" id="purpose1f" name="purpose1f" value="1" {if $foreign.purpose1f==1}checked="checked"{/if}>来場者の利用がある<br/>
+<input type="radio" id="purpose1f" name="purpose1f" value="2" {if $foreign.purpose1f==2}checked="checked"{/if}>スタッフ等の特定の者が利用する<br/>
+<input type="radio" id="purpose1f" name="purpose1f" value="9" {if $foreign.purpose1f==9}checked="checked"{/if}>その他(具体的に使用目的をご記入下さい)<br/>
+<textarea id="reason1f" name="reason1f" cols="50" rows="5">{$foreign.reason1f nocache}</textarea><br/>
+{if isset($message.purpose1f)}<span class="linewarn">{$message.purpose1f nocache}</span>{/if}
+{if isset($message.reason1f)}<span class="linewarn">{$message.reason1f nocache}</span>{/if}
+</td></tr>
+</tbody> 
+</table> 
+<!-- 2016-11-28 23:59:59 クローズの処理 -->
+{if $smarty.now < "2019-11-30 00:00:00"|strtotime}
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="入力内容確認画面へ">
+{else}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em;">
+お申し込みを締め切らせていただきました。
+</p>
+{/if}
+<!-- 2016-11-28 23:59:59 クローズの処理 -->
+</form>
+{include file='core/ex_2ndfloor.html' nocache}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e09floor_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e09floor/">天井・二階工事申請</a>&nbsp;&gt;&nbsp;編集
+{/block}

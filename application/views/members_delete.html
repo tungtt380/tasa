@@ -1,0 +1,54 @@
+{extends file='core/member.html'}
+{block name='title'}削除 &raquo; members &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>削除 &raquo; members</h2>
+<p class="faxmark">以下のデータを削除してよろしいですか？
+<br />注意！削除すると元に戻せなくなります。</p>
+<div id="delete-nav">
+<form method="post" action="../delete_in">
+<table class="uniform">
+
+<tr>
+<th>memberid</th>
+<td>{$foreign.memberid nocache}</td>
+</tr>
+<tr>
+<th>rolename</th>
+<td>{$foreign.rolename nocache}</td>
+</tr>
+<tr>
+<th>username</th>
+<td>{$foreign.username nocache}</td>
+</tr>
+<tr>
+<th>password</th>
+<td>{$foreign.password nocache}</td>
+</tr>
+<tr>
+<th>email</th>
+<td>{$foreign.email nocache}</td>
+</tr>
+<tr>
+<th>activate</th>
+<td>{$foreign.activate nocache}</td>
+</tr>
+<tr>
+<th>reject</th>
+<td>{$foreign.reject nocache}</td>
+</tr>
+<tr>
+<th>reason</th>
+<td>{$foreign.reason nocache}</td>
+</tr>
+
+</table>
+<input type="hidden" id="memberid" name="memberid" value="{$foreign.memberid nocache}">
+<input type="image" src="/images/common/btn_delete.gif" id="action" name="action" value="削除">
+</form>
+</div>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/account/">アカウント</a>&nbsp;&gt;&nbsp;削除
+{/block}

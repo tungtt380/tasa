@@ -1,0 +1,63 @@
+{extends file='core/member.html'}
+{block name='title'}名寄せ &raquo; 請求先 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>請求先名寄せ</h2>
+<div class="article">
+<p>主となる請求先を選択して「登録」ボタンを押してください。</p>
+</div>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<form method="post" action="combine_confirm_in">
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th></th>
+<th>請求先コード</th>
+<th>表示名</th>
+<th>請求先企業名</th>
+<th>所在地</th>
+<th>氏名</th>
+<th>連絡先</th>
+</tr>
+<thead>
+<tbody>
+{/if}
+ <tr>
+<td><input type="radio" name="parentid" value="{$i.billid}" {if $smarty.foreach.rec.first}checked="checked"{/if}><input type="hidden" name="billid[]" value="{$i.billid}"></td>
+<td>{if $i.seqno == 0}{$i.billid}{else}<a href="change/{$i.billid}">{$i.billid}</a>{/if}{if $i.parentbillid}<div class="ruby">→{$i.parentbillid}</div>{/if}</td>
+<td>{if $i.exhid}<div class="ruby">{$i.brandkana}</div><a href="../exhibitor/detail/{$i.exhid}">{$i.brandname}</a>{/if}</td>
+<td><div class="ruby"><span class="nowrap" title="{$i.corpkana nocache}">{$i.corpkana|truncate:16 nocache}</span></div><span class="nowrap" title="{$i.corpname nocache}">{$i.corpname|truncate:16 nocache}</span></td>
+<td><div class="ruby">{if $i.countrycode != 'JP'}{$i.countrycode nocache}{else}〒{$i.zip nocache}{/if}</div>
+{$i.prefecture nocache} {$i.address1 nocache}<br />{$i.address2 nocache}</td>
+<td>{$i.division nocache} {$i.position nocache}<br/><div class="ruby">{$i.fullkana nocache}</div><span class="nowrap">{$i.fullname nocache}</span></td>
+<td>TEL: {$i.phone nocache}<br/>FAX: {$i.fax nocache}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+<input type="submit" src="/images/common/btn_regist_01.gif" id="merge" name="merge" value="登録">
+</form>
+{/if}
+{foreachelse}
+<div class="notice">
+<ul>
+<li>データが見つかりません。</li>
+</ul>
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;請求先
+{/block}

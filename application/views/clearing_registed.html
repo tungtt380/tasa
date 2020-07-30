@@ -1,0 +1,17 @@
+{extends file='core/member.html'}
+{block name='title'}消込完了 &laquo; 入金消込 &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>入金消込 - 消込完了</h2>
+<div>
+<p>入金消込の処理を完了しました。</p>
+</div>
+
+<div class="btn-detail" style="margin:20px 0 0;">
+<a href="../payment"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+</div>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="../">入金消込</a>&nbsp;&gt;&nbsp;消込完了
+{/block}

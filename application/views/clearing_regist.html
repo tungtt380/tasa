@@ -1,0 +1,117 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &laquo; 入金消込 &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>入金消込 &raquo; 登録</h2>
+
+<form method="post" action="regist_in">
+<table class="listform tablesorter">
+<tr>
+<thead>
+<tr>
+<th>入金番号</th>
+<th>入力日</br>入金日</th>
+<th>入金元(請求先)<br/>出展者名</th>
+<th>入金金額</th>
+<th>手数料</th>
+<th>消込金額</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+ <td>{$payment.paymentno}</td>
+ <td>{$payment.created|truncate:10:""}<br/>{$payment.paymentdate}</td>
+ <td>{$payment.corpname}</td>
+ <td class="right">&yen;{$payment.deposit|number_format}</td>
+ <td class="right">&yen;{$payment.charge|number_format}</td>
+ <td class="right">&yen;{$payment.amount|number_format}</td>
+ </tr>
+</tbody>
+</tr>
+</table>
+
+{if isset($message.__all) && $message.__all != ''}
+<div class="blockwarn"><span class="linewarn">入力項目に不備があります。以下の入力項目を確認してください。</span>
+{$message.__all nocache}
+</div>
+{else}
+<div class="article">
+<p>消込項目をチェックして、入金額の変更がありましたら修正をしてください。</p>
+</div>
+{/if}
+
+{foreach from=$invoice.detail name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div>
+<table class="listform tablesorter">
+<colgroup>
+<colgroup>
+<colgroup class="nowrap" style="width:7em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup class="nowrap" style="width:7em;">
+<colgroup class="nowrap" style="width:7em;">
+<thead>
+<tr>
+<th>出展者名</th>
+<th>明細</th>
+<th>請求金額</th>
+<th>消込金額</th>
+<th>未入金額</th>
+<th>今回入金額</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+{assign var="key" value="iv{$i.invoicedid}"}
+<tr>
+<td>{$i.itemname}</td>
+<td>{$i.itemdetail}</td>
+<td class="right">&yen{if $i.itemtype == 0}{($i.amount * 1.1)|number_format}{else}{$i.amount|number_format}{/if}</td>
+<td class="right">&yen{$i.sumpaymentamount|number_format}</td>
+<td class="right">&yen{if $i.itemtype == 0}{(($i.amount * 1.1)-$i.sumpaymentamount)|number_format}{else}{($i.amount-$i.sumpaymentamount)|number_format}{/if}</td>
+{if $i.amount > $i.paymentamount}
+<td class="right"><input type="text" name="iv{$i.invoicedid}" value="{$foreign[$key]}" class="numeric"></td>
+{else}
+<td>(入金済)<!--{$i.paymentid}--></td>
+{/if}
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+</div>
+{/if}
+{/foreach}
+<table class="uniform">
+<tr>
+<th>今回手数料</th>
+<td><input type="text" name="charge" value="{$foreign.charge}" /></td>
+</tr>
+<tr>
+<th>複数入金</th>
+<td><input type="hidden" name="multi" value="0" /><input type="checkbox" name="multi" value="1" />他請求の入金も兼ねている場合はチェックを入れてください。</td>
+</tr>
+<tr>
+<th>コメント</th>
+<td><input type="text" name="comment" size="60" /></td>
+</tr>
+</table>
+<input type="hidden" name="paymentno" value="{$foreign.paymentno}">
+<input type="hidden" name="invoiceno" value="{$foreign.invoiceno}">
+<input type="image" src="/images/common/btn_regist_confirm.gif" id="action" name="action" value="入力内容確認">
+<a style="float:right" href="javascript:history.back();"><img src="/images/common/btn_back_04.gif" alt="戻る"></a>
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<style>#contents th.sub { background:#4D80C1; color:#fff; }</style>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/clearing_regist.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent} &gt; 登録 &gt; 入金消込 
+{/block}

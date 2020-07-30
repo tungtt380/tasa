@@ -1,0 +1,50 @@
+{extends file='core/object.html'}
+{block name='theme'}member{/block}
+
+{block name='headernav'}
+{if $rolename != ''}
+<div id="headerNav">
+<span class="bold">{$username nocache}</span> |
+<a href="{uri_folder_string()}/password">パスワード変更</a> |
+<a href="{uri_folder_string()}/history">操作履歴</a> |
+<a href="{uri_folder_string()}/logout">ログアウト</a>
+</div>
+<div id="pan"><p>{block name='pan'}
+<img src="/images/common/ico_01.png" width="20" height="20" alt="ホーム" /><a href="{uri_folder_string()}/">ホーム</a>
+{/block}</p></div>
+{/if}
+{/block}
+
+{block name='mnav'}
+{if $rolename != ''}
+{if $rolename == 'exhibitor' || $rolename == 'exhibitor2'}
+{include file="core/r_exhibitor.html"}
+{elseif $rolename == 'partner1'}
+{include file="core/r_partner1.html"}
+{elseif $rolename == 'partner2'}
+{include file="core/r_partner2.html"}
+{elseif $rolename == 'partner3'}
+{include file="core/r_partner3.html"}
+{elseif $rolename == 'partner4'}
+{include file="core/r_partner4.html"}
+{elseif $rolename == 'partner5'}
+{include file="core/r_partner5.html"}
+{elseif $rolename == 'partner6'}
+{include file="core/r_partner6.html"}
+{elseif $rolename == 'partner7'}
+{include file="core/r_partner7.html"}
+{elseif $rolename == 'partner8'}
+{include file="core/r_partner8.html"}
+{elseif $rolename == 'partner9'}
+{include file="core/r_partner9.html"}
+{else}
+{include file="core/r_member.html"}
+{/if}
+{else}
+<ul class="mnav">
+</ul>
+{/if}
+<a href="#" id="dynamic-to-top" style="display:inline">
+<span>&nbsp;</span>
+</a>
+{/block}

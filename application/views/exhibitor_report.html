@@ -1,0 +1,81 @@
+{extends file='core/member.html'}
+{block name='title'}集計レポート &raquo; 出展者 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>出展申込集計</h2>
+<div class="article">
+<p>灰色表示は、キャンセル待ちを表します。</p>
+</div>
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="reportform tablesorter">
+<thead>
+<tr>
+<th>スペース</th>
+<th>仮入力</th>
+<th>未確認</th>
+<th>確認済</th>
+<th>受理済</th>
+<th>合計数</th>
+<th>申込可能数</th>
+<th class="left">申込み率</th>
+<th class="left"><!--<span class="webmark">■</span>WEB <span class="faxmark">■</span>郵送-->申込み方法別</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td><a href="./?sp={$i.spaceabbr nocache}">{$i.spacename}</a></td>
+<td class="">{$i.s100}</td>
+<td class="right">{$i.s200}<br/><span class="ruby">{$i.s202}</span></td>
+<td class="right">{$i.s300}<br/><span class="ruby">{$i.s302}</span></td>
+<td class="right">{$i.s400+$i.s401}<br/><span class="ruby">{$i.s402}</span></td>
+<td class="right">{$i.s100+$i.s200+$i.s300+$i.s400+$i.s401}<br/><span class="ruby">{$i.s202+$i.s302+$i.s402}</span></td>
+<td>
+最大受付数:{$i.maxspaces}<br />
+80%ライン:{ceil($i.maxspaces*8/10)}</td>
+{if $i.maxspaces >= ($i.s100+$i.s200+$i.s300+$i.s400+$i.s401+$i.s202+$i.s302+$i.s402)}
+<td><span class="pie1 piefloat">{$i.s100+$i.s200+$i.s300+$i.s400+$i.s401+$i.s202+$i.s302+$i.s402},{$i.maxspaces-($i.s100+$i.s200+$i.s300+$i.s400+$i.s401+$i.s202+$i.s302+$i.s402)}</span>
+{else}
+<td><span class="pie3 piefloat">0,100</span>
+{/if}
+{if $i.maxspaces > 0}
+申込み率<br />{if 50<=floor(($i.s100+$i.s200+$i.s300+$i.s400+$i.s401+$i.s202+$i.s302+$i.s402)*100/$i.maxspaces)}
+<span class="red bold">
+{round((($i.s100+$i.s200+$i.s300+$i.s400+$i.s401+$i.s202+$i.s302+$i.s402)*100/$i.maxspaces),1)}%</span>
+{else}
+{round((($i.s100+$i.s200+$i.s300+$i.s400+$i.s401+$i.s202+$i.s302+$i.s402)*100/$i.maxspaces),1)}%
+{/if}
+{else}
+申込み率<br />(受付なし)
+{/if}
+</td>
+<td width="23%"><span class="pie2 piefloat">{$i.faxcount},{$i.webcount}</span>
+<span class="webmark">■</span>郵送:{if $i.faxcount>0}{round((($i.faxcount/($i.webcount+$i.faxcount)*100)),1)}%{else}0%{/if}<br /><span class="faxmark">■</span>WEB:{if $i.webcount>0}{round((($i.webcount/($i.webcount+$i.faxcount)*100)),1)}%{else}0%{/if}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<ul>
+<li>データが見つかりません。</li>
+</ul>
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/exhibitor.css" rel="stylesheet" />
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.sparkline.js"></script>
+<script type="text/javascript" src="/js/exhibitor_report.js"></script>
+{/block}
+
+{block name='pan'}{$smarty.block.parent}
+{/block}

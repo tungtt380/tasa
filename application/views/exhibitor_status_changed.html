@@ -1,0 +1,28 @@
+{extends file='core/member.html'}
+{block name='headjs'}
+{if $foreign.nextstate == 401 && isset($foreign.exhid) && $foreign.exhid != ''}
+<meta http-equiv="Refresh" content="2;URL=/op/exhibitor/acceptance/{$foreign.exhid}">
+{/if}
+{/block}
+{block name='title'}ステータス変更完了 &laquo; 出展申込者 &laquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>出展者申込 - ステータス変更完了({$status[$foreign.nextstate]})</h2>
+</p>
+{if $foreign.nextstate == 400}<p>審査確認メールを送りました。</p>{/if}
+{if $foreign.nextstate == 401}
+<p>受理書のダウンロードを開始します。<br/>受理書ダウンロードが始まらない場合は、以下のボタンをクリックしてください。</p>
+
+<div class="btn-detail" style="margin:20px 0 0;">
+<a href="./acceptance/{$foreign.exhid}"><img src="/images/common/btn_receipt_issuance.gif" width="150" height="25" alt="受理書発行" /></a>
+<a href="../"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" style="float:right;" /></a>
+</div>
+
+{else}
+<a href="./"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a>
+{/if}
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="../">出展申込者</a>&nbsp;&gt;&nbsp;ステータス変更完了
+{/block}

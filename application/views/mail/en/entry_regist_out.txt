@@ -1,0 +1,160 @@
+TOKYO AUTO SALON 2020【出展申込み確認メール】（控）
+
+　 ◆ ウェブサイト申込み 受付確認
+
+-------------------------------------------------
+
+{$foreign.corpname nocache}
+{$foreign.m_corpname nocache} 様
+
+-------------------------------------------------
+
+この度は TOKYO AUTO SALON 2020 に
+お申込みをいただきまして誠にありがとうございました。
+
+ウェブサイトにてご入力頂いた内容の登録を受付致しました。
+お申込み頂いた内容は、以下の通りです。
+
+--*----*----*----*----*----*----*----*----*----*----*----*----*----*----*----*--
+◆出展会社
+　--------------
+　出展会社名　　：{$foreign.corpname nocache}
+　フリガナ　　　：{$foreign.corpkana nocache}
+　--------------
+　所在地〒　　　：{$foreign.zip nocache} 
+　所在地住所　　：{$foreign.prefecture nocache}{$foreign.address1 nocache} {$foreign.address2 nocache}
+　--------------
+　役職　　　　　：{$foreign.position nocache}
+　代表者名　　　：{$foreign.fullname nocache}
+　フリガナ　　　：{$foreign.fullkana nocache}
+　--------------
+　ＴＥＬ　　　　：{$foreign.phone nocache}
+　ＦＡＸ　　　　：{$foreign.fax nocache}
+　ホームページ　：http://{$foreign.url nocache}
+
+◆表示名
+　--------------
+　出展会社名　　：{$foreign.brandname nocache}
+　フリガナ　　　：{$foreign.brandkana nocache}
+
+◆責任者名
+　--------------
+　会社名　　　　：{$foreign.m_corpname nocache}
+　フリガナ　　　：{$foreign.m_corpkana nocache}
+　--------------
+　所在地〒　　　：{$foreign.m_zip nocache} 
+　所在地住所　　：{$foreign.m_prefecture nocache}{$foreign.m_address1 nocache} {$foreign.m_address2 nocache} 
+　--------------
+　所属　　　　　：{$foreign.m_section nocache}
+　役職　　　　　：{$foreign.m_position nocache}
+　氏名　　　　　：{$foreign.m_fullname nocache}
+　フリガナ　　　：{$foreign.m_fullkana nocache}
+　--------------
+　ＴＥＬ　　　　：{$foreign.m_phone nocache}
+　ＦＡＸ　　　　：{$foreign.m_fax nocache}
+　携帯　　　　　：{$foreign.m_mobile nocache}
+　メールアドレス：{$foreign.m_email nocache}
+
+◆請求先
+　--------------
+　会社名　　　　：{$foreign.b_corpname nocache}
+　フリガナ　　　：{$foreign.b_corpkana nocache}
+　--------------
+　所在地〒　　　：{$foreign.b_zip nocache} 
+　所在地住所　　：{$foreign.b_prefecture nocache}{$foreign.b_address1 nocache} {$foreign.b_address2 nocache} 
+　--------------
+　所属　　　　　：{$foreign.b_section nocache}
+　役職　　　　　：{$foreign.b_position nocache}
+　氏名　　　　　：{$foreign.b_fullname nocache}
+　フリガナ　　　：{$foreign.b_fullkana nocache}
+　--------------
+　ＴＥＬ　　　　：{$foreign.b_phone nocache}
+　ＦＡＸ　　　　：{$foreign.b_fax nocache}
+
+◆連絡先
+　--------------
+　会社名　　　　：{$foreign.c_corpname nocache}
+　フリガナ　　　：{$foreign.c_corpkana nocache}
+　--------------
+　所在地〒　　　：{$foreign.c_zip nocache} 
+　所在地住所　　：{$foreign.c_prefecture nocache}{$foreign.c_address1 nocache} {$foreign.c_address2 nocache} 
+　--------------
+　所属　　　　　：{$foreign.c_section nocache}
+　役職　　　　　：{$foreign.c_position nocache}
+　氏名　　　　　：{$foreign.c_fullname nocache}
+　フリガナ　　　：{$foreign.c_fullkana nocache}
+　--------------
+　ＴＥＬ　　　　：{$foreign.c_phone nocache}
+　ＦＡＸ　　　　：{$foreign.c_fax nocache}
+　携帯　　　　　：{$foreign.c_mobile nocache}
+　メールアドレス：{$foreign.c_email nocache}
+
+◆送付先
+　--------------
+　会社名　　　　：{$foreign.d_corpname nocache}
+　フリガナ　　　：{$foreign.d_corpkana nocache}
+　--------------
+　所在地〒　　　：{$foreign.d_zip nocache} 
+　所在地住所　　：{$foreign.d_prefecture nocache}{$foreign.d_address1 nocache} {$foreign.d_address2 nocache} 
+　--------------
+　所属　　　　　：{$foreign.d_section nocache}
+　役職　　　　　：{$foreign.d_position nocache}
+　氏名　　　　　：{$foreign.d_fullname nocache}
+　フリガナ　　　：{$foreign.d_fullkana nocache}
+　--------------
+　ＴＥＬ　　　　：{$foreign.d_phone nocache}
+　ＦＡＸ　　　　：{$foreign.d_fax nocache}
+
+◆出展内容
+　--------------
+　カテゴリー　　：{foreach from=$category name=rec key=k item=i}{assign var="key" value="q_category_{$k}"}{if isset($foreign.$key) && $foreign.$key != ''}■{$i}&nbsp;{/if}{/foreach}
+　展示車両　　　：{foreach from=$section name=rec key=k item=i}{assign var="key" value="q_section_{$k}"}{if isset($foreign.$key) && $foreign.$key != ''}■{$i}&nbsp;{/if}{/foreach}
+　展示車両台数　：{$foreign.q_entrycars nocache}
+　物販内容　　　：{$foreign.q_salesitem nocache}
+
+◆希望小間形状
+　--------------
+　希望小間形状　：{if isset($foreign.q_boothcount1) && $foreign.q_boothcount1 >= 1}{$booth[$foreign.q_booth1]}{/if}
+　　　（追加１）：{if isset($foreign.q_boothcount2) && $foreign.q_boothcount2 >= 1}{$booth[$foreign.q_booth2]}{/if}
+　　　（追加２）：{if isset($foreign.q_boothcount3) && $foreign.q_boothcount3 >= 1}{$booth[$foreign.q_booth3]}{/if}
+　
+--*----*----*----*----*----*----*----*----*----*----*----*----*----*----*----*--
+
+なお、この時点では、正式受理ではございません。
+事務局から郵送にてお送りする『受理書』をもって、
+正式受理とさせていただきます。
+予めご了承下さい。
+
+※「出展の流れ」については、
+　 http://www.tokyoautosalon.jp/2020ex/en/procedure/ をご覧下さい。
+
+/////////////////////////////////////////////////
+　※このメールには返信できません。
+
+　■問い合わせNo.
+　　{$foreign.exhid nocache}
+　■TOKYO AUTO SALON 2020に関する
+　　お問い合わせは info@tokyoautosalon.jp
+　　（東京オートサロン事務局）
+　■当システムやWebサイトに関するお問い合わせは
+　　tas_web@sans-inc.net
+　　TEL：03-3461-9885 (AUTOSALON Web担当)
+　　まで、お願い致します。
+
+-------------------------------------------------
+　登録日：{$foreign.created nocache}
+-------------------------------------------------
+
+
+〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
+
+　東京オートサロン事務局
+
+　　http://www.tokyoautosalon.jp
+　　http://cus.tokyoautosalon.jp（出展者様向け）
+　　info@tokyoautosalon.jp
+　　TEL：03-3461-9885
+　　FAX：03-3461-9882
+
+〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
+

@@ -1,0 +1,63 @@
+@charset "utf-8";
+
+.blockwarn {
+	padding: 4px 6px 0px;
+	font-size:9pt;
+	font-weight:bold;
+	display:none;
+}
+.blockwarn p {
+	color:#f00;
+	margin:0;
+}
+.linewarn{
+	padding: 2px 4px 0px;
+	font-size:8pt;
+	font-weight:bold;
+	color:#f00;
+	margin:0;
+}
+.lineinfo{
+	line-height:133%;
+}
+/*
+*
+*/
+div.crit, div.error{
+	background: #f93;
+	padding: 2px 4px 0px;
+	border: 2px solid #880;
+	font-size:9pt;
+}
+div.warn{
+	background: #fc9;
+	padding: 2px 4px 0px;
+	border: 2px solid #880;
+	font-size:9pt;
+}
+div.notice{
+	background: #ff9;
+	padding: 2px 4px 0px;
+	border: 2px solid #880;
+	font-size:9pt;
+}
+div.info{
+/*	background: #cf9;*/
+	padding: 2px 4px 0px;
+	border: 2px solid #880;
+	font-size:8pt;
+}
+div.debug, div.trace{
+	background: #ccf;
+	padding: 2px 4px 0px;
+	border: 2px solid #880;
+	font-size:8pt;
+}
+/*
+*
+*/
+.info{
+	border: 2px solid #030;
+	padding: 1em;
+	background-color: #063;
+}

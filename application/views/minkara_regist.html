@@ -1,0 +1,118 @@
+{extends file='core/member.html'}
+{block name='title'}みんカラ×オートサロン 参加確認 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>みんカラ×オートサロン</h2>
+<h3><img src="/images/minkara/logo.jpg" width="300" height="54" /></h3>
+<p style="padding:0 0 0 15px; font-weight:bold;">出展ブースを最大手のSNSサイトを活用してアピールしてみませんか？</p>
+
+<dl style="margin:20px 0 0 15px;">
+<dt style="font-size:1.3em; font-weight:bold; text-decoration:underline; padding:20px 0 10px; line-height:1.6em">日本最大級のクルマ[イベント＆SNSサイト]がコラボ！
+</dt>
+<dd style="line-height:1.75em; padding:0 0 0 1em; font-size:1.1em">このたび、みんカラとオートサロンがコラボすることになりました！<br />
+バーチャルコミュニケーションとしてのみんカラと、リアルコミュニケーションとしてのオートサロンをミックスし、よりダイレクトに来場者の反応、イベントへの集客などが可能になります。<br />
+ユーザーとの接点が増えること、よりリアルタイムでの反応を得られることで、クチコミによる広告効果もアップ！ぜひこのチャンスをお見逃しなく！！
+<br />
+※参考<br />
+「みんカラ」サイト → <a href="http://minkara.carview.co.jp/" target="_blank">http://minkara.carview.co.jp/</a><br />
+「東京オートサロン」サイト → <a href="http://www.tokyoautosalon.jp/" target="_blank">http://www.tokyoautosalon.jp/</a></dd>
+<dt style="font-size:1.3em; font-weight:bold; text-decoration:underline; padding:20px 0 10px">リアルタイムに情報発信！（「みんカラ+」同様）</dt>
+<dd style="line-height:1.75em; padding:0 0 0 1em; font-size:1.1em">ご出展社様各位に於いて書き込みのできるブログサイトです<br />
+<span style="font-weight:bold">開催期間は2012年1月6日～2012年2月5日（予定）</span><br />
+※利用例<br />
+1月6日～	　：事前情報で来場者を出展ブースに誘導<br />
+1月13日～15日　：会期中はLIVE情報発信<br />
+1月16日～	　：来場者フォロー、クチコミ効果での販売促進</dd>
+<dt style="font-size:1.3em; font-weight:bold; text-decoration:underline; padding:20px 0 10px">通常の「みんカラ+」には無い特別なサービス！</dt>
+<dd style="line-height:1.75em; padding:0 0 0 1em; font-size:1.1em">・メルマガの発信（当サイト立ち上げ時、東京オートサロン開催時を予定）<br />
+・TOPページにはすべての出展社様名を記載（予定）<br />
+・1月16日（月）からはオートサロン出展デモカー/パーツを紹介するコーナー新設<br />
+　（みんカラユーザーによる投票キャンペーン実施予定）
+</dd>
+</dl>
+<div style="padding:10px; margin:30px 0; background-color:#eee; border:#999 solid 1px;">
+<span style="font-size:1.1em; text-decoration:underline;font-weight:bold;">「みんカラ+（プラス）」とは？</span>&nbsp;&nbsp;&nbsp;<a href="http://minkara.carview.co.jp/plus/" target="_blank">http://minkara.carview.co.jp/plus/</a>
+	<br />
+	みんカラは株式会社カービューが運営する、国内最大級のクルマ専門SNSです。<br />
+みんカラ＋（プラス）は、みんカラの中で、ショップやサービス店などをまとめて紹介するページ。<br />
+クルマ好きが多く集まるので、デモカーを登録して自慢したり、ショップが行うさまざまな施行例をブログで紹介したりと、クルマへの関心度が高い人々へ、効果的にアプローチすることが可能です。<br /><br />
+アフターパーツの購入には３人に一人がみんカラを参考にしているとのデータもあり（※）、雑誌やチラシよりも高い宣伝効果が期待できます。（※マクロミル調べ）
+<br /><br />
+ショップなら全国へ、サービス店なら地域限定で集客が可能！まずはみんカラの実力に触れてください。</div>
+
+【お申込み方法】<br />
+参加希望者には別途申込書を送付いたしますので下記ボタンより参加希望の連絡をお願い致します。お申込みには参加法人の印鑑証明が必要となります。
+※12月5日まで必要書類の必着にてお申込完了となります。<br /><br />
+<div>
+<table class="exhform">
+<colgroup class="w200">
+<colgroup>
+<tbody>
+<tr><th>お問い合わせコード</th><td>{$exhibitor.exhid}</td></tr>
+<tr><th>出展者名</th><td>{$exhibitor.corpname}</td></tr>
+<tr><th>表示名</th><td>{$exhibitor.brandname}</td></tr>
+<tr>
+	<th><span class="w200">所在地</span></th>
+	<td>{$exhibitor.c_zip nocache}<br />
+		{$exhibitor.c_prefecture nocache}{$exhibitor.c_address1 nocache}{$exhibitor.c_address2 nocache}</td>
+</tr>
+<tr><th>担当者</th><td>{$exhibitor.c_fullname}</td></tr>
+<tr><th>TEL</th><td>{deco_phone($exhibitor.c_countrycode,$exhibitor.c_phone)}</td></tr>
+</tbody>
+</table>
+</div>
+<br />上記ご担当者様に申込書を送付致します。宜しければ、下記ボタンを押して確認画面に進んでください。
+
+<form method="post" action="regist_in">
+<input type="hidden" name="exhid" value="{$foreign.exhid}"/>
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid}"/>
+<input type="hidden" name="zip" value="{$exhibitor.c_zip nocache}"/>
+<input type="hidden" name="prefecture" value="{$exhibitor.c_prefecture nocache}"/>
+<input type="hidden" name="address1" value="{$exhibitor.c_address1 nocache}"/>
+<input type="hidden" name="address2" value="{$exhibitor.c_address2 nocache}"/>
+<input type="hidden" name="corpname" value="{$exhibitor.corpname}"/>
+<input type="hidden" name="c_fullname" value="{$exhibitor.c_fullname}"/>
+<input type="hidden" name="deco_phone" value="{deco_phone($exhibitor.c_countrycode,$exhibitor.c_phone)}"/>
+
+<p style="font-size:1.4em; font-weight:bold; margin:30px 0 0;"><span class="red">参加費は10万円/件
+<br />是非お申込みください！<input type="image" src="/images/common/btn_sign_up.gif" id="action" name="action" value="確認画面へ" />
+<a href="/ex/"><img src="/images/common/btn_back_04.gif" /></a></span>
+</p>
+</form>
+<h3 style="width:100%;height:30px;line-height:33px;color:#fff;font-size:14px;text-indent:10px;margin:20px 0 15px;background:#09F;border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">お申込みの流れ</h3>
+
+<dl style="margin:10px 0 20px 15px;">
+<dt style="font-size:1.3em; font-weight:bold; text-decoration:underline; padding:20px 0 10px; line-height:1.6em">１．ご出展社様ログイン画面からお申込みください</dt>
+<dt style="font-size:1.3em; font-weight:bold; text-decoration:underline; padding:20px 0 10px; line-height:1.6em">２．申込書／契約書／請求書が届きます</dt>
+<dd style="line-height:1.75em; padding:0 0 0 1em; font-size:1.1em">ご出展社様の印鑑証明が別途必要となりますのでご用意ください。</dd>
+<dt style="font-size:1.3em; font-weight:bold; text-decoration:underline; padding:20px 0 10px; line-height:1.6em">３．申込書／契約書をお送りください</dt>
+<dd style="line-height:1.75em; padding:0 0 0 1em; font-size:1.1em">必要事項を記入のうえ郵送にてご提出ください。
+<br />第1次締切：2011年12月5日（月）　</dd>
+<dt style="font-size:1.3em; font-weight:bold; text-decoration:underline; padding:20px 0 10px; line-height:1.6em">４．参加費をご入金ください</dt>
+<dd style="line-height:1.75em; padding:0 0 0 1em; font-size:1.1em">お支払期限：2011年12月12日（月）</dd>
+<dt style="font-size:1.3em; font-weight:bold; text-decoration:underline; padding:20px 0 10px; line-height:1.6em">５．初期設定済みIDをお渡しします</dt>
+<dd style="line-height:1.75em; padding:0 0 0 1em; font-size:1.1em">IDお渡し予定日：2011年12月15日（木）</dd>
+</dl>
+
+
+
+
+<p>&lt;&lt;お問合せ先&gt;&gt;&#13;<br />
+東京オートサロン事務局<br />
+TEL：03-6897-4820&#13;<br />
+E-mail：<u><a href="mailto:info@tokyoautosalon.jp">info@tokyoautosalon.jp</a></u>&#13;</p>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;みんカラ×オートサロン 参加確認
+{/block}
+

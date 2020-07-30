@@ -1,0 +1,62 @@
+TOKYO AUTO SALON 2020【みんカラ×オートサロン】
+
+　 ◆ 申込書 内容確認
+
+-------------------------------------------------
+
+{$exhibitor.c_corpname nocache} 
+{$exhibitor.c_fullname nocache} 様
+
+-------------------------------------------------
+
+この度は みんカラ×オートサロンに
+参加希望をいただきまして誠にありがとうございました。
+
+
+
+なお、この時点では、申し込み完了ではございません。
+事務局からお送りする『申込書』にご記入頂き、12/5（月）必着
+でご返送頂き、申し込み完了となります。
+
+【申込書送付先】
+
+お問い合わせコード：{$exhibitor.exhid}
+出展者名：{$exhibitor.corpname}
+表示名：{$exhibitor.brandname}
+所在地：
+〒{deco_zip($exhibitor.c_countrycode,$exhibitor.c_zip)}
+{$exhibitor.c_prefecture nocache}{$exhibitor.c_address1 nocache}{$exhibitor.c_address2 nocache}
+
+担当者：{$exhibitor.c_fullname}
+TEL：{deco_phone($exhibitor.c_countrycode,$exhibitor.c_phone)}
+
+
+
+/////////////////////////////////////////////////
+　※このメールには返信できません。
+
+　■問い合わせNo.
+　　{$exhibitor.exhid nocache}
+　■TOKYO AUTO SALON 2020に関する
+　　お問い合わせは info@tokyoautosalon.jp
+　　（東京オートサロン事務局）
+　　　まで、お願い致します。
+
+-------------------------------------------------
+　確認日：{$foreign['updated'] nocache}
+-------------------------------------------------
+
+
+〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
+
+　東京オートサロン事務局
+
+　　http://www.tokyoautosalon.jp
+　　http://cus.tokyoautosalon.jp（出展者様向け）
+　　info@tokyoautosalon.jp
+　　TEL：03-6897-4820
+　　FAX：03-6897-4840
+
+〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
+
+

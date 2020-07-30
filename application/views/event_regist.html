@@ -1,0 +1,92 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &raquo; 開催情報 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>開催情報 &raquo; 登録</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="regist-nav">
+<form method="post" action="regist_in">
+<table class="uniform">
+
+<tr>
+<th>開催コード</th>
+<td>(新規)</td>
+</tr>
+
+<tr>
+<th>開催名称</th>
+<td>
+<input type="text" name="eventname" value="{$foreign.eventname nocache}" placeholder="開催名称を入力" />
+{if $message.eventname != '' nocache}<span class="linewarn">{$message.eventname nocache}</span>{/if}
+<span class="example">例) 東京オートサロン2011</span>
+</td>
+</tr>
+
+<tr>
+<th>開催略称</th>
+<td>
+<input type="text" name="eventabbr" value="{$foreign.eventabbr nocache}" placeholder="開催略称を入力" />
+{if $message.eventabbr != '' nocache}<span class="linewarn">{$message.eventabbr nocache}</span>{/if}
+<span class="example">例) TAS2011</span>
+</td>
+</tr>
+
+<tr>
+<th>開催区分</th>
+<td>
+{form_dropdown('eventtype', $eventtype, $foreign.eventtype, 'id="eventtype"')}
+{if $message.eventtype != '' nocache}<span class="linewarn">{$message.eventtype nocache}</span>{/if}
+</td>
+</tr>
+
+<tr>
+<th>会場</th>
+<td>
+{form_dropdown('eventsite', $location, $foreign.eventsite, 'id="eventsite"')}
+{if $message.eventsite != '' nocache}<span class="linewarn">{$message.eventsite nocache}</span>{/if}
+</td>
+</tr>
+
+<tr>
+<th>開催期間</th>
+<td>
+自）<input type="text" id="event_sdate" name="event_sdate" class="datepicker" value="{$foreign.event_sdate nocache}" placeholder="YYYY-MM-DD形式" />
+{if $message.event_sdate != '' nocache}<span class="linewarn">{$message.event_sdate nocache}</span>{/if}
+<span class="example">例) 2011-01-14</span><br />
+至）<input type="text" id="event_edate" name="event_edate" class="datepicker" value="{$foreign.event_edate nocache}" placeholder="YYYY-MM-DD形式" />
+{if $message.event_edate != '' nocache}<span class="linewarn">{$message.event_edate nocache}</span>{/if}
+<span class="example">例) 2011-01-16</span><br />
+</td>
+</tr>
+
+<tr>
+<th>申込期間</th>
+<td>
+自）<input type="text" id="entry_sdate" name="entry_sdate" class="datepicker" value="{$foreign.entry_sdate nocache}" placeholder="YYYY-MM-DD形式" />
+{if $message.entry_sdate != '' nocache}<span class="linewarn">{$message.entry_edate nocache}</span>{/if}
+<span class="example">例) 2010-07-01</span><br />
+至）<input type="text" id="entry_edate" name="entry_edate" class="datepicker" value="{$foreign.entry_sdate nocache}" placeholder="YYYY-MM-DD形式" />
+{if $message.entry_edate != '' nocache}<span class="linewarn">{$message.entry_edate nocache}</span>{/if}
+<span class="example">例) 2010-08-31</span><br />
+</td>
+</tr>
+
+</table>
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+</form>
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.14.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/ui/i18n/jquery.ui.datepicker-ja.js"></script>
+<script type="text/javascript" src="/js/event_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/event/">開催情報</a>&nbsp;&gt;&nbsp;登録
+{/block}

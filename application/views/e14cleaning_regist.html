@@ -1,0 +1,63 @@
+{extends file='core/member.html'}
+{block name='title'}(14)小間内清掃申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>小間内清掃申込</h2>
+{if isset($message.__all)}
+<div class="blockwarn"><p>{$message.__all nocache}</p></div> 
+{/if}
+
+{include file='core/ex_insupport.html' nocache}
+{include file='core/exhform.html' nocache}
+
+<form method="post" action="regist_in">
+<input type="hidden" name="exhid" value="{$foreign.exhid}"/>
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid}"/>
+
+<div id="tabcorp">
+{include file='core/e14form.html' nocache}
+</div>
+
+<table class="uniform">
+<tr>
+<th colspan="2" class="sub">請求先</th>
+</tr>
+<tr>
+<th>請求先</th>
+<td>
+<select name="billid">
+{foreach from=$lists name=rec item=i}
+<option value="{$i.billid}" {if $foreign.billid==$i.billid}selected{/if}>〒{$i.zip} {$i.prefecture} {$i.address1} {$i.address2} {$i.corpname} {$i.position} {$i.fullname}</option>
+{/foreach}
+</select>
+</td>
+</tr>
+<tr>
+<th>支払方法</th>
+<td>
+<span class="red"><b>海外ご出展者様は、最終日に現金でのお支払いをお願いします。</b></span><br/>
+<input name="paymethod" type="radio" value="0" {if $foreign.paymethod==0}checked="checked"{/if}/>
+銀行振込（開催終了後に請求書を送付いたします）<br/>
+<input name="paymethod" type="radio" value="1" {if $foreign.paymethod==1}checked="checked"{/if}/>
+集金（開催最終日に領収書をもってお伺いします）
+</td>
+</tr>
+</table>
+
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="確認画面へ" />
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/e.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e14cleaning_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e14cleaning/">小間内清掃申込</a>&nbsp;&gt;&nbsp;登録
+{/block}

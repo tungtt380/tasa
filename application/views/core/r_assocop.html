@@ -1,0 +1,128 @@
+{block name='mnav'}
+<ul class="mnav">
+
+{if uri_folder_string() == '/op'}
+<li class="lv1 n2"><h3><img src="/images/common/ico_03.png" width="20" height="20" alt="出展申込" />出展申込</h3><ul>
+{if uri_match(uri_folder_string('/service'), $rolepermission)}
+  <li><a href="{uri_folder_string()}/service">サービス状態</a></li>
+{/if}
+  <li><a href="{uri_folder_string()}/exhibitor">出展申込一覧</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/create">新規登録</a></li>
+</ul></li>
+{/if}
+{/if}
+
+{if uri_match(uri_folder_string('/exhibitor'), $rolepermission)}
+{if uri_folder_string() == '/op'}
+<li class="lv1 n3"><h3><img src="/images/common/ico_04.png" width="20" height="20" alt="出展申込集計"  /><a href="{uri_folder_string()}/exhibitor/report">出展申込集計</a></h3><ul>
+  <li><a href="{uri_folder_string()}/exhibitor/?s=100">受付待ち一覧</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?s=300">審査待ち一覧</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?s=400">受理待ち一覧</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?s=401">出展者一覧</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?s=302">キャンセル待ち一覧</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/download">ダウンロード</a></li>
+  <li><a href="{uri_folder_string()}/exmatch">顧客マッチング</a></li>
+</ul></li>
+
+<li class="lv1 n3"><h3><img src="/images/common/ico_04.png" width="20" height="20" alt="媒体ブース" />媒体ブース</h3><ul>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3AOPTION">OPTION</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3AOPT2">OPTION2</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3ADORI">ドリフト天国</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3AGWORKS">G-ワークス</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3AGQ">GENROQ</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3ASPE">Special Cars</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3ASTYLE">STYLE WAGON</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3AREV">REV SPEED</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3AJLUG">J-LUG</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3AGOOUT">GO OUT</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3Aclicccar">クリッカー</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3ACARXS">カーXS</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3ALEGEND">レジェンド</a></li>
+  <li><a href="{uri_folder_string()}/exhibitor/?q=promotion%3ATUNINGCAR">チューニングカーギャラリー</a></li>
+</ul></li>
+{/if}
+{/if}
+
+{if uri_match('/op/billing', $rolepermission)}
+<li class="lv1 n2"><h3><img src="/images/common/ico_03.png" width="20" height="20" alt="請求関連" />請求関連</h3><ul>
+  <li><a href="{uri_folder_string()}/billing">請求先名寄せ</a></li>
+  <li><a href="{uri_folder_string()}/exhibitorfee">出展料請求(請求書登録)</a></li>
+  <li><a href="{uri_folder_string()}/overtimefee">有料残業請求</a></li>
+  <li><a href="{uri_folder_string()}/anteroomfee">有料控室請求</a></li>
+  <li><a href="{uri_folder_string()}/ticketfee">パス類追加請求</a></li>
+  <li><a href="{uri_folder_string()}/itemfee">個別請求(請求書登録)</a></li>
+  <li><a href="{uri_folder_string()}/invoice">請求書発行</a></li>
+  <li><a href="{uri_folder_string()}/invoice">請求一覧/再発行</a></li>
+</ul></li>
+<li class="lv1 n2"><h3><img src="/images/common/ico_03.png" width="20" height="20" alt="追加請求関連" />追加請求関連</h3><ul>
+  <li><a href="{uri_folder_string()}/billing">請求先一覧</a></li>
+  <li><a href="{uri_folder_string()}/billing/create">請求先登録</a></li>
+</ul></li>
+{/if}
+
+{if uri_match(uri_folder_string('/payment'), $rolepermission)}
+<li class="lv1 n2"><h3><img src="/images/common/ico_03.png" width="20" height="20" alt="入金関連" />入金関連</h3><ul>
+  <li><a href="{uri_folder_string()}/payment">入金一覧/入金消込</a></li>
+  <li><a href="{uri_folder_string()}/payment/create">入金登録</a></li>
+</ul></li>
+{/if}
+
+{if uri_match('/op/sales', $rolepermission)}
+<li class="lv1 n2"><h3><img src="/images/common/ico_03.png" width="20" height="20" alt="入金関連" />売上集計</h3><ul>
+  <li><a href="{uri_folder_string()}/sales">売上集計</a></li>
+</ul></li>
+{/if}
+
+{elseif uri_folder_string() == '/op'}
+<li class="lv1 n5"><h3><img src="/images/common/ico_08.png" width="20" height="20" alt="各種手続" />各種手続</h3><ul>
+ <li><a href="{uri_folder_string()}/e01car">１.展示車両登録</a><div style="float:right">★</div></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e02publicinfo">２.公開用出展者データ</a><div style="float:right">★</div></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e03present">３.アンケート回答プレゼント協賛</a></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e04construction">４.施工業者登録</a><div style="float:right">★</div></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e05passticket">５.パス類追加請求</a></li>
+ <li class="lv2 fax"><a href="{uri_folder_string()}/e06_01electric">６-１.電気供給申込</a><div style="float:right">★<span class="labelcount">FAX</span></div></li>
+ <li class="lv2 fax"><a href="{uri_folder_string()}/e06_02electric">６-２.通路側外壁証明申込</a><div style="float:right">★<span class="labelcount">FAX</span></div></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e07voucherticket">７.飲食共通利用券</a></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e08anchor">８.アンカー工事申請</a></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e09floor">９.天井・2階建工事申請</a></li>
+ <li class="lv2 fax"><a href="{uri_folder_string()}/e10baloonrental">10.バルーン・レンタル申込</a><div style="float:right"><span class="labelcount">FAX</span></div></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e11avrental">11.AV機材レンタル申込</a></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e12lease">12.リース備品申込</a></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e13equipment">13.オプション備品申込</a></li>
+ <li class="lv2"><a href="{uri_folder_string()}/e14cleaning">14.小間内清掃申込</a></li>
+ <li class="lv2 fax"><a href="{uri_folder_string()}/e15lunchbox">15.弁当類申込</a><div style="float:right"><span class="labelcount">FAX</span></div></li>
+ <li class="lv2 fax"><a href="{uri_folder_string()}/e16reservation">16.宿泊予約申込</a><div style="float:right"><span class="labelcount">FAX</span></div></li>
+</ul></li>
+<li class="lv1 n5"><h3><img src="/images/common/ico_08.png" width="20" height="20" alt="各種手続" />各種手続(２次受付)</h3><ul>
+ <li><a name="{uri_folder_string()}/e21car">21.展示車両登録(公開用)</a><div style="float:right">★</div></li>
+ <li><a name="{uri_folder_string()}/e25paccticket">25.パス類追加請求(２次)</a></li>
+</ul></li>
+<li class="lv1 n5"><h3><img src="/images/common/ico_08.png" width="20" height="20" alt="各種手続" />各種手続(企画)</h3><ul>
+ <li class="lv2 fax"><a href="{uri_folder_string()}/minkara">みんカラ</a></li>
+</ul></li>
+{/if}
+
+{if uri_match(uri_folder_string('/customer'), $rolepermission)}
+<li class="lv1 n4"><h3><img src="/images/common/ico_05.png" width="20" height="20" alt="顧客情報" />顧客情報</h3><ul>
+ <li><a href="{uri_folder_string()}/customer">顧客</a></li>
+</ul></li>
+{/if}
+
+{if uri_match(uri_folder_string('/account'), $rolepermission)}
+<li class="lv1 n5"><h3><img src="/images/common/ico_06.png" width="20" height="20" alt="アカウント" />アカウント</h3><ul>
+ <li><a href="{uri_folder_string()}/account">アカウント</a></li>
+ <li><a href="{uri_folder_string()}/role">役割</a></li>
+</ul></li>
+{/if}
+
+{if uri_folder_string() != '/ex'}
+<li class="lv1 sub"><ul>
+ <li class="n6"><h3><img src="/images/common/ico_07.png" width="20" height="20" alt="メールアドレス変更" /><a href="{uri_folder_string()}/email">メールアドレス変更</a></h3></li>
+ <li class="n7"><h3><img src="/images/common/ico_08.png" width="20" height="20" alt="ユーザー名変更"  /><a href="{uri_folder_string()}/username">ユーザー名変更</a></h3></li>
+</ul></li>
+{/if}
+
+</ul>
+{/block}
+
+

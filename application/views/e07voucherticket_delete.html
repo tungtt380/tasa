@@ -1,0 +1,59 @@
+{extends file='core/member.html'}
+{block name='title'}削除 &raquo; 幕張新都心食事券 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>幕張新都心食事券削除</h2> 
+<p>削除してよろしいですか？<br>
+削除すると元に戻せなくなります。</p>
+<!--
+<form method="post" action="../history" target="_blank"> 
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input name="addpass_submit_a" type="submit" class="bt1" value="今までのお申込み履歴" />
+</form>
+-->
+{if isset($message.__all)}
+<div class="blockwarn"><p>{$message.__all nocache}</p></div>
+{/if}
+
+<div id="tabcorp"> 
+<table class="uniform">
+<tr> 
+<th colspan="2" class="main">幕張新都心飲食共通利用券</th>
+</tr>
+<tr>
+<th class="w200">利用券の追加枚数</th>
+<td>これまでの申込枚数：{$quant|default:0 nocache}枚に、以下の枚数を追加申込みします。<br />
+@1,000円券×{$foreign.addquantity nocache}枚<br/>
+(250円券×3枚＋100円券×2枚＋50円券×１枚)
+{if $message.addquantity != '' nocache}<span class="linewarn">{$message.addquantity nocache}</span>{/if}
+</td>
+</tr>
+<tr> 
+<th colspan="2" class="sub">ご請求先</th>
+</tr>
+<tr>
+<th class="w200">ご請求先</th>
+<td>〒{$lists.0.zip} {$lists.0.prefecture} {$lists.0.address1} {$lists.0.address2} {$lists.0.corpname} {$lists.0.position} {$lists.0.fullname}
+<br />
+{if $message.billid != '' nocache}<span class="linewarn">{$message.billid nocache}</span>{/if}</td>
+</tr>
+</table>
+</div>
+<a href="/op/e07voucherticket/"><img src="/images/common/btn_cancel.gif" width="100" height="25" alt="キャンセル" style="float:right;" /></a>
+<form method="post" action="../delete_in"> 
+<input type="image" src="/images/common/btn_delete.gif" id="action" name="action" value="削除">
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e04construction_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e07voucherticket/">幕張新都心食事券</a>&nbsp;&gt;&nbsp;削除
+{/block}

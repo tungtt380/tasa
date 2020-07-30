@@ -1,0 +1,49 @@
+{extends file='core/member.html'}
+{block name='title'}削除 &raquo; 小間形状 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>削除 &raquo; 小間形状</h2>
+<p class="faxmark">以下のデータを削除してよろしいですか？
+<br />注意！削除すると元に戻せなくなります。</p>
+<div id="delete-nav">
+<form method="post" action="../delete_in">
+<table class="uniform">
+<tr>
+<th>小間形状コード</th>
+<td>{$foreign.boothid nocache}</td>
+</tr>
+<tr>
+<th>イベント名</th>
+<td>{$event[$foreign.eventid] nocache}</td>
+</tr>
+<tr>
+<th>小間形状番号</th>
+<td>{$foreign.boothno nocache}</td>
+</tr>
+<tr>
+<th>小間種別</th>
+<td>{$space[$foreign.spaceid] nocache}</td>
+</tr>
+<tr>
+<th>小間形状名</th>
+<td>{$foreign.boothname nocache}</td>
+</tr>
+<tr>
+<th>小間形状略記</th>
+<td>{$foreign.boothabbr nocache}</td>
+</tr>
+<tr>
+<th>小間数</th>
+<td>{$foreign.boothcount nocache}</td>
+</tr>
+
+</table>
+<input type="hidden" id="boothid" name="boothid" value="{$foreign.boothid nocache}">
+<input type="image" src="/images/common/btn_delete.gif" id="action" name="action" value="削除">
+<a href="../"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" style="float:right;" /></a>
+</form>
+</div>
+{/block}
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/booth/">小間形状</a>&nbsp;&gt;&nbsp;削除
+{/block}

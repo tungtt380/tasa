@@ -1,0 +1,230 @@
+<div id="tabmachine3">
+<table class="uniform">
+<thead>
+<tr><th colspan="3">車両スペック(ドレスアップ)</th></tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="3">外装系</th>
+<td>エアロキット名</td>
+<td>
+<span class="example"><label for="sharyo_deco_airo"></label></span>
+<input type="text" id="sharyo_deco_airo" name="aeroname" size="60" maxlength="25" value="{$foreign.aeroname nocache}" placeholder="名称">
+{if $message.aeroname != '' nocache}<span class="linewarn">{$message.aeroname nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>ボディカラー</td>
+<td>
+<span class="example"><label for="sharyo_deco_color"></label></span>
+<input type="text" id="sharyo_deco_color" name="bodycolor" size="60" maxlength="25" value="{$foreign.bodycolor nocache}" placeholder="名称">
+{if $message.bodycolor != '' nocache}<span class="linewarn">{$message.bodycolor nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>ドレスアップ内容＆<br>使用パーツ</td>
+<td>
+<span class="example"><label for="sharyo_deco_dress"></label></span>
+<textarea id="sharyo_deco_dress" name="dressupcomment" maxlength="100" cols="50" rows="2">{$foreign.dressupcomment nocache}</textarea>
+{if $message.dressupcomment != '' nocache}<span class="linewarn">{$message.dressupcomment nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th rowspan="7">内装／オーディオ関係</th>
+<td>シート</td>
+<td>
+<span class="example"><label for="sharyo_naiso_sheet"></label></span>
+<input type="text" id="sharyo_naiso_sheet" name="sheet" size="48" maxlength="25" value="{$foreign.sheet nocache}" placeholder="名称">
+{if $message.sheet != '' nocache}<span class="linewarn">{$message.sheet nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>ステアリング</td>
+<td>
+<span class="example"><label for="sharyo_naiso_stearing"></label></span>
+<input type="text" id="sharyo_naiso_stearing" name="steering" size="48" maxlength="25" value="{$foreign.steering nocache}" placeholder="名称">
+{if $message.steering != '' nocache}<span class="linewarn">{$message.steering nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>インパネ</td>
+<td>
+<span class="example"><label for="sharyo_naiso_meter"></label></span>
+<input type="text" id="sharyo_naiso_meter" name="meter" size="48" maxlength="25" value="{$foreign.meter nocache}" placeholder="名称">
+{if $message.meter != '' nocache}<span class="linewarn">{$message.meter nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>フロアマット</td>
+<td>
+<span class="example"><label for="sharyo_naiso_floormat"></label></span>
+<input type="text" id="sharyo_naiso_floormat" name="floormat" size="48" maxlength="25" value="{$foreign.floormat nocache}" placeholder="名称">
+{if $message.floormat != '' nocache}<span class="linewarn">{$message.floormat nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>オーディオ</td>
+<td>
+<span class="example"><label for="sharyo_naiso_audio"></label></span>
+<input type="text" id="sharyo_naiso_audio" name="audio" size="48" maxlength="25" value="{$foreign.audio nocache}" placeholder="名称">
+{if $message.audio != '' nocache}<span class="linewarn">{$message.audio nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>カーナビ</td>
+<td>
+<span class="example"><label for="sharyo_naiso_navi"></label></span>
+<input type="text" id="sharyo_naiso_navi" name="carnavi" size="48" maxlength="25" value="{$foreign.carnavi nocache}" placeholder="名称">
+{if $message.carnavi != '' nocache}<span class="linewarn">{$message.carnavi nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>その他</td>
+<td>
+<span class="example"><label for="sharyo_naiso_etc"></label></span>
+<input type="text" id="sharyo_naiso_etc" name="etc" size="48" maxlength="200" value="{$foreign.etc nocache}" placeholder="名称">
+{if $message.tec != '' nocache}<span class="linewarn">{$message.etc nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th rowspan="5">サスペンション</th>
+<td>サスキット名</td>
+<td>
+<span class="example"><label for="sharyo_suspention"></label></span>
+<input type="text" id="sharyo_suspention" name="suspension" size="48" maxlength="50" value="{$foreign.suspension nocache}" placeholder="名称">
+{if $message.suspension != '' nocache}<span class="linewarn">{$message.suspension nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>ショック</td>
+<td>
+<span class="example"><label for="sharyo_suspention_shock"></label></span>
+<input type="text" id="sharyo_suspention_shock" name="absorber" size="48" maxlength="25" value="{$foreign.absorber nocache}" placeholder="名称">
+{if $message.absorber != '' nocache}<span class="linewarn">{$message.absorber nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>スプリング</td>
+<td>
+<span class="example"><label for="sharyo_suspention_spring"></label></span>
+<input type="text" id="sharyo_suspention_spring" name="spring" size="48" maxlength="25" value="{$foreign.spring nocache}" placeholder="名称">
+{if $message.spring != '' nocache}<span class="linewarn">{$message.spring nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>ブレーキ</td>
+<td>
+<span class="example"><label for="sharyo_suspention_break"></label></span>
+<input type="text" id="sharyo_suspention_break" name="brake" size="48" maxlength="25" value="{$foreign.brake nocache}" placeholder="名称">
+{if $message.brake != '' nocache}<span class="linewarn">{$message.brake nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>その他</td>
+<td>
+<span class="example"><label for="sharyo_suspention_break"></label></span>
+<input type="text" id="sharyo_suspention_break" name="suspensioncomment" size="48" maxlength="25" value="{$foreign.suspensioncomment nocache}" placeholder="名称">
+{if $message.suspensioncomment != '' nocache}<span class="linewarn">{$message.suspensioncomment nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th rowspan="3">ホイール</th>
+<td>ホイールメーカー・名称</td>
+<td>
+<span class="example"><label for="sharyo_wheel"></label></span>
+<input type="text" id="sharyo_wheel" name="wheel" size="48" maxlength="25" value="{$foreign.wheel nocache}" placeholder="名称">
+{if $message.wheel != '' nocache}<span class="linewarn">{$message.wheel nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>サイズ(F)</td>
+<td>
+<span class="example"><label for="sharyo_wheel_sizef"></label></span>
+<input type="text" id="sharyo_wheel_sizef" name="frontsize" size="48" maxlength="12" value="{$foreign.frontsize nocache}" placeholder="名称">
+{if $message.frontsize != '' nocache}<span class="linewarn">{$message.frontsize nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>サイズ(R)</td>
+<td>
+<span class="example"><label for="sharyo_wheel_sizer"></label></span>
+<input type="text" id="sharyo_wheel_sizer" name="rearsize" size="48" maxlength="12" value="{$foreign.rearsize nocache}" placeholder="名称">
+{if $message.rearsize != '' nocache}<span class="linewarn">{$message.rearsize nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th rowspan="3">タイヤ</th>
+<td>タイヤメーカー・名称</td>
+<td>
+<span class="example"><label for="sharyo_tire"></label></span>
+<input type="text" id="sharyo_tire" name="tire" size="48" maxlength="25" value="{$foreign.tire nocache}" placeholder="名称">
+{if $message.tire != '' nocache}<span class="linewarn">{$message.tire nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>サイズ(F)</td>
+<td>
+<span class="example"><label for="sharyo_tire_sizef"></label></span>
+<input type="text" id="sharyo_tire_sizef" name="fronttire" size="48" maxlength="12" value="{$foreign.fronttire nocache}" placeholder="名称">
+{if $message.fronttire != '' nocache}<span class="linewarn">{$message.fronttire nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>サイズ(R)</td>
+<td>
+<span class="example"><label for="sharyo_tire_sizer"></label></span>
+<input type="text" id="sharyo_tire_sizer" name="reartire" size="48" maxlength="12" value="{$foreign.reartire nocache}" placeholder="名称">
+{if $message.reartire != '' nocache}<span class="linewarn">{$message.reartire nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th rowspan="5">エンジン系</th>
+<td>型式</td>
+<td>
+<span class="example"><label for="sharyo_engine_keishiki"></label></span>
+<input type="text" id="sharyo_engine_keishiki" name="enginetype" size="48" maxlength="25" value="{$foreign.enginetype nocache}" placeholder="名称">
+{if $message.enginetype != '' nocache}<span class="linewarn">{$message.enginetype nocache}</span>{/if}
+</td></tr>
+<tr>
+<td>排気量</td>
+<td>
+<input type="text" name="enginecc" size="20" maxlength="6" value="{$foreign.enginecc nocache}"> cc
+{if $message.enginecc != '' nocache}<span class="linewarn">{$message.enginecc nocache}</span>{/if}
+</td>
+</tr>
+<tr>
+<td>出力</td>
+<td>
+<input type="text" name="outputnum" size="10" maxlength="6" value="{$foreign.outputnum nocache}">
+<input type="radio" name="outputunit" value="1" {if $foreign.outputunit!=2}checked="checked"{/if}>kw
+<input type="radio" name="outputunit" value="2" {if $foreign.outputunit==2}checked="checked"{/if}>ps /
+<input type="text" name="outputrpm" size="10" maxlength="6" value="{$foreign.outputrpm nocache}">rpm
+{if $message.outputnum != '' nocache}<span class="linewarn">{$message.outputnum nocache}</span>{/if}
+{if $message.outputrpm != '' nocache}<span class="linewarn">{$message.outputrpm nocache}</span>{/if}
+</td>
+</tr>
+<tr>
+<td>トルク</td>
+<td>
+<input type="text" name="torquenum" size="10" maxlength="6" value="{$foreign.torquenum nocache}">
+<input type="radio" name="torqueunit" value="1" {if $foreign.torqueunit!=2}checked="checked"{/if}>kg
+<input type="radio" name="torqueunit" value="2" {if $foreign.torqueunit==2}checked="checked"{/if}>Nm /
+<input type="text" name="torquerpm" size="10" maxlength="6" value="{$foreign.torquerpm nocache}">rpm
+{if $message.torquenum != '' nocache}<span class="linewarn">{$message.torquenum nocache}</span>{/if}
+{if $message.torquerpm != '' nocache}<span class="linewarn">{$message.torquerpm nocache}</span>{/if}
+</td>
+</tr>
+<tr>
+<td>使用パーツ</td>
+<td>
+<span class="example"><label for="sharyo_engine_tuning"></label></span>
+<textarea id="sharyo_engine_tuning" name="enginecomment" maxlength="150" cols="50" rows="3">{$foreign.enginecomment nocache}</textarea>
+{if $message.enginecomment != '' nocache}<span class="linewarn">{$message.enginecomment nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th rowspan="1">排気系</th>
+<td>マフラー</td>
+<td>
+<span class="example"><label for="sharyo_haiki_muffler"></label></span>
+<input type="text" id="sharyo_haiki_muffler" name="muffler" size="48" maxlength="60" value="{$foreign.muffler nocache}" />
+{if $message.muffler != '' nocache}<span class="linewarn">{$message.muffler nocache}</span>{/if}
+</td></tr>
+
+<tr>
+<th rowspan="1">その他チューニング</th>
+<td colspan="2">
+<span class="example"><label for="sharyo_comment"></label></span>
+<input type="text" id="sharyo_comment" name="comment" size="48" maxlength="50" value="{$foreign.comment nocache}" />
+{if $message.comment != '' nocache}<span class="linewarn">{$message.comment nocache}</span>{/if}
+</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+

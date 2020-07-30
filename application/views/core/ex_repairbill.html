@@ -1,0 +1,14 @@
+<div>
+<table class="uniform">
+<tr>
+<th colspan="2" class="sub">請求先</th>
+</tr>
+<tr>
+<th class="w200">ご請求先</th>
+<td>〒{deco_zip($lists[$foreign.billid].countrycode,$lists[$foreign.billid].zip)}<br>
+{$lists[$foreign.billid].prefecture} {$lists[$foreign.billid].address1} {$lists[$foreign.billid].address2}<br>
+{$lists[$foreign.billid].corpname}<br>
+{$lists[$foreign.billid].position} {$lists[$foreign.billid].fullname}
+</tr>
+</table>
+</div>

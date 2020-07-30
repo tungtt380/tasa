@@ -1,0 +1,176 @@
+{extends file='core/member.html'}
+{block name='title'}協賛者変更{/block}
+
+{block name='contents'}
+<h2>協賛者変更</h2>
+<div class="arcicle">
+<p style="margin:0 0 20px;">以下の内容で変更してよろしいですか？よろしければ変更ボタンを押して下さい。</p>
+{if isset($message.__all)}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+</div>
+
+<form method="post" action="change_confirm_in">
+<div id="tabcorp">
+<table class="uniform">
+<tr>
+<th colspan="2" class="sub">協賛会社名</th>
+</tr>
+
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.corpkana nocache}</div>{$foreign.corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>〒{$foreign.zip nocache}<br/>
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">代表者名</th>
+<td>
+{$foreign.position nocache}
+<div class="ruby">{$foreign.fullkana nocache}</div>{$foreign.fullname nocache}
+</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.fax nocache}</td>
+</tr>
+
+</table>
+</div>
+
+
+<div id="tabcontact">
+<table class="uniform" summary="協賛に関する全てのご連絡窓口">
+<tr>
+<th colspan="2" class="sub">協賛に関する全てのご連絡窓口</th>
+</tr>
+
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.c_corpkana nocache}</div>{$foreign.c_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>〒{$foreign.c_zip nocache}<br />
+{$foreign.c_prefecture nocache}
+{$foreign.c_address1 nocache}
+{$foreign.c_address2 nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">担当者名</th>
+<td>{$foreign.c_division nocache} {$foreign.c_position nocache}
+<div class="ruby">{$foreign.c_fullkana nocache}</div>{$foreign.c_fullname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.c_phone nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.c_fax nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">携帯 </th>
+<td>{$foreign.c_mobile nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">メールアドレス(携帯メールは不可)</th>
+<td>{$foreign.c_email nocache}</td>
+</tr>
+</table>
+</div>
+
+<div id="tabbill">
+<table class="uniform" summary="請求先">
+<tr>
+<th colspan="2" class="sub">請求先</th>
+</tr>
+
+<tr>
+<th class="w200">会社名</th>
+<td><div class="ruby">{$foreign.b_corpkana nocache}</div>{$foreign.b_corpname nocache}</td>
+</tr>
+
+<tr>
+<th class="w200">所在地</th>
+<td>〒{$foreign.b_zip nocache}<br />
+{$foreign.b_prefecture nocache}
+{$foreign.b_address1 nocache}
+{$foreign.b_address2 nocache}</td>
+</tr>
+
+
+<tr>
+<th class="w200">担当者名</th>
+<td>{$foreign.b_division nocache} {$foreign.b_position nocache}
+<div class="ruby">{$foreign.b_fullkana nocache}</div>{$foreign.b_fullname nocache}</td>
+</tr>
+<tr>
+<th class="w200">TEL</th>
+<td>{$foreign.b_phone nocache}</td>
+</tr>
+<tr>
+<th class="w200">FAX</th>
+<td>{$foreign.b_fax nocache}</td>
+</tr>
+</table>
+</div>
+
+<div id="tabdetail">
+<table class="uniform" summary="申込内容">
+<tr><th colspan="2" class="sub">申込内容</th></tr>
+<tr>
+<th class="w200">プロモーションコード</th>
+<td>{$foreign.promotion nocache}</td>
+</tr>
+</table>
+
+<table class="uniform" summary="事務局メモ">
+<tr><th colspan="2" class="sub">事務局メモ</th></tr>
+<tr>
+<th class="w200">メモ</th>
+<td>{$foreign.comment nocache}</td>
+</tr>
+</table>
+<a href="{uri_folder_string()}/sponsor/"><img src="/images/common/btn_cancel.gif" width="100" height="25" alt="キャンセル" style="float:right;" /></a>
+<input type="hidden" name="spoid" value="{$foreign.spoid nocache}">
+<input type="hidden" name="token" value="{$foreign.token nocache}">
+<input type="image" src="/images/common/btn_change.gif" id="action" name="action" value="変更">
+
+</div>
+
+
+</form>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/sponsor_change.js"></script>
+<style>#contents th.sub { background:#4D80C1!important; color:#fff!important; }</style>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/sponsor">協賛者</a>&nbsp;&gt;変更確認
+{/block}

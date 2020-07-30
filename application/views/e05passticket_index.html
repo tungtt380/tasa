@@ -1,0 +1,110 @@
+{extends file='core/member.html'}
+{block name='title'}パス類追加請求一覧 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>パス類追加請求一覧</h2> 
+<div>
+<p></p>
+</div>
+<div id="cnav" class="clearfix">
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="hidden" id="limit" name="limit" value="{$limit}" />
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<div>
+<a href="#download">[ダウンロード]</a>
+<a href="sendlist">[パス類データ集計]</a>
+</div>
+
+<table class="listform tablesorter"> 
+<colgroup class="nowrap">
+<colgroup>
+<colgroup>
+<colgroup>
+<colgroup class="nowrap">
+<colgroup class="nowrap">
+<colgroup class="nowrap">
+<colgroup class="nowrap">
+<colgroup class="nowrap">
+<thead>
+<tr> 
+<th>小間番号</th>
+<th>出展者名/表示名</th>
+<th>メールアドレス</th>
+<th class="nowrap">追加種類</th>
+<th class="nowrap">枚数</th>
+<th>追加日</th>
+<th>編集</th>
+<th class="nowrap">発送日</th>
+<th class="nowrap">発送</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td class="right">{$i.exhboothno}</td>
+<td><span title="{$i.corpname}">{$i.corpname|truncate:20}<span><br />{$i.brandname}</td>
+<td>{$i.email}</td>
+<td class="nowrap">
+{if $i.itemnames.0}
+{foreach from=$i.itemnames name=subrec item=itemname}
+{$itemname}<br />
+{/foreach}
+{else}
+<span class="grey">[未登録]</span>
+{/if}
+</td>
+<td class="nowrap">
+{if $i.quantities.0}
+{foreach from=$i.quantities name=subrec item=quantity}
+{$quantity}<br/>
+{/foreach}
+{/if}
+</td>
+<td>{$i.ordered}</td>
+<td class="nowrap">{if $i.appid}<a href="change/{$i.appid}">[編集]</a>{else}<a href="create/{$i.exhid}/{$i.exhboothid}">[追加]</a>{/if}</td>
+<td>{$i.sentdate}</td>
+<td class="nowrap">{if $i.ordered > $i.sentdate}<a href="sent/{$i.appid}">[発送]</a>{/if}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+
+<div>
+<p><a href="#top">[&uarr;画面上へ]</a></p>
+</div>
+
+<div id="download">
+<h3>ダウンロード</h3>
+<p>
+<a href="download/csv"><img src="/images/common/ico_csv.png" style="vertical-align:text-bottom" width="48" height="48" alt="CSV" title="CSV" />(CSVファイル)</a>
+<a href="download/xlsx"><img src="/images/common/ico_xlsx.png" style="vertical-align:text-bottom" width="48" height="48" alt="Excel2007" title="Excel2007" />(Excelファイル)</a>
+</p>
+</div>
+{/if}
+{foreachelse}
+<div class="warn" style="width:100%; padding:20px 0;">
+見つかりません.
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/e05passticket_list.js"></script>
+{/block}
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;パス類追加請求一覧
+{/block}

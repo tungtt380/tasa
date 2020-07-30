@@ -1,0 +1,62 @@
+{extends file='core/member.html'}
+{block name='title'}小間形状 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>小間形状</h2>
+<div id="cnav" class="clearfix">
+<a href="regist"><img src="/images/common/btn_regist.gif" width="100" height="25" alt="新規作成" /></a>
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter" id="sorttable">
+<thead>
+ <tr>
+<th>コード</th>
+<th>小間形状番号</th>
+<th>小間種別</th>
+<th>小間形状</th>
+<th>小間形状略記</th>
+<th>小間数</th>
+<th>非表示</th>
+ </tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td><a href="change/{$i.boothid}">{$i.boothid}</a></td>
+<td>{$i.boothno nocache}</td>
+<td>{$space[$i.spaceid] nocache}</td>
+<td>{$i.boothname nocache}</td>
+<td>{$i.boothabbr nocache}</td>
+<td>{$i.boothcount nocache}</td>
+<td>{if $i.allow == 0}○{/if}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<p>データが見つかりません。</p>
+</div>
+{/foreach}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/booth_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;小間形状
+{/block}

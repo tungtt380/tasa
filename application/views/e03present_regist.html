@@ -1,0 +1,304 @@
+{extends file='core/member.html'}
+{block name='title'}(03)アンケート協賛登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>アンケート協賛登録</h2>
+
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}
+{if (($rolename == 'exhibitor' || $rolename == 'promotion') && $smarty.now > "2020-01-01 00:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+アンケート協賛登録の受付けは締め切らせていただきました。
+</p>
+{else}
+{include file='core/ex_sans.html'}
+{include file='core/exhform.html'}
+
+
+<form method="post" action="regist_in" enctype="multipart/form-data"> 
+<input type="hidden" name="exhid" value="{$foreign.exhid}"/>
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid}"/>
+
+<div>
+<p>「協賛企業」としてご紹介させて頂く際の社名(ブランド名)、問合せ先(所在地、電話番号)をご記入下さい。</p> 
+</div>
+
+<div> 
+<table class="uniform"> 
+<thead> 
+<tr><th colspan="3">協賛社名</th></tr> 
+</thead> 
+<tbody>
+<tr>
+<th style="w200">出展会社名</th> 
+<td colspan="2"> 
+<span class="example">例)○○株式会社</span>
+<input type="text" id="corpname" name="corpname" size="48" maxlength="60" value="{$foreign.corpname nocache}" placeholder="名称"> 
+</td> 
+</tr> 
+ 
+<tr> 
+<th rowspan="3" class="w200">お問合せ先</th>
+<td>所在地</td> 
+<td> 
+<span class="example"><label for="sekou_zip">郵便番号</label> 例)1234567</span> 
+<input type="text" id="zip" name="zip" size="8" maxlength="8" value="{$foreign.zip nocache}" placeholder="郵便番号"> 
+<div id="zip" class="clearfix"><span id="zipdir" class="zipsearch">郵便番号から住所を検索</span><span id="ziprev" class="revsearch">住所から郵便番号を検索</span></div>
+{if $message.zip != '' nocache}<span class="linewarn">{$message.zip nocache}</span>{/if}
+<span class="example"><label for="sekou_address_one">町名番地</label> 例)東京都新宿区新宿6-27-30</span> 
+{form_dropdown_ex('prefecture',$prefecture,$foreign.prefecture,'東京都','id="prefecture"')}
+{if $message.prefecture != '' nocache}<span class="linewarn">{$message.prefecture nocache}</span>{/if}
+
+<input type="text" id="address1" name="address1" size="31" maxlength="60" value="{$foreign.address1 nocache}" placeholder="町名番地"> 
+{if $message.address1 != '' nocache}<span class="linewarn">{$message.address1 nocache}</span>{/if}
+<br/> 
+<span class="example"><label for="address2">ビルマンション名</label> 例)○○ビル3F</span> 
+<input type="text" id="address2" name="address2" size="48" maxlength="60" value="{$foreign.address2 nocache}" placeholder="ビル・マンション名"> 
+{if $message.address2 != '' nocache}<span class="linewarn">{$message.address2 nocache}</span>{/if}
+<br/> 
+</td> 
+</tr> 
+ 
+<tr> 
+<td>TEL</td> 
+<td> 
+<span class="example">例)0312345678</span> 
+<input type="text" id="phone" name="phone" size="15" maxlength="15" value="{$foreign.phone nocache}" placeholder="TEL"> 
+{if $message.phone != '' nocache}<span class="linewarn">{$message.phone nocache}</span>{/if}
+</td> 
+</tr> 
+ 
+<tr> 
+<td>FAX</td> 
+<td> 
+<span class="example">例)0312345678</span> 
+<input type="text" id="fax" name="fax" size="15" maxlength="15" value="{$foreign.fax nocache}" placeholder="FAX"> 
+{if $message.fax != '' nocache}<span class="linewarn">{$message.fax nocache}</span>{/if}
+</td> 
+</tr> 
+</tbody> 
+</table> 
+</div>
+
+<h3>○アンケート回答者プレゼント協賛商品（オリジナルパーツなど）</h3>
+・ご協賛いただいた賞品を会期中アンケートにお答えいただいた来場者へのプレゼント賞品として活用させていただきます。<br/>
+恒例のプレゼント企画は、楽しみにしておられる来場者も多く、注目度の高いものです。<br/>
+ただし、協賛賞品はオリジナルパーツなどに限定させていただき、販促品・ノベルティグッズなどはご遠慮いただいております。<br/>
+<strong>・協賛メリット：</strong>
+<ol>
+<li>１、ショー会場内「アンケート投票所」にて、ご協賛社名、商品名、商品写真をパネルで展示。</li>
+<li>２、会期中「公式Webサイト」にて、ご協賛社名、商品名、商品写真を掲出。</li>
+<li>３、後援各誌内の告知広告」にてご協賛商品の写真と商品名およびご協賛社名を紹介。</li>
+</ol>
+<br><span style="color:#ff0000">
+*協賛賞品の写真１点をご用意頂き、以下フォームよりご送信下さい</span><br>
+・アンケート回答者プレゼントの抽選は２月中旬頃を予定しております。当選者が決定次第ご連絡<br/>
+  させていただきますので、<strong>３月中旬頃</strong>までにご当選者への賞品の発送をお願い申し上げます。
+
+<div> 
+<table border="0" cellpadding="0" cellspacing="0" class="tbl1">
+<tbody> 
+<tr>
+<td valign="top" bgcolor="#FFFFCC" class="ft41">
+<span style="color:#000000">
+<strong>---写真データの注意事項---</strong><br/>
+ファイル名には必ず<b>拡張子(○○○.jpg)をつけてください</b>。<br />
+ファイル名は必ず半角英数字としてください。<br/></span>
+
+    <table>
+    <tr>
+    <td bgcolor="#003399" class="ft5">
+    <span class="ft4" style="color:#fff">
+    画像データサイズ<br/>
+    <dl>
+    <dt>解像度</dt><dd><b>300</b>(pixel/inch)</dd>
+    <dt>サイズ</dt><dd><b>640x480</b>(pixel)</dd>
+    <dt>ファイルサイズ</dt><dd>(約1MB)</dd>
+    </dl>
+    </span>
+    </td></tr>
+    </table>
+
+    </td>
+    </tr>
+</tbody>
+</table>
+</div>
+
+<div> 
+<table> 
+<tbody> 
+<tr> 
+<td><span style="color:#ff0000">
+*指定した画像は下の「確認する」ボタンよお進み頂き、次の確認画面にてご確認下さい。</span>
+<!--
+*データを<strong>CMYKカラー</strong>で保存されますと、WEB上でのご確認ができない場合がございます。
+<br/>データとして破損等なければCMYKでも問題ございませんが、
+<br/>WEB上で画像確認なさりたい方は、<strong>RGBカラーで保存したもの</strong>をアップロードして下さい。
+-->
+<br/>*確認用画像は縦横比が崩れて表示されますが、画像には問題ありませんのでご了承下さい。
+</td></tr>
+</tbody>
+</table>
+</div>
+
+<div>
+<table class="uniform"> 
+<tbody> 
+<tr>
+<th class="w200"></th><th colspan="2">ご協賛商品<span style="color:#ff0000">*</span></th>
+<th  class="w200">商品の画像</th><br/>
+</tr> 
+<tr>
+<th rowspan="3"><b>1</b></th>
+<td>ご協賛商品名</td>
+<td>
+<span class="example"><label for="sponsors_products_a"></label></span>
+<input type="text" id="itemname1" name="itemname1" size="30" maxlength="120" value="{$foreign.itemname1 nocache}" placeholder="ご協賛商品名">
+<td rowspan="3"><br/>アップロード<br/>
+<input name="itemphoto1" type="file" class="bt1" value="ファイルを選択"><br /><span class="red" style="font-size:12px; font-weight:bold;">画像名は必ず半角英数字の画像名にしてからアップしてください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">標準価格</td>
+<td>
+<span class="example"><label for="sponsors_price_a"></label></span>
+<input type="text" id="itemprice1" name="itemprice1" size="30" maxlength="60" value="{$foreign.itemprice1 nocache}" placeholder="標準価格"><br /><span class="red">半角英数字で価格を記入してください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">個数</td>
+<td>
+<span class="example"><label for="sponsors_num_a"></label></span>
+<input type="text" id="quantity1" name="quantity1" size="30" maxlength="60" value="{$foreign.quantity1 nocache}" placeholder="個数"><br /><span class="red">半角英数字で数量を記入してください。</span>
+<br/></td></tr>
+<tr>
+<th rowspan="3"><b>2</b></th>
+<td class="w100">ご協賛商品名</td>
+<td>
+<span class="example"><label for="sponsors_products_a"></label></span>
+<input type="text" id="itemname2" name="itemname2" size="30" maxlength="120" value="{$foreign.itemname2 nocache}" placeholder="ご協賛商品名">
+<td rowspan="3"><br/>アップロード<br/>
+<input name="itemphoto2" type="file" class="bt1" value="ファイルを選択"><br /><span class="red" style="font-size:12px; font-weight:bold;">画像名は必ず半角英数字の画像名にしてからアップしてください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">標準価格</td>
+<td>
+<span class="example"><label for="sponsors_price_a"></label></span>
+<input type="text" id="itemprice2" name="itemprice2" size="30" maxlength="60" value="{$foreign.itemprice2 nocache}" placeholder="標準価格"><br /><span class="red">半角英数字で価格を記入してください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">個数</td>
+<td>
+<span class="example"><label for="sponsors_num_a"></label></span>
+<input type="text" id="quantity2" name="quantity2" size="30" maxlength="60" value="{$foreign.quantity2 nocache}" placeholder="個数"><br /><span class="red">半角英数字で数量を記入してください。</span>
+<br/></td></tr>
+<tr>
+<th rowspan="3"><b>3</b></th>
+<td class="w100">ご協賛商品名</td>
+<td>
+<span class="example"><label for="sponsors_products_a"></label></span>
+<input type="text" id="itemname3" name="itemname3" size="30" maxlength="120" value="{$foreign.itemname3 nocache}" placeholder="ご協賛商品名">
+<td rowspan="3"><br/>アップロード<br/>
+<input name="itemphoto3" type="file" class="bt1" value="ファイルを選択"><br /><span class="red" style="font-size:12px; font-weight:bold;">画像名は必ず半角英数字の画像名にしてからアップしてください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">標準価格</td>
+<td>
+<span class="example"><label for="sponsors_price_a"></label></span>
+<input type="text" id="itemprice3" name="itemprice3" size="30" maxlength="60" value="{$foreign.itemprice3 nocache}" placeholder="標準価格"><br /><span class="red">半角英数字で価格を記入してください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">個数</td>
+<td>
+<span class="example"><label for="sponsors_num_a"></label></span>
+<input type="text" id="quantity3" name="quantity3" size="30" maxlength="60" value="{$foreign.quantity3 nocache}" placeholder="個数"><br /><span class="red">半角英数字で数量を記入してください。</span>
+<br/></td></tr>
+<tr>
+<th rowspan="3"><b>4</b></th>
+<td class="w100">ご協賛商品名</td>
+<td>
+<span class="example"><label for="sponsors_products_a"></label></span>
+<input type="text" id="itemname4" name="itemname4" size="30" maxlength="120" value="{$foreign.itemname4 nocache}" placeholder="ご協賛商品名">
+<td rowspan="3"><br/>アップロード<br/>
+<input name="itemphoto4" type="file" class="bt1" value="ファイルを選択"><br /><span class="red" style="font-size:12px; font-weight:bold;">画像名は必ず半角英数字の画像名にしてからアップしてください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">標準価格</td>
+<td>
+<span class="example"><label for="sponsors_price_a"></label></span>
+<input type="text" id="itemprice4" name="itemprice4" size="30" maxlength="60" value="{$foreign.itemprice4 nocache}" placeholder="標準価格"><br /><span class="red">半角英数字で価格を記入してください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">個数</td>
+<td>
+<span class="example"><label for="sponsors_num_a"></label></span>
+<input type="text" id="quantity4" name="quantity4" size="30" maxlength="60" value="{$foreign.quantity4 nocache}" placeholder="個数"><br /><span class="red">半角英数字で数量を記入してください。</span>
+<br/></td></tr>
+<tr>
+<th rowspan="3"><b>5</b></th>
+<td class="w100">ご協賛商品名</td>
+<td>
+<span class="example"><label for="sponsors_products_a"></label></span>
+<input type="text" id="itemname5" name="itemname5" size="30" maxlength="120" value="{$foreign.itemname5 nocache}" placeholder="ご協賛商品名">
+<td rowspan="3"><br/>アップロード<br/>
+<input name="itemphoto5" type="file" class="bt1" value="ファイルを選択"><br /><span class="red" style="font-size:12px; font-weight:bold;">画像名は必ず半角英数字の画像名にしてからアップしてください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">標準価格</td>
+<td>
+<span class="example"><label for="sponsors_price_a"></label></span>
+<input type="text" id="itemprice5" name="itemprice5" size="30" maxlength="60" value="{$foreign.itemprice5 nocache}" placeholder="標準価格"><br /><span class="red">半角英数字で価格を記入してください。</span>
+<br/></td></tr>
+<tr>
+<td class="w100">個数</td>
+<td>
+<span class="example"><label for="sponsors_num_a"></label></span>
+<input type="text" id="quantity5" name="quantity5" size="30" maxlength="60" value="{$foreign.quantity5 nocache}" placeholder="個数"><br /><span class="red">半角英数字で数量を記入してください。</span>
+<br/></td></tr>
+<tr>
+<th rowspan="3"><b>6</b></th>
+<td class="w100">ご協賛商品名</td>
+<td>
+<span class="example"><label for="sponsors_products_a"></label></span>
+<input type="text" id="itemname6" name="itemname6" size="30" maxlength="120" value="{$foreign.itemname6 nocache}" placeholder="ご協賛商品名">
+<td rowspan="3"><br/>アップロード<br/>
+<input name="itemphoto6" type="file" class="bt1" value="ファイルを選択"><br /><span class="red" style="font-size:12px; font-weight:bold;">画像名は必ず半角英数字の画像名にしてからアップしてください。</span>
+</td></tr>
+<tr>
+<td class="w100">標準価格</td>
+<td>
+<span class="example"><label for="sponsors_price_a"></label></span>
+<input type="text" id="itemprice6" name="itemprice6" size="30" maxlength="60" value="{$foreign.itemprice6 nocache}" placeholder="標準価格"><br /><span class="red">半角英数字で価格を記入してください。</span>
+</td></tr>
+<tr>
+<td class="w100">個数</td>
+<td>
+<span class="example"><label for="sponsors_num_a"></label></span>
+<input type="text" id="quantity6" name="quantity6" size="30" maxlength="60" value="{$foreign.quantity6 nocache}" placeholder="個数"><br /><span class="red">半角英数字で数量を記入してください。</span>
+</td></tr>
+</tbody>
+</table>
+</div>
+
+{if (($rolename == 'exhibitor' || $rolename == 'promotion') && $smarty.now > "2020-01-01 00:00:00"|strtotime)}
+<p style="font-weight: bold; color: #f00; margin-bottom: 2em; margin-top: 2em; padding: 0.5em; border: 1px solid #f00; background: #ffeded; font-size: 1.25em;">
+{else}
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="確認画面へ" />
+{/if}
+</form>
+{/if}
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/e.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e03present_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e03present/">アンケート協賛登録</a>&nbsp;&gt;&nbsp;登録
+{/block}

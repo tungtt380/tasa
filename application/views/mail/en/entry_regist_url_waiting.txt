@@ -1,0 +1,52 @@
+TOKYO AUTO SALON 2020 "Automatic reply email"
+
+Exhibition application waiting for a cancellation automatic reply email
+
+-------------------------------------------------
+
+To {$foreign['c_corpname'] nocache}
+
+-------------------------------------------------
+
+This time thank you very much for an exhibition
+application to TOKYO AUTO SALON 2020.
+
+We accept the registration of the contents which
+had you input on a website by waiting for a cancellation.
+
+With regard to the content that you submitted,
+please confirm it than the following address. 
+
+  https://cus.tokyoautosalon.jp/entry/detail/{$cipher nocache}
+
+In addition, We will send a confirmation email
+from TASA at a later date.
+
+* About "Administrative Timeline"
+  http://www.tokyoautosalon.jp/2019/en/exhibitors/procedures.php
+
+/////////////////////////////////////////////////
+  * We can not accept reply to this email.
+
+  Inquiry No.
+    {$foreign['exhid'] nocache}
+
+  Inquiries about TOKYO AUTO SALON 2020
+    info@tokyoautosalon.jp
+
+-------------------------------------------------
+  Registration day: {$foreign['created'] nocache}
+-------------------------------------------------
+
+==================================================
+
+ TOKYO AUTO SALON ASSOCIATION
+
+    http://www.tokyoautosalon.jp
+    http://cus.tokyoautosalon.jp "Product for exhibitor"
+    info@tokyoautosalon.jp
+    TEL：+81-(0)3-6897-4820
+    FAX：+81-(0)3-6897-4840
+
+==================================================
+

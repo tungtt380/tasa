@@ -1,0 +1,74 @@
+{extends file='core/member.html'}
+{block name='title'}登録 &raquo; 入金 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>入金 &raquo; 登録</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="regist-nav">
+<form method="post" action="regist_confirm_in">
+<table class="uniform">
+
+<tr>
+<th>入金No</th>
+<td>(新規)</td>
+</tr>
+
+<tr>
+<th>入金日</th>
+<td>
+{$foreign.paymentdate nocache}
+{if $message.paymentdate != '' nocache}<span class="linewarn">{$message.paymentdate nocache}</span>{/if}
+</td>
+</tr>
+
+<tr>
+<th>入金元<br/>(請求先)</th>
+<td>
+{$foreign.corpname nocache}
+{if $message.corpname != '' nocache}<span class="linewarn">{$message.corpname nocache}</span>{/if}
+</td>
+</tr>
+
+<tr>
+<th>入金金額</th>
+<td>
+{$foreign.deposit|number_format nocache}
+{if $message.deposit != '' nocache}<span class="linewarn">{$message.deposit nocache}</span>{/if}
+</td>
+</tr>
+
+<tr>
+<th>入金方法</th>
+<td>
+{$paymenttype[$foreign.paymentcode]}
+{if $message.paymentcode != '' nocache}<span class="linewarn">{$message.paymentcode nocache}</span>{/if}
+</td>
+</tr>
+
+<tr>
+<th>入金先</th>
+<td>
+{$payee[$foreign.payeeid]}
+{if $message.payeeid != '' nocache}<span class="linewarn">{$message.payeeid nocache}</span>{/if}
+</td>
+</tr>
+
+</table>
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+</form>
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.14.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/ui/i18n/jquery.ui.datepicker-ja.js"></script>
+<script type="text/javascript" src="/js/payment_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/payment/">入金</a>&nbsp;&gt;&nbsp;登録確認
+{/block}

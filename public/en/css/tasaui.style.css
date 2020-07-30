@@ -1,0 +1,133 @@
+@charset "utf-8";
+/*
+*
+*/
+body{
+}
+#ground{
+	width:100%;
+}
+#groundnorth{
+	width:100%;
+}
+#groundsouth{
+	clear:both;
+	width:100%;
+	height:3em;
+}
+/*
+*
+*/
+#contents{
+	float:right;
+	width:100%;
+	margin-left:-200px;
+}
+#mainContents{
+	position:relative;
+	text-align:left;
+	margin-left:200px;
+}
+#footer{
+	height:100%;
+}
+#footerin{
+	text-align:center;
+	font-size:9pt;
+	line-height:110%;
+	padding:6px 12px;
+}
+/*
+* for Overflow footer
+*/
+#ground{
+	position:relative;
+	min-height:100%;
+}
+#groundnorth{
+	height:100%;
+	padding-bottom:3em;
+}
+#canvas{
+	overflow:auto;
+}
+#groundsouth{
+	position:absolute;
+	bottom:0;
+}
+/*
+*
+*/
+#header img{
+	margin: 8px 0 0 8px;
+}
+#headerNav {
+	position:absolute;
+	right:6px;
+	top:72px;
+}
+#headerNav a:link,#headerNav a:visited {
+	color:#ccc;
+	text-decoration:none;
+}
+#headerNav a:hover,#headerNav a:active {
+	color:#eec;
+	text-decoration:underline;
+}
+.mainNav{
+	margin-left:12px;
+}
+.subNav{
+	margin: 12px 0 12px 12px;
+}
+/*
+.stdlayout #canvas{
+	min-width:930px;
+}
+*
+*/
+.stdlayout #canvas{
+	overflow-y:hidden;
+}
+.stdlayout #contents{
+	margin-right:12px;
+}
+/*
+* table, th, div is no color
+*/
+.stdcolor h1,.stdcolor h2,.stdcolor h3,.stdcolor h4,.stdcolor h5,.stdcolor h6,
+.stdcolor p,.stdcolor blockquote,.stdcolor pre,.stdcolor address,
+.stdcolor ul,.stdcolor ol,.stdcolor li,.stdcolor dl,.stdcolor dt,.stdcolor dd,.stdcolor a,
+.stdcolor td,.stdcolor form,.stdcolor fieldset
+{
+   color:#eee;
+   list-style:none;
+}
+.stdcolor #ground{
+	background: url(../images/ground.gif) #000;
+}
+.stdcolor .header{
+	background-color:#110;
+}
+.stdcolor .footer{
+	background-color:#110;
+	color:#eee;
+}
+.stdcolor .ruby{
+	color:#bbb;
+}
+.stdcolor .webmark{
+	color:#9fc;
+}
+.stdcolor .faxmark{
+	color:#faa;
+}
+
+.icon { width: 16px; height: 13px; display:inline-block; background-image: url(jquery/images/ui-icons_222222_256x240.png); }
+.icon-cancel { background-position: 0 -128px; }
+.icon-plus { background-position: -16px -128px; }
+.icon-plusthick { background-position: -32px -128px; }
+.icon-minus { background-position: -48px -128px; }
+.icon-minusthick { background-position: -64px -128px; }
+.icon-delete { background-position: -80px -128px; }
+.icon-closethick { background-position: -96px -128px; }

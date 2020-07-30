@@ -1,0 +1,115 @@
+﻿{extends file='core/member.html'}
+{block name='title'}変更確認 &raquo; アンカー工事業者一覧 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>アンカー工事業者変更確認 </h2> 
+ 
+<p>以下に変更してよろしいですか。<br/> 
+よろしければ「<strong>変更</strong>」ボタンを押してください。</p>
+
+{include file='core/ex_murayama08.html'}
+{include file='core/exhform.html'}
+{include file='core/ex_constructor.html'}
+
+<form method="post" action="change_confirm_in"> 
+<input type="hidden" name="appid" value="{$foreign.appid nocache}"> 
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}"> 
+<input type="hidden" name="appno" value="{$foreign.appno nocache}"> 
+<input type="hidden" name="seqno" value="{$foreign.seqno nocache}"> 
+<input type="hidden" name="token" value="{$foreign.token nocache}"> 
+
+<div id="tabc">
+<table class="uniform">
+<tr><th colspan="2" class="sub">アンカー工事に関する連絡先</th></tr>
+<th class="w200">連絡窓口</th>
+<td>
+{if $foreign.outsourcing == 0 nocache}
+出展者(自社)にご連絡
+{elseif $foreign.outsourcing == 1 nocache}
+出展者以外(施工業者)に連絡
+{/if}
+</td></tr>
+{if $foreign.outsourcing==1}
+<tr>
+<th colspan="2" class="sub">施工業者名</th>
+</tr>
+<tr>
+<th>施工業者名</th>
+<td>{$foreign.corpname nocache}</td>
+</tr>
+<tr>
+<th>所在地</th>
+<td>〒{$foreign.zip nocache}
+{$foreign.prefecture nocache}{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+</td>
+</tr>
+<tr>
+<th style="width:6em">担当部署</th>
+<td>{$foreign.division nocache}</td></tr>
+<tr>
+<th style="width:6em">担当者</th>
+<td>{$foreign.fullname nocache}</td>
+</tr>
+<tr>
+<th style="width:6em">E-mail</th>
+<td>{$foreign.email nocache}</td>
+</tr>
+<tr>
+<th>携帯番号</th>
+<td>{$foreign.mobile nocache}</td>
+</tr>
+<tr>
+<th>TEL</th>
+<td>{$foreign.phone nocache}</td>
+</tr>
+<tr>
+<th>FAX</th>
+<td>{$foreign.fax nocache}</td>
+</tr>
+{/if}
+</table>
+</div>
+
+<table width="635" height="235" class="uniform">
+<tbody>
+<tr>
+<th colspan="2" class="sub">作業内容</th>
+</tr>
+<tr>
+<th class="w200"><span class="style5"><span class="style7"><span class="style1"><span style="color:#ff0000">*</span>床面アンカーボルト打設</span></span></th>
+    <td>{$foreign.anchorbolt nocache}本（@1,650円（税込）/本）</td>
+  </tr>
+  <tr>
+    <th height="15" class="sub">&nbsp;</th>
+    <th class="sub"><div align="left">(直径16mm以下/長さ80mm以下）</div></th>
+ </tr>
+
+<tr><td height="81" colspan="2" bgcolor="#ffdab9"><p>
+1、当届をご提出頂いても、会場建造物の構造上、作業できない箇所があります。<br />
+2、提出後に内容の変更があった場合、必ず事前に(株）ムラヤマまでご連絡ください。<br />
+3、コンクリート針・ドライピット鋲を打つことは禁止されています。<br />
+4、ピット端部から20ｃｍ以上離して打設して下さい。<br />
+5、違反作業を行った場合は、ペナルティーが科せられます。<br />
+6、アンカーボルトの打設位置を示した平面図を提出してください。</p>
+</table>
+
+{include file="core/ex_repairbill.html"}
+  
+<input type="image" src="/images/common/btn_change.gif" id="action" name="action" value="変更">
+</form> 
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e08anchor_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e08anchor/">アンカー工事業者一覧</a>&nbsp;&gt;&nbsp;変更
+{/block}
+

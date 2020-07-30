@@ -1,0 +1,120 @@
+{extends file='core/member.html'}
+{block name='title'}追加請求先登録{/block}
+
+{block name='contents'}
+<h2>追加請求先登録</h2>
+{if isset($message.__all) && $message.__all != ''}
+<div class="blockwarn"><span class="linewarn">入力項目に不備があります。以下の入力項目を確認してください。</span>
+{$message.__all nocache}
+</div>
+{else}
+<div class="article"><p>追加請求先の登録をおこないます。</p></div>
+{/if}
+<form method="post" action="regist_in">
+
+<div id="tabbill">
+<table class="uniform" summary="請求先">
+<tbody>
+<tr>
+<th colspan="2" class="sub">会社名</th>
+</tr>
+<tr>
+<th class="w200">会社名</th>
+<td><input type="text" id="corpname" name="corpname" size="48" maxlength="60" value="{if isset($foreign.corpname)}{$foreign.corpname nocache}{/if}" placeholder="名称">
+{if isset($message.corpname)}<span class="linewarn">{$message.corpname nocache}</span>{/if}<br /><span class="darkred">例)○○株式会社</span></td>
+</tr>
+<tr>
+<th class="w200">フリガナ(全角カナ)</th>
+<td><input type="text" id="corpkana" name="corpkana" size="48" maxlength="60" value="{$foreign.corpkana nocache}" placeholder="フリガナ">
+{if isset($message.corpkana)}<span class="linewarn">{$message.corpkana nocache}</span>{/if}<br /><span class="darkred">例)マルマル</span></td>
+</tr>
+
+<tr>
+<th colspan="2" class="sub">所在地</th>
+</tr>
+<tr>
+<th class="w200">国</th>
+<td>{form_dropdown_ex('countrycode',$countrycode,$foreign.countrycode,'JP','id="countrycode"')}</td>
+</tr>
+<tr>
+<th class="w200">郵便番号</th>
+<td><input type="text" id="zip" name="zip" size="10" maxlength="10" value="{$foreign.zip nocache}" placeholder="郵便番号">{if isset($message.zip)}<span class="linewarn">{$message.zip nocache}</span>{/if}
+<div id="zip" class="clearfix"><span id="zipdir" class="zipsearch">郵便番号から住所を検索</span><span id="ziprev" class="revsearch">住所から郵便番号を検索</span></div>
+<span class="darkred">例)1234567</span></td>
+</tr>
+<tr>
+<th class="w200">町名番地</th>
+<td>{form_dropdown_ex('prefecture',$prefecture,$foreign.prefecture,'東京都','id="prefecture"')}&nbsp;<input type="text" id="address1" name="address1" size="31" maxlength="60" value="{$foreign.address1 nocache}" placeholder="町名番地">
+<br /><span class="darkred">例)東京都新宿区新宿6-27-30</span></td>
+</tr>
+<tr>
+<th class="w200">ビルマンション名</th>
+<td><input type="text" id="address2" name="address2" size="48" maxlength="60" value="{$foreign.address2 nocache}" placeholder="ビル・マンション名">
+{if isset($message.address2)}<span class="linewarn">{$message.address2 nocache}</span>{/if}<br /><span class="darkred">例)○○ビル3F</span></td>
+</tr>
+
+<tr>
+<th colspan="2" class="sub">担当者名</th>
+</tr>
+<tr>
+<th class="w200">所属(ない場合は無記入)</th>
+<td><input type="text" id="division" name="division" size="32" maxlength="40" value="{$foreign.division nocache}" placeholder="所属">
+{if isset($message.division)}<span class="linewarn">{$message.division nocache}</span>{/if}<br /><span class="darkred">例)営業部</span></td>
+</tr>
+<tr>
+<th class="w200">役職(ない場合は無記入)</th>
+<td><input type="text" id="position" name="position" size="32" maxlength="40" value="{$foreign.position nocache}" placeholder="役職">
+{if isset($message.position)}<span class="linewarn">{$message.position nocache}</span>{/if}<br /><span class="darkred">例)部長</span></td>
+</tr>
+<tr>
+<th class="w200">氏名</th>
+<td><input type="text" id="fullname" name="fullname" size="32" maxlength="40" value="{$foreign.fullname nocache}" placeholder="氏名">
+{if isset($message.fullname)}<span class="linewarn">{$message.fullname nocache}</span>{/if}<br /><span class="darkred">例)○○太郎</span></td>
+</tr>
+<tr>
+<th class="w200">フリガナ(全角カナ)</th>
+<td><input type="text" id="fullkana" name="fullkana" size="32" maxlength="40" value="{$foreign.fullkana nocache}" placeholder="フリガナ">
+{if isset($message.fullkana)}<span class="linewarn">{$message.fullkana nocache}</span>{/if}<br /><span class="darkred">例)マルマルタロウ</span></td>
+</tr>
+
+<tr>
+<th colspan="2" class="sub">連絡先</th>
+</tr>
+<tr>
+<th class="w200">TEL(数字)</th>
+<td><input type="text" id="phone" name="phone" size="15" maxlength="30" value="{$foreign.phone nocache}" placeholder="数字のみで入力">
+{if isset($message.phone)}<span class="linewarn">{$message.phone nocache}</span>{/if}<br /><span class="darkred">例)0312345678</span></td>
+</tr>
+
+<tr>
+<th class="w200">FAX(数字)</th>
+<td><input type="text" id="fax" name="fax" size="15" maxlength="30" value="{$foreign.fax nocache}" placeholder="数字のみで入力">
+{if isset($message.fax)}<span class="linewarn">{$message.fax nocache}</span>{/if}<br /><span class="darkred">例)0312345678</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<input type="hidden" name="billid" value="{$foreign.billid nocache}">
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input type="hidden" name="token" value="{$foreign.token nocache}">
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="入力内容確認へ">
+
+</div>
+</div>
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<style>#contents th.sub { background:#4D80C1!important; color:#fff!important; }</style>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/billing_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/">追加請求先</a>&nbsp;&gt;登録
+{/block}

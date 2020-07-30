@@ -1,0 +1,155 @@
+{extends file='core/member.html'}
+{block name='title'}変更 &raquo; 顧客 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>変更 &raquo; 顧客</h2>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="change-nav">
+<form method="post" action="../change_in">
+<table class="uniform">
+
+<tr>
+<th>顧客コード</th>
+<td>{$foreign.customerid nocache}
+<input type="hidden" id="customerid" name="customerid" value="{$foreign.customerid nocache}">
+</td>
+</tr>
+<tr>
+ <th>企業名</th>
+ <td>
+ <input type="text" id="corpname" name="corpname" maxlength="60" value="{$foreign.corpname nocache}" />
+{if $message.corpname != "" nocache}<span class="linewarn">{$message.corpname nocache}</span>{/if}
+ <span class="example">例)○○株式会社</span>
+ </td>
+</tr>
+<tr>
+ <th>企業名カナ</th>
+ <td>
+ <input type="text" id="corpkana" name="corpkana" maxlength="60" value="{$foreign.corpkana nocache}" />
+{if $message.corpkana != "" nocache}<span class="linewarn">{$message.corpkana nocache}</span>{/if}
+ <span class="example">例)○○カブシキガイシャ</span>
+ </td>
+</tr>
+<tr>
+ <th>国</th>
+ <td>
+{form_dropdown('countrycode', $countrycode, $foreign.countrycode, 'id="countrycode"')}
+ <span class="example">例)日本</span>
+ </td>
+</tr>
+<tr>
+ <th>郵便番号</th>
+ <td>
+ <input type="text" id="zip" name="zip" maxlength="7" value="{$foreign.zip nocache}" />
+{if $message.zip != "" nocache}<span class="linewarn">{$message.zip nocache}</span>{/if}
+ <span class="example">例)1000047</span>
+ </td>
+</tr>
+<tr>
+ <th>都道府県</th>
+ <td>
+{form_dropdown_ex('prefecture',$prefecture,$foreign.prefecture,'東京都','id="prefecture"')}
+{if $message.prefecture != "" nocache}<span class="linewarn">{$message.prefecture nocache}</span>{/if}
+ <span class="example">例)東京都</span>
+ </td>
+</tr>
+<tr>
+ <th>町名番地</th>
+ <td>
+ <input type="text" id="address1" name="address1" maxlength="120" value="{$foreign.address1 nocache}" />
+{if $message.address1 != "" nocache}<span class="linewarn">{$message.address1 nocache}</span>{/if}
+ <span class="example">例)東京都新宿区新宿6-27-30</span>
+ </td>
+</tr>
+<tr>
+ <th>ビル名など</th>
+ <td>
+ <input type="text" id="address2" name="address2" maxlength="120" value="{$foreign.address2 nocache}" />
+{if $message.address2 != "" nocache}<span class="linewarn">{$message.address2 nocache}</span>{/if}
+ <span class="example">例)恵比寿ビル3F</span>
+ </td>
+</tr>
+<tr>
+ <th>TEL</th>
+ <td>
+ <input type="text" id="phone" name="phone" maxlength="15" value="{$foreign.phone nocache}" />
+{if $message.phone != "" nocache}<span class="linewarn">{$message.phone nocache}</span>{/if}
+ <span class="example">例)0312345678</span>
+ </td>
+</tr>
+<tr>
+ <th>FAX</th>
+ <td>
+ <input type="text" id="fax" name="fax" maxlength="15" value="{$foreign.fax nocache}" />
+{if $message.fax != "" nocache}<span class="linewarn">{$message.fax nocache}</span>{/if}
+ <span class="example">例)0312348765</span>
+ </td>
+</tr>
+<tr>
+ <th>氏名</th>
+ <td>
+ <input type="text" id="fullname" name="fullname" maxlength="60" value="{$foreign.fullname nocache}" />
+{if $message.fullname != "" nocache}<span class="linewarn">{$message.fullname nocache}</span>{/if}
+ <span class="example">例)東京太郎</span>
+ </td>
+</tr>
+<tr>
+ <th>氏名カナ</th>
+ <td>
+ <input type="text" id="fullkana" name="fullkana" maxlength="60" value="{$foreign.fullkana nocache}" />
+{if $message.fullkana != "" nocache}<span class="linewarn">{$message.fullkana nocache}</span>{/if}
+ <span class="example">例)トウキョウタロウ</span>
+ </td>
+</tr>
+<tr>
+ <th>役職</th>
+ <td>
+ <input type="text" id="position" name="position" size="40" maxlength="60" value="{$foreign.position nocache}" />
+{if $message.position != "" nocache}<span class="linewarn">{$message.position nocache}</span>{/if}
+ <span class="example">例)部長</span>
+ </td>
+</tr>
+<tr>
+ <th>ホームページ</th>
+ <td>
+http://<input type="text" id="url" name="url" size="33" maxlength="255" value="{$foreign.url nocache}" />
+{if $message.url != "" nocache}<span class="linewarn">{$message.url nocache}</span>{/if}
+ <span class="example">例)www.tokyoautosalon.jp</span>
+ </td>
+</tr>
+<tr>
+  <th>事務局メモ</th>
+  <td><textarea id="comment" name="comment" rows="4" cols="48">{$foreign.comment nocache}</textarea></td>
+</tr>
+<tr>
+ <th>会員</th>
+ <td>
+  <input type="hidden" name="tas" value="0" />
+  <input type="checkbox" id="tas" name="tas" value="1" {if $foreign.tas != 0}checked="checked"{/if}>
+  <label for="tas">TAS会員</label>
+  <input type="hidden" name="napac" value="0" />
+  <input type="checkbox" id="napac" name="napac" value="1" {if $foreign.napac != 0}checked="checked"{/if}>
+  <label for="napac">NAPAC会員</label>
+ </td>
+</tr>
+</table>
+<div class="del-btn"><a href="../delete/{$foreign.customerid nocache}"><img src="/images/common/btn_delete.gif" width="150" height="25" alt="削除" /></a></div>
+<input type="hidden" id="token" name="token" value="{$foreign.token nocache}" />
+<input type="image" src="/images/common/btn_change.gif" id="action" name="action" value="変更" />
+</form>
+<div class="info">
+郵便番号、TEL、FAX は数字のみ入力してください。<br />フリガナは姓名の間にスペースは必要ありません。そのまま入力ください。</p>
+</div>
+</div>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/customer_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/customer/">顧客</a>&nbsp;&gt;&nbsp;変更
+{/block}

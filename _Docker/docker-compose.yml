@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+    tasa_app2:
+        build: ./php
+        container_name: tasa_app2
+        hostname: tasa_app2
+        depends_on:
+            - tasa_db2
+        volumes:
+            - "../application/:/var/www/virtual/cus.tokyoautosalon.jp/application"
+            - "../public/:/var/www/virtual/cus.tokyoautosalon.jp/public"
+            - "../system/:/var/www/virtual/cus.tokyoautosalon.jp/system"
+            - "./working:/home/working"
+            - "./working/setting/tasa.local.conf:/etc/nginx/conf.d/tasa.local.conf"
+            - "./working/setting/www.conf:/usr/local/etc/php-fpm.d/www.conf"
+            - "./working/setting/advanced.ini:/usr/local/etc/php/conf.d/advanced.ini"
+            - "./working/php.ini:/etc/php.ini"
+        links:
+            - tasa_db2
+    tasa_web:
+        build: ./nginx
+        container_name: tasa_web
+        hostname: tasa_web
+        depends_on:
+            - tasa_app2
+        image: tasa_web_image
+        ports:
+            - "80:80"
+        volumes:
+            - "../application/:/var/www/virtual/cus.tokyoautosalon.jp/application"
+            - "../public/:/var/www/virtual/cus.tokyoautosalon.jp/public"
+            - "../system/:/var/www/virtual/cus.tokyoautosalon.jp/system"
+            - "./working:/home/working"
+            - "./working/setting/tasa.local.conf:/etc/nginx/conf.d/tasa.local.conf"
+        links:
+            - tasa_app2
+    tasa_db2:
+        container_name: tasa_db2
+        hostname: tasa_db2
+        image: mysql:5.7
+        environment:
+            MYSQL_DATABASE: tasadoc
+            MYSQL_USER: tasa
+            MYSQL_PASSWORD: tasa!30th
+            MYSQL_ROOT_PASSWORD: password
+        ports:
+            - "3306:3306"
+        volumes:
+            - "./working:/home/working"
+            - "./working/init_db:/docker-entrypoint-initdb.d"
+            - "volume_tasa_2021:/var/lib/mysql"
+volumes:
+    volume_tasa_2021:

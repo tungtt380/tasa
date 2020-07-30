@@ -1,0 +1,104 @@
+{extends file='core/member.html'}
+{block name='title'}(13)Bスペース用オプション備品申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+
+<h2>Bスペース用オプション備品編集</h2> 
+<div style="background-color:#FFFFCC;font-size:10.5pt;margin:8px 0px;padding:2px;border:1px solid #FFFF99;">この申込は B、E、Fスペース専
+用になります。</div>
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}
+
+<form method="post" action="../change_in"> 
+<input type="hidden" name="appid" value="{$foreign.appid nocache}">
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+<input type="hidden" name="exhboothid" value="{$foreign.exhboothid nocache}">
+<input type="hidden" name="appno" value="{$foreign.appno nocache}">
+<input type="hidden" name="seqno" value="{$foreign.seqno nocache}">
+<input type="hidden" name="token" value="{$foreign.token nocache}">
+
+<p>Bスペースには下記備品以外は置くことができません。</p> 
+
+<div> 
+<table class="uniform"> 
+<tbody>
+<tr><th colspan="2">品名</th><th>単価(税別)</th><th>数量</th><th>画像</th></tr> 
+<tr><td colspan="2">インフォメーションカウンター[カギつき]<br/>(GR-615/W600×D450×H900)<br/> 
+※鍵を紛失した場合は、別途\1,000頂戴いたします。</td> 
+<td align="right">&yen;15,000</td> 
+<td><input type="text" id="quantity_1" name="quantity_1" size="8" maxlength="8" value="{$foreign.quantity_1 nocache}">台
+{if isset($message.quantity_1)}<span class="linewarn">{$message.quantity_1 nocache}</span>{/if}</td> 
+<td></td></tr>
+
+<tr> 
+<td rowspan="4">スタンド椅子(BC-38)<br/> 
+※インフォメーションカウンターとセットで<br>
+ご使用する場合は「Cタイプ」をお選びください。</td> 
+<td>A(H450)</td><td rowspan="4" align="right">&yen;3,500</td> 
+<td><input type="text" id="quantity_2" name="quantity_2" size="8" maxlength="8" value="{$foreign.quantity_2 nocache}">台
+{if isset($message.quantity_2)}<span class="linewarn">{$message.quantity_2 nocache}</span>{/if}</td> 
+<td rowspan="4"></td></tr> 
+<tr><td>B(H500)</td> 
+<td><input type="text" id="quantity_3" name="quantity_3" size="8" maxlength="8" value="{$foreign.quantity_3 nocache}">台
+{if isset($message.quantity_3)}<span class="linewarn">{$message.quantity_3 nocache}</span>{/if}</td> 
+</td></tr> 
+<tr><td>C(H600)</td> 
+<td><input type="text" id="quantity_4" name="quantity_4" size="8" maxlength="8" value="{$foreign.quantity_4 nocache}">台
+{if isset($message.quantity_4)}<span class="linewarn">{$message.quantity_4 nocache}</span>{/if}</td> 
+</td></tr> 
+<tr><td>D(H750)</td> 
+<td><input type="text" id="quantity_5" name="quantity_5" size="8" maxlength="8" value="{$foreign.quantity_5 nocache}">台
+{if isset($message.quantity_5)}<span class="linewarn">{$message.quantity_5 nocache}</span>{/if}</td> 
+</td></tr> 
+<tr><td rowspan="2">カタログスタンド</td><td>A4</td><td rowspan="2" align="right">&yen;5,500</td> 
+<td><input type="text" id="quantity_6" name="quantity_6" size="8" maxlength="8" value="{$foreign.quantity_6 nocache}">台
+{if isset($message.quantity_6)}<span class="linewarn">{$message.quantity_6 nocache}</span>{/if}</td> 
+</td> 
+<td rowspan="2"></td></tr> 
+<tr><td>B4</td>
+<td><input type="text" id="quantity_7" name="quantity_7" size="8" maxlength="8" value="{$foreign.quantity_7 nocache}">台
+{if isset($message.quantity_7)}<span class="linewarn">{$message.quantity_7 nocache}</span>{/if}</td> 
+</td> 
+</tr>
+</tbody>
+</table>
+
+<table class="uniform">
+<tbody>
+<tr>
+<th>請求先</th>
+</tr>
+<tr>
+<td>■請求先を選択して下さい。<span style="color:#ff0000">*</span><br/>
+<select name="billid">
+{foreach from=$lists name=rec item=i}
+<option value="{$i.billid}" {if $foreign.billid==$i.billid}selected{/if}>
+〒{deco_zip($i.countrycode,$i.zip)} {$i.prefecture} {$i.address1} {$i.address2} {$i.corpname} {$i.position} {$i.fullname}</option>
+{/foreach}
+</select>
+<br />
+{if $message.billid != '' nocache}<span class="linewarn">{$message.billid nocache}</span>{/if}
+</td>
+</tr>
+</tbody> 
+</table> 
+
+<input type="image" src="/images/common/btn_change_confirm.gif" id="action" name="action" value="確認画面へ" />
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<link type="text/css" href="/css/e.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery/shadowbox.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/e13equipment_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e13equipment/">Bスペース用オプション備品申込</a>&nbsp;&gt;&nbsp;編集
+{/block}

@@ -1,0 +1,21 @@
+<div>
+<table class="exhform">
+<colgroup class="w200">
+<colgroup>
+<tbody>
+<tr><th>お問い合わせコード</th><td>{$exhibitor.exhid}</td></tr>
+<tr><th>小間番号</th><td>
+{if (isset($exhibitor.q_boothid1) && $foreign.exhboothid==$exhibitor.q_boothid1)}{$exhibitor.q_boothno1}{/if}
+{if (isset($exhibitor.q_boothid2) && $foreign.exhboothid==$exhibitor.q_boothid2)}{$exhibitor.q_boothno2}{/if}
+{if (isset($exhibitor.q_boothid3) && $foreign.exhboothid==$exhibitor.q_boothid3)}{$exhibitor.q_boothno3}{/if}
+{if (isset($exhibitor.q_boothid4) && $foreign.exhboothid==$exhibitor.q_boothid4)}{$exhibitor.q_boothno4}{/if}
+{if (isset($exhibitor.q_boothid5) && $foreign.exhboothid==$exhibitor.q_boothid5)}{$exhibitor.q_boothno5}{/if}
+&nbsp;</td></tr>
+<tr><th>出展者名</th><td>{$exhibitor.corpname}</td></tr>
+<tr><th>表示名</th><td>{$exhibitor.brandname}</td></tr>
+<tr><th>担当者</th><td>{$exhibitor.c_fullname}</td></tr>
+<tr><th>TEL</th><td>{deco_phone($exhibitor.c_countrycode,$exhibitor.c_phone)}</td></tr>
+<tr><th>FAX</th><td>{deco_phone($exhibitor.c_countrycode,$exhibitor.c_fax)}</td></tr>
+</tbody>
+</table>
+</div>

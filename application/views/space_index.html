@@ -1,0 +1,71 @@
+{extends file='core/member.html'}
+{block name='title'}スペース(出展料) &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>スペース(出展料)</h2>
+<div id="cnav" class="clearfix">
+<a href="regist"><img src="/images/common/btn_regist.gif" width="100" height="25" alt="新規作成" /></a>
+<div class="search">
+<form id="search" method="post" action="search">
+<input type="image" src="/images/common/btn_search_02.gif" id="action" name="action" value="検索">
+<input type="text" id="q" name="q" value="{$q}" />
+</form>
+</div>
+</div>
+{foreach from=$lists name=rec item=i}
+{if $smarty.foreach.rec.first}
+<table class="listform tablesorter">
+<thead>
+<tr>
+<th>並び順</th>
+<th>小間種別</th>
+<th>正会員価格</th>
+<th>準会員価格<br/>(定価)①</th>
+<th>売却<br/>予定数②</th>
+<th>売却予定金額<br/>(①×②)</th>
+<th>最大<br/>受付数</th>
+<th>コメント</th>
+<th>展示車数<br/>制限</th>
+</tr>
+</thead>
+<tbody>
+{/if}
+<tr>
+<td class="right"><a href="change/{$i.spaceid}">{$i.seqno nocache}</a></td>
+<td>{$i.spacename nocache}</td>
+<td class="right">&yen;{$i.memberprice|number_format nocache}</td>
+<td class="right">&yen;{$i.assocprice|number_format nocache}</td>
+<td class="right">{$i.forsale_count|number_format nocache}</td>
+<td class="right">&yen;{($i.assocprice*$i.forsale_count)|number_format nocache}</td>
+<td class="right">{$i.maxspaces|number_format nocache}</td>
+<td>{$i.comments nocache}</td>
+<td class="right">{$i.carlimits nocache}</td>
+</tr>
+{if $smarty.foreach.rec.last}
+</tbody>
+<tfoot>
+<tr>
+<td colspan="5" class="right">合計:</td>
+<td class="total right">&yen;{$subtotal|number_format nocache}</td>
+<td colspan="3"></td>
+</tr>
+</tfoot>
+</table>
+{/if}
+{foreachelse}
+<div class="notice">
+<p>データが見つかりません.</p>
+</div>
+{/foreach}
+{/block}
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/tablesorter/style.css" rel="stylesheet" />
+{/block}
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/jquery/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/js/space_list.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;スペース(出展料)
+{/block}

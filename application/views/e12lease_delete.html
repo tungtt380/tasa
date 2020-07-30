@@ -1,0 +1,470 @@
+{extends file='core/member.html'}
+{block name='title'}(11)リース備品申込 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>リース備品削除</h2> 
+<p>削除してよろしいですか？<br>
+削除すると元に戻せなくなります。</p> 
+{if isset($message.__all)}
+<div class="blockwarn">{$message.__all nocache}</div>
+{/if}<br/>
+<form method="post" action="../delete_in">
+<input type="hidden" name="exhid" value="{$foreign.exhid nocache}">
+
+出展者名：{$contact.corpname}<br />
+担当者：{$contact.fullname}<br />
+TEL：{$contact.phone}<br />
+FAX：{$contact.fax}<br />
+
+<br /><br />
+現在登録されている施工業者は以下になります。<br />
+{if $04data['outsourcing']==1}
+ブース装飾：出展者以外が施工<br />
+出展者名：{$04data.corpname}<br />
+所在地：{$04data.zip}　{$04data.prefecture} {$04data.address1} {$04data.address2}<br />
+担当者：{$04data.fullname}<br />
+E-Mail：{$04data.email}<br />
+携帯番号：{$04data.mobile}<br />
+TEL：{$04data.phone}<br />
+FAX：{$04data.fax}<br />
+
+
+{else}
+ブース装飾：自社(出展者)が施工<br />
+{/if} 
+  <p>
+  </p>
+<td colspan="2"><table width="626" height="390" class="uniform">
+  <thead>
+    </thead>
+    <tbody>
+
+<tr>
+  <th width="142">備品名</th>
+  <th height="27" colspan="2">品番</th>
+  <th width="48">単価(税別)</th>
+  <th width="216">数量</th>
+  <th width="51">画像</th>
+  <tr>
+  <th>応接セット</th>
+  <th height="15" colspan="2">AS-5</th>
+  <th>42,000</th>
+  <td>{$foreign.quantity_1 nocache} </td>
+<td>&nbsp;</td> 
+</tr>
+ 
+  <tr>
+    <th rowspan="2">応接セット</th>
+    <th height="13" colspan="2">AS-29(白)</th>
+  <th rowspan="2">10,000</th>
+  <td>{$foreign.quantity_2 nocache}  
+  <td>
+  <tr>
+    <th height="13" colspan="2">AS-29(黒)</th>
+    <td>{$foreign.quantity_2 nocache}        
+    <td>    
+  <tr>
+  <th height="15">ティーレストセット</th>
+  <th colspan="2">AS-38</th> 
+  <th>18,000</th>
+  <td>{$foreign.quantity_3 nocache}  
+   
+  <td>
+  <tr>
+    <th rowspan="2">ティーレストセット</th>
+    <th height="6" colspan="2">AS-111(白) W</th>
+    <th rowspan="2">13,000</th>
+    <td>{$foreign.quantity_4 nocache}        
+    <td>    
+  <tr>
+      <th height="7" colspan="2">AS-111(黒) BK</th>
+      <td>{$foreign.quantity_4 nocache}            
+      <td>      
+  <tr>
+        <th class="w200">ハイカウンターセット</th>
+        <th colspan="2" class="w200">AS-960</th>
+        <th height="3" class="w200">16,000</th>
+        <td>{$foreign.quantity_5 nocache}</td>
+       <td>&nbsp;</td> 
+      </tr>
+    <tr>
+      <th rowspan="2" class="w200">ハイカウンターセット</th>
+      <th height="4" colspan="2" class="w200">AS-973 Y(黄)</th>
+      <th rowspan="2" class="w200">18,000</th>
+      <td>{$foreign.quantity_6 nocache}</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th height="15" colspan="2" class="w200">AS-973 GN(緑)</th>
+      <td>{$foreign.quantity_6 nocache}</td>
+      <td>&nbsp;</td>
+    </tr>
+      <tr>
+        <th rowspan="8" class="w200">スタンド椅子</th>
+        <th width="93" rowspan="2" class="w200">BC-38 A(H450)</th>
+        <th width="48" class="w200">W(白)</th>
+        <th height="83" rowspan="8" class="w200"><span class="style5">3,500</span></th>
+        <td height="16"> {$foreign.quantity_7 nocache}</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th width="48" height="15" class="w200">BK(黒)</th>
+        <td>{$foreign.quantity_7 nocache}</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th rowspan="2" class="w200">BC-38 B(H500)</th>
+        <th height="15" class="w200">W(白)</th>
+        <td>{$foreign.quantity_8 nocache}</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th height="15" class="w200">BK(黒)</th>
+        <td>{$foreign.quantity_8 nocache}</td>
+        <td>&nbsp;</td>
+        </tr>
+      <tr>
+        <th rowspan="2" class="w200">BC-38 C(H600)</th>
+        <th height="15" class="w200">W(白)</th>
+        <td>{$foreign.quantity_9 nocache}</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th height="15" class="w200">BK(黒)</th>
+        <td>{$foreign.quantity_9 nocache}</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th rowspan="2" class="w200">BC-38 D(H750)</th>
+        <th height="15" class="w200">W(白)</th>
+        <td>{$foreign.quantity_10 nocache}</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th height="15" class="w200">BK(黒)</th>
+        <td>{$foreign.quantity_10 nocache}</td>
+        <td>&nbsp;</td>
+        </tr>   
+    
+<tr>
+<th rowspan="3" class="w200">パイプ椅子</th>
+<th colspan="2">BC-107(茶)BR</th>
+<th rowspan="3"><span class="style5">&yen;600</span></th>
+<td> {$foreign.quantity_18 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">BC-107(青)BL</th>
+<td>{$foreign.quantity_19 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">BC-107(白)W</th>
+<td>{$foreign.quantity_20 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="3" class="w200">折タタミ椅子</th>
+<th colspan="2">BC-139(黒)BK</th>
+<th rowspan="3"><span class="style5">&yen;3,500</span></th>
+<td>{$foreign.quantity_21 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">BC-139(青)BL</th>
+<td>{$foreign.quantity_22 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">BC-139(緑)GN</th>
+<td> {$foreign.quantity_23 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="2" class="w200">受付カウンター</th>
+<th colspan="2">GR-601A</th>
+<th rowspan="1"><span class="style5">&yen;6,000</span></th>
+<td>{$foreign.quantity_24 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">GR-601B</th>
+<th rowspan="1"><span class="style5">&yen;7,000</span></th>
+<td>{$foreign.quantity_25 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="4" class="w200">ユニットカウンター</th>
+<th colspan="2">GR-602A</th>
+<th rowspan="2"><span class="style5">&yen;12,000</span></th>
+<td>{$foreign.quantity_26 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">GR-602B</th>
+<td>{$foreign.quantity_27 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">GR-635A</th>
+<th rowspan="2"><span class="style5">&yen;13,000</span></th>
+<td>{$foreign.quantity_28 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">GR-635B</th>
+<td>{$foreign.quantity_29 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="3" class="w200">会議用テーブル</th>
+<th colspan="2">DT-332</th>
+<th rowspan="3"><span class="style5">&yen;3,500</span></th>
+<td>{$foreign.quantity_30 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">DT-334</th>
+<td>{$foreign.quantity_31 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">DT-335</th>
+<td>{$foreign.quantity_32 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="3" class="w200">丸テーブル(白)</th>
+<th colspan="2">DT-330S</th>
+<th rowspan="3"><span class="style5">&yen;3,500</span></th>
+<td>{$foreign.quantity_33 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">DT-330M</th>
+<td>{$foreign.quantity_34 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">DT-330L</th>
+<td>{$foreign.quantity_35 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th class="w200">商談テーブル(白)</th>
+<th colspan="2">DT-326</th>
+<th rowspan="2"><span class="style5">&yen;1,500</span></th>
+<td>{$foreign.quantity_36 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="2" class="w200">角テーブル(黒)</th>
+<th colspan="2">GR-328S</th>
+<th rowspan="2"><span class="style5">&yen;3,000</span></th>
+<td>{$foreign.quantity_37 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">GR-328L</th>
+<td>{$foreign.quantity_38 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th class="w200">ポールパーティーション</th>
+<th colspan="2">EP-423</th>
+<th rowspan="2"><span class="style5">&yen;1,500</span></th>
+<td>{$foreign.quantity_39 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th class="w200">ポールパーティーション</th>
+<th colspan="2">EP-421</th>
+<th rowspan="2"><span class="style5">&yen;2,000</span></th>
+<td>{$foreign.quantity_40 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="6" class="w200">ポール用チェーン</th>
+<th colspan="2">EP-425C</th>
+<th rowspan="6"><span class="style5">&yen;300</span></th>
+<td>{$foreign.quantity_41 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">EP-425D</th>
+<td>{$foreign.quantity_42 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">EP-425E</th>
+<td>{$foreign.quantity_43 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">EP-425F</th>
+<td>{$foreign.quantity_44 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">EP-425G</th>
+<td>{$foreign.quantity_45 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th colspan="2">EP-425H</th>
+<td>{$foreign.quantity_46 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="2" class="w200">サインスタンド</br>(次回実演時間</br>/NEXT STAGE)</th>
+<th colspan="2">EP-430A</th>
+<th rowspan="2"><span class="style5">&yen;9,500</span></th>
+<td>{$foreign.quantity_47 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">EP-430B</th>
+<td>{$foreign.quantity_48 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="1" class="w200">姿見</th>
+<th colspan="2">FF-559</th>
+<th rowspan="1"><span class="style5">&yen;4,500</span></th>
+<td>{$foreign.quantity_49 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="1" class="w200">卓上鏡</th>
+<th colspan="2">FF-549A</th>
+<th rowspan="1"><span class="style5">&yen;2,000</span></th>
+<td>{$foreign.quantity_50 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="2" class="w200">カタログスタンド</br>(A4用/B4用)</th>
+<th colspan="2">ES-446A</th>
+<th rowspan="2"><span class="style5">&yen;5,500</span></th>
+<td>{$foreign.quantity_51 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">ES-446B</th>
+<td>{$foreign.quantity_52 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="1" class="w200">卓上カタログスタンド</th>
+<th colspan="2">ES-469A</th>
+<th rowspan="1"><span class="style5">&yen;1,500</span></th>
+<td>{$foreign.quantity_53 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="2" class="w200">パネルスタンド</th>
+<th colspan="2">ES-439A</th>
+<th rowspan="2"><span class="style5">&yen;5,500</span></th>
+<td>{$foreign.quantity_54 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">ES-439B</th>
+<td>{$foreign.quantity_55 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="1" class="w200">シングルハンガー</th>
+<th colspan="2">FF-553</th>
+<th rowspan="1"><span class="style5">&yen;4,500</span></th>
+<td>{$foreign.quantity_56 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="2" class="w200">Gケース</th>
+<th colspan="2">FF-510M</th>
+<th rowspan="1"><span class="style5">&yen;16,000</span></th>
+<td>{$foreign.quantity_57 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">FF-510L</th>
+<th rowspan="1"><span class="style5">&yen;19,000</span></th>
+<td>{$foreign.quantity_58 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="1" class="w200">メッシュウォール</th>
+<th colspan="2">FF-531</th>
+<th rowspan="1"><span class="style5">&yen;18,000</span></th>
+<td>{$foreign.quantity_59 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="2" class="w200">スチール棚</th>
+<th colspan="2">CO-230S</th>
+<th rowspan="2"><span class="style5">&yen;6,500</span></th>
+<td>{$foreign.quantity_60 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th colspan="2">CO-230L</th>
+<td>{$foreign.quantity_61 nocache}</td>
+<td>&nbsp;</td>
+</tr>    
+<tr>
+<th rowspan="1" class="w200">ダストボックス</th>
+<th colspan="2">JQ-858</th>
+<th rowspan="1"><span class="style5">&yen;2,500</span></th>
+<td>{$foreign.quantity_62 nocache}</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="1" class="w200">貴名受け</th>
+<th colspan="2">JQ-832</th>
+<th rowspan="1"><span class="style5">&yen;1,500</span></th>
+<td>{$foreign.quantity_63 nocache}
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="7" bgcolor="#ffdab9">※商品サイズ、カラー、仕様等の詳細についてはお問い合わせください。<br />
+※上記の商品以外にもご用意できますので、お気軽にご相談下さい。<br />
+※万が一、商品の破損が発生した場合は、実費をご請求させて頂きます。予めご了承ください。<br />
+ </td></tr>
+  </table>   
+  <thead>
+ <p></p>  
+<tr><th colspan="2">ご請求先<br /></th></tr>
+<tr>(ご登録と異なる場合はご請求先をご入力下さい)</tr>
+</thead>
+ 
+
+<tbody>
+  <tr>
+<td colspan="2">
+{if !$foreign.billid}
+      <br />
+    上記請求先と同じ(ご記入の必要はございません)<br/>
+       {else} 別の請求先 (請求先を以下にご記入ください)
+          <br />
+〒{$lists.0.zip} {$lists.0.prefecture} {$lists.0.address1} {$lists.0.address2} {$lists.0.corpname} {$lists.0.position} {$lists.0.fullname}
+ </td> </tr>{/if}
+  <tr><th>
+    <input name="lease_submit" type="submit" class="bt1" value="削除">
+</th></tr>
+</form>
+</tbody>
+
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<link type="text/css" href="/css/jquery/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/sponsor_change.js"></script>
+<script type="text/javascript" src="/js/e04construction_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/e12lease/">リース備品申込</a>&nbsp;&gt;&nbsp;編集
+{/block}

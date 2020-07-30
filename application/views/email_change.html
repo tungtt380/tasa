@@ -1,0 +1,50 @@
+{extends file='core/member.html'}
+{block name='title'}変更 &raquo; メールアドレス &raquo; {$smarty.block.parent}{/block}
+{block name='contents'}
+<h2>メールアドレスの変更</h2>
+<div id="change-nav">
+<form method="post" action="change_in">
+{if $message.__all != ''}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+<div id="tabs">
+<table class="uniform">
+<thead>
+<tr>
+<th colspan="2" class="main">メールアドレス</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="w200"><span class="nowrap">現在の</span><span class="nowrap">メールアドレス</span></th>
+<td>{$session.email}</td>
+</tr>
+<tr>
+<th class="w200"><span class="nowrap">新しい</span><span class="nowrap">メールアドレス</span></th>
+<td><input type="text" id="newemail" name="newemail" size="48" maxlength="60" value="{$foreign.newemail}" placeholder="新しいメールアドレスを入力" />{if isset($message.newemail)}<span class="linewarn">{$message.newemail nocache}</span>{/if}
+<br />例)user@example.co.jp</td>
+</tr>
+<th class="w200">確認のため再入力</th>
+<td><input type="text" id="newemailconf" name="newemailconf" size="48" maxlength="60" value="{$foreign.newemailconf}" placeholder="確認のために再入力" />{if isset($message.newemailconf)}<span class="linewarn">{$message.newemailconf nocache}</span>{/if}
+<br />例)user@example.co.jp</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="info" style="margin:0 0 20px;">
+<p>本サイトからのメール通知を確認可能なアドレスを入力してください。<br />
+PDFなどの添付ファイルを送付するので、携帯メールアドレスはご遠慮ください。</p>
+</div>
+
+<input type="hidden" name="memberid" value="{$session.memberid nocache}" />
+<input type="hidden" name="token" value="{$session.token nocache}" />
+<input type="image" src="/images/common/btn_change_email.gif" id="action" name="action" value="メールアドレス変更">
+</form>
+</div>
+{/block}
+
+{block name='footjs'}{$smarty.block.parent}
+<script type="text/javascript" src="/js/email_change.js"></script>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;メールアドレスの変更
+{/block}

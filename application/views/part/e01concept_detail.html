@@ -1,0 +1,94 @@
+<div id="tabmachine3">
+<table class="uniform">
+<thead>
+<tr><th colspan="3">車両スペック(コンセプト)</th></tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="5" style="width:100px">エンジン系</th>
+<td style="width:200px">型式</td>
+<td>{$foreign.enginetype nocache}</td>
+</tr>
+<tr>
+<td>排気量</td>
+<td>{$foreign.enginecc nocache} cc</td>
+</tr>
+<tr>
+<td>出力</td>
+<td>
+{$foreign.outputnum nocache}
+{if $foreign.outputunit!=2}kw{else}ps{/if} / 
+{$foreign.outputrpm nocache}
+</td>
+</tr>
+<tr>
+<td>トルク</td>
+<td>
+{$foreign.torquenum nocache}
+{if $foreign.torqueunit!=2}kw{else}Nm{/if} / 
+{$foreign.torquerpm nocache}
+</td>
+</tr>
+<tr>
+<td>チューニング内容＆<br>使用パーツ</td>
+<td>{$foreign.enginecomment nocache}</td>
+</tr>
+<tr>
+<th rowspan="1">サスペンション</th>
+<td></td>
+<td>{$foreign.suspensioncomment nocache}</td>
+</tr>
+<tr>
+<th rowspan="1">外装関係</th>
+<td></td>
+<td>{$foreign.dressupcomment nocache}</td>
+</tr>
+<tr>
+<th rowspan="1">内装関係</th>
+<td></td>
+<td>{$foreign.etc nocache}</td>
+</tr>
+<tr>
+<th rowspan="3">ホイール</th>
+<td>ホイールメーカー・名称</td>
+<td>{$foreign.wheel nocache}</td>
+</tr>
+<tr>
+<td>サイズ(F)</td>
+<td>{$foreign.frontsize nocache}</td>
+</tr>
+<tr>
+<td>サイズ(R)</td>
+<td>{$foreign.rearsize nocache}</td>
+</tr>
+<tr>
+<th rowspan="3">タイヤ</th>
+<td>タイヤメーカー・名称</td>
+<td>{$foreign.tire nocache}</td>
+</tr>
+<tr>
+<td>サイズ(F)</td>
+<td>{$foreign.fronttire nocache}</td>
+</tr>
+<tr>
+<td>サイズ(R)</td>
+<td>{$foreign.reartire nocache}</td>
+</tr>
+
+<tr>
+<th rowspan="3">記録等</th>
+<td>最高速</td>
+<td>{$foreign.maxspeed nocache} km/h</td>
+</tr>
+<tr>
+<td>0～400m</td>
+<td>{$foreign.dragspeed nocache} sec</td>
+</tr>
+<tr>
+<td>その他</td>
+<td>{$foreign.speedcomment nocache}</td>
+</tr>
+
+</tbody>
+</table>
+</div>

@@ -1,0 +1,144 @@
+{extends file='core/member.html'}
+{block name='title'}(04)施工業者登録 &raquo; 各種申請 &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>施工業者登録</h2> 
+<p>入力した値はこれでよろしいですか？<br>
+よろしければ「登録」ボタンを押してください。</p>
+{if $message.__all != '' nocache}<div class="blockwarn">{$message.__all nocache}</div>{/if}
+
+{include file='core/ex_murayama.html'}
+{include file='core/exhform.html'}
+
+<form method="post" action="regist_confirm_in"> 
+
+<div id="tabcontact"> 
+<table class="uniform"> 
+<tr><th colspan="2" class="sub">施工に関する連絡先</th></tr> 
+<th class="w200">連絡窓口</th>
+<td>
+{if $foreign.outsourcing == 0 nocache}
+出展者(自社)にご連絡
+{elseif $foreign.outsourcing == 1 nocache}
+出展者以外(施工業者)に連絡 
+{/if}
+</td></tr>
+{if $foreign.outsourcing==1}
+<tr>
+<th colspan="2" class="sub">施工業者名</th> 
+</tr>
+<tr>
+<th>施工業者名</th>
+<td> 
+{$foreign.corpname nocache}
+</td></tr> 
+ 
+<tr> 
+<th>所在地</th> 
+<td> 
+〒{$foreign.zip nocache}
+{$foreign.prefecture nocache}
+{$foreign.address1 nocache}
+{$foreign.address2 nocache}
+<br/> 
+</td> 
+</tr> 
+<tr> 
+<th style="width:6em">担当部署</th> 
+<td>{$foreign.division nocache}</td></tr> 
+<tr>
+<th style="width:6em">担当者</th> 
+<td>{$foreign.fullname nocache}</td>
+</tr> 
+<tr>
+<th style="width:6em">E-mail</th> 
+<td>{$foreign.email nocache}</td>
+</tr> 
+<tr> 
+<th>携帯番号</th> 
+<td>{$foreign.mobile nocache}</td> 
+</tr>
+<tr> 
+<th>TEL</th> 
+<td>{$foreign.phone nocache}</td> 
+</tr> 
+<tr> 
+<th>FAX</th> 
+<td>{$foreign.fax nocache}</td> 
+</tr> 
+{/if}
+</table> 
+</div>
+
+<div id="tabetc">
+<table class="uniform" summary="基本設備オプションについて">
+<tr>
+<th colspan="2" class="main">基本設備オプションについて</th>
+</tr>
+
+<tr>
+<th class="w200">パラペット <span class="red">*</span></th>
+<td>
+{if $foreign.parapet==1}
+要
+{else}
+不要
+{/if}
+<br />※パラペットを取り外す場合は、統一社名板・蛍光灯も同時に取り外しとなります。
+</td>
+</tr>
+
+<tr>
+<th class="w200">社名ロゴ使用 <span class="red">*</span>
+<br />@&yen;5,500(税込)</th>
+<td>
+{if $foreign.corplogo==1}
+希望する
+{else}
+希望しない
+{/if}
+<br />※社名板表記は申し込み時にご指定いただいた「表示名」となります。
+<br />※ロゴデータはイラストレーター（AIデータ）のアウトライン処理されたデータをご用意ください。（送付先メールアドレスは後日ご連絡します。）
+</td>
+</tr>
+
+<tr>
+<th class="w200">壁面カラーの変更 <span class="red">*</span>
+<br />@&yen;330(税込)/㎡</th>
+<td>
+{if $foreign.wallpaper==1}
+希望する(色：{$foreign.wallcolor})
+{else}
+希望しない
+{/if}
+<br />※基本色は白になります。他の色を希望する場合は、色を入力してください。
+<br />※一部の貼り分けについては別途料金となります。
+</td>
+</tr>
+
+<tr>
+<th class="w200">パンチカーペット <span class="red">*</span>
+<br />@&yen;17,600(税込)/1小間</th>
+<td>
+{if $foreign.punchcarpet==1}
+希望する{if $foreign.punchcolor}(色：{$foreign.punchcolor}){/if}
+{else}
+希望しない
+{/if}
+<br />※一部の貼り分けについては別途料金となります。
+</td>
+</tr>
+
+</table>
+</div>
+
+{include file="core/ex_repairbill.html"}
+
+<a href="{uri_folder_string()}/e04construction/"><img src="/images/common/btn_cancel.gif" width="100" height="25" alt="キャンセル" style="float:right;" /></a>
+<input type="image" src="/images/common/btn_regist_02.gif" id="action" name="action" value="登録">
+</form>
+{/block}
+
+{block name='headjs'}{$smarty.block.parent}
+<style>#contents th.sub { background:#4D80C1; color:#fff; }</style>
+{/block}

@@ -1,0 +1,16 @@
+{extends file='core/member.html'}
+{block name='title'}変更完了 &raquo; メールアドレス &raquo; {$smarty.block.parent}{/block}
+
+{block name='contents'}
+<h2>{$title}</h2>
+<div>
+{foreach from=$message item=i}
+<p>{$i}</p>
+{/foreach}
+</div>
+<p><a href="../../"><img src="/images/common/btn_back.gif" width="100" height="25" alt="一覧に戻る" /></a></p>
+{/block}
+
+{block name='pan'}
+{$smarty.block.parent}&nbsp;&gt;&nbsp;<a href="{uri_folder_string()}/email/change/">メールアドレス</a>&nbsp;&gt;&nbsp;変更完了
+{/block}

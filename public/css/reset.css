@@ -1,0 +1,68 @@
+@charset "utf-8";
+
+/* IE9 clearfix */
+.clearfix:after{
+	content:"";
+	clear:both;
+	display:block;
+	height:0;
+}
+
+html,body,div,h1,h2,h3,h4,h5,h6,
+p,blockquote,pre,address,
+ul,ol,li,dl,dt,dd,
+table,th,td,form,fieldset{
+	margin:0;
+	padding:0;
+}
+html,body{
+	width:100%;
+	height:100%;
+}
+body{
+	width:100%;
+	height:100%;
+	font:13px Meiryo,"Hiragino Kaku Gothic Pro","MS P Gothic",sans-serif;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-size: 100%;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style: normal;
+	font-weight: normal;
+}
+ol,ul {
+	list-style: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+img{
+	border:none;
+}
+
+/*
+ul ul,ol ol{
+	margin-left:1em;
+}
+*/
+
+.ruby{
+	font-size:8pt;
+	line-height:100%;
+}
+.nobr,.nowrap{
+	white-space:nowrap;
+}
+.right{
+	text-align:right;
+}
+.center{
+	text-align:center;
+}
